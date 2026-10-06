@@ -1,0 +1,42 @@
+name: scrape
+
+# Triggered externally (cron-job.org -> GitHub API workflow_dispatch). No schedule on purpose.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: scraper
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # scraper.py uses only the standard library, so the runner's preinstalled
+      # python3 is enough. actions/setup-python is skipped to save seconds.
+      - name: Scrape
+        run: python3 scraper.py || echo "::warning::scrape failed, error logged to data/runs.csv"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "no changes"
+            exit 0
+          fi
+          git commit -q -m "data: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for i in 1 2; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            echo "push attempt $i failed"; sleep 3
+          done
+          exit 1
