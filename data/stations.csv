@@ -2491,6 +2491,7 @@ IBG-E-D5GW-A,21246,4035,Laumėnų g.  (atrama 200) | Vilniaus Apšvietimas | Inb
 IBG-E-D69Y-A,21119,3886,Vytenio g. 61A | Vilniaus apšvietimas | Inbalance grid,"In Balance grid, UAB",Vytenio g. 61A,Vilnius,54.66996,25.266776,IEC_62196_T2,4,0.29 €/kWh
 IBG-E-D6AD-A,23483,4261,Transekpedicija | Inbalance grid,"In Balance grid, UAB",Galinės g. 5,"Galinės k., Vilniaus r.",54.806952,25.165377,IEC_62196_T2,22,0.23 €/kWh
 IBG-E-D76I-A,23648,4834,IKI Burbiškės | Inbalance grid,"In Balance grid, UAB",Burbiškių g. 31,Vilnius,54.6441,25.262818,IEC_62196_T2,22,0.28 €/kWh
+IBG-E-D81D-A,70929,3878,K. Griniaus g. | Vilniaus Apšvietimas | Inbalance grid,"In Balance grid, UAB",K. Griniaus g.,Vilnius,54.685977,25.27567,IEC_62196_T2,4,0.29 €/kWh
 IBG-E-DAIV-A,21010,3472,Impuls Klaipėda | Inbalance grid,"In Balance grid, UAB",Liepų g. 53A,Klaipėda,55.717858,21.146582,IEC_62196_T2,22,0.28 €/kWh
 IBG-E-DAIV-B,21011,3472,Impuls Klaipėda | Inbalance grid,"In Balance grid, UAB",Liepų g. 53A,Klaipėda,55.717858,21.146582,IEC_62196_T2,22,0.28 €/kWh
 IBG-E-DBW6-A,21193,3961,P. Žadeikos g. 9 | Vilniaus Apšvietimas | Inbalance grid,"In Balance grid, UAB",P. Žadeikos g. 9,Vilnius,54.7343,25.246343,IEC_62196_T2,4,0.29 €/kWh
@@ -2624,6 +2625,9 @@ IBG-E-IAXA-E,26901,278,"Maxima, V. Grybo g. | Inbalance grid","In Balance grid, 
 IBG-E-IBGZ-A,21209,3980,Linksmoji g.  1 | Vilniaus apšvietimas | Inbalance grid,"In Balance grid, UAB",Linksmoji g.,Vilnius,54.686296,25.429843,IEC_62196_T2,4,0.29 €/kWh
 IBG-E-IELQ-A,70863,3471,EMS Karmėlava | Inbalance grid,"In Balance grid, UAB",Vilniaus g. 52A,"Karmėlava, Kauno r.",54.969576,24.064225,IEC_62196_T2_COMBO,55,0.35 €/kWh
 IBG-E-IELQ-B,70864,3471,EMS Karmėlava | Inbalance grid,"In Balance grid, UAB",Vilniaus g. 52A,"Karmėlava, Kauno r.",54.969576,24.064225,IEC_62196_T2_COMBO,55,0.35 €/kWh
+IBG-E-IG2Y-A,70926,2413,"Vievis A1, 38,14km | Via Lietuva | Inbalance grid","In Balance grid, UAB",A1,Vievis,54.772891,24.817518,IEC_62196_T2,43,0.36 €/kWh
+IBG-E-IG2Y-B,70927,2413,"Vievis A1, 38,14km | Via Lietuva | Inbalance grid","In Balance grid, UAB",A1,Vievis,54.772891,24.817518,CHADEMO,50,0.36 €/kWh
+IBG-E-IG2Y-C,70928,2413,"Vievis A1, 38,14km | Via Lietuva | Inbalance grid","In Balance grid, UAB",A1,Vievis,54.772891,24.817518,IEC_62196_T2_COMBO,50,0.36 €/kWh
 IBG-E-IJKS-A,70721,3963,L.Baliukeviciaus-Dzūko g. (15 atrama) | Inbalance grid,"In Balance grid, UAB",L.Baliukeviciaus-Dzūko g.,Vilnius,54.734968,25.25037,IEC_62196_T2,4,0.29 €/kWh
 IBG-E-IJTE-B,23240,3607,Klaipėdos Akropolis 1 | Inbalance grid,"In Balance grid, UAB",Taikos av. 61,Klaipėda,55.692983,21.153567,IEC_62196_T2,22,0.28 €/kWh
 IBG-E-IJTE-C,23241,3607,Klaipėdos Akropolis 1 | Inbalance grid,"In Balance grid, UAB",Taikos av. 61,Klaipėda,55.692983,21.153567,IEC_62196_T2,22,0.28 €/kWh
@@ -3714,16 +3718,17 @@ IGN-E-51PL-H#70708,70708,15781,"Kautra Verpėjų g., Druskininkai (Coming soon)"
 IGN-E-51PL-H#70797,70797,15781,"Kautra Verpėjų g., Druskininkai (Coming soon)","Ignitis, UAB","Verpėjų gatvė 26, 66491 Viečiūnai, Lithuania",Viečiūnai,54.058775,24.047261,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-51PL-I#70709,70709,15781,"Kautra Verpėjų g., Druskininkai (Coming soon)","Ignitis, UAB","Verpėjų gatvė 26, 66491 Viečiūnai, Lithuania",Viečiūnai,54.058775,24.047261,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-51PL-I#70798,70798,15781,"Kautra Verpėjų g., Druskininkai (Coming soon)","Ignitis, UAB","Verpėjų gatvė 26, 66491 Viečiūnai, Lithuania",Viečiūnai,54.058775,24.047261,IEC_62196_T2_COMBO,150,0.39 €/kWh
-IGN-E-51Z5-B,70644,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-C,70645,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-D,70646,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-E,70647,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-F,70648,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-G,70649,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-51Z5-H,70650,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-B,70906,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-C,70907,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-D,70908,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-E,70909,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-F,70910,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-G,70911,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-H,70912,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-51Z5-I,70860,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-51Z5-I#70651,70651,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-51Z5-I#70860,70860,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-51Z5-I#70913,70913,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-52-0-A,68982,424,"Autocentras ""Žibintas""","Ignitis, UAB","Savanorių pr. 217, Vilnius, Lithuania",Vilnius,54.643896,25.20017,CHADEMO,45,0.35 €/kWh
 IGN-E-52-0-B,68983,424,"Autocentras ""Žibintas""","Ignitis, UAB","Savanorių pr. 217, Vilnius, Lithuania",Vilnius,54.643896,25.20017,IEC_62196_T2_COMBO,45,0.35 €/kWh
 IGN-E-52-0-C,68984,424,"Autocentras ""Žibintas""","Ignitis, UAB","Savanorių pr. 217, Vilnius, Lithuania",Vilnius,54.643896,25.20017,IEC_62196_T2,43,0.29 €/kWh
@@ -4107,15 +4112,17 @@ IGN-E-B3XL-A,69588,2851,IKI Vidzgiris,"Ignitis, UAB",Jaunimo g. 24,Alytus,54.391
 IGN-E-B3XL-B,69589,2851,IKI Vidzgiris,"Ignitis, UAB",Jaunimo g. 24,Alytus,54.391232,24.021618,IEC_62196_T2_COMBO,150,0.39 €/kWh
 IGN-E-B3XL-C,69590,2851,IKI Vidzgiris,"Ignitis, UAB",Jaunimo g. 24,Alytus,54.391232,24.021618,IEC_62196_T2_COMBO,150,0.39 €/kWh
 IGN-E-B3XL-D,69591,2851,IKI Vidzgiris,"Ignitis, UAB",Jaunimo g. 24,Alytus,54.391232,24.021618,IEC_62196_T2_COMBO,150,0.39 €/kWh
-IGN-E-B8ZI-D,70652,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-B8ZI-E,70653,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-B8ZI-F,70654,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-B8ZI-D,70914,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-B8ZI-E,70915,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-B8ZI-F,70916,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-B8ZI-G,70698,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-B8ZI-G#70655,70655,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-B8ZI-G#70698,70698,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-B8ZI-G#70917,70917,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-B8ZI-H#70656,70656,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2_COMBO,75,
 IGN-E-B8ZI-H#70699,70699,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-B8ZI-H#70861,70861,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-B8ZI-H#70918,70918,14525,Kautra Metalo g. 19A (coming soon),"Ignitis, UAB","Metalo g. 19A, 02190 Vilnius, Lithuania",Vilnius,54.633556,25.261945,IEC_62196_T2_COMBO,75,
 IGN-E-BFW5-A,69660,2912,Karališkių gatvė 1,"Ignitis, UAB","Karališkių g. 1, Trušelių k.","Trušeliai, Klaipėdos r.",55.748713,21.193225,IEC_62196_T2_COMBO,60,0.35 €/kWh
 IGN-E-BFW5-B,69661,2912,Karališkių gatvė 1,"Ignitis, UAB","Karališkių g. 1, Trušelių k.","Trušeliai, Klaipėdos r.",55.748713,21.193225,IEC_62196_T2_COMBO,60,0.35 €/kWh
 IGN-E-BFW5-C,69662,2912,Karališkių gatvė 1,"Ignitis, UAB","Karališkių g. 1, Trušelių k.","Trušeliai, Klaipėdos r.",55.748713,21.193225,IEC_62196_T2_COMBO,150,0.39 €/kWh
@@ -4162,15 +4169,16 @@ IGN-E-D4TD-C,70811,15786,"Kautra Parčevskių g., Vilkaraisčio k. (Coming soon)
 IGN-E-D4TD-D,70812,15786,"Kautra Parčevskių g., Vilkaraisčio k. (Coming soon)","Ignitis, UAB",Parčevskių gatvė 5A,Vilkaraistis,54.863112,25.493617,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-D4TD-E,70813,15786,"Kautra Parčevskių g., Vilkaraisčio k. (Coming soon)","Ignitis, UAB",Parčevskių gatvė 5A,Vilkaraistis,54.863112,25.493617,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-D4TD-F,70814,15786,"Kautra Parčevskių g., Vilkaraisčio k. (Coming soon)","Ignitis, UAB",Parčevskių gatvė 5A,Vilkaraistis,54.863112,25.493617,IEC_62196_T2,22,0.29 €/kWh
-IGN-E-D9OL-B,70657,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
-IGN-E-D9OL-C,70658,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
-IGN-E-D9OL-D,70659,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
-IGN-E-D9OL-E,70660,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
-IGN-E-D9OL-F,70662,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
-IGN-E-D9OL-G,70663,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
+IGN-E-D9OL-B,70919,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
+IGN-E-D9OL-C,70920,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
+IGN-E-D9OL-D,70921,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
+IGN-E-D9OL-E,70922,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
+IGN-E-D9OL-F,70923,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
+IGN-E-D9OL-G,70924,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,150,0.39 €/kWh
 IGN-E-D9OL-H,70862,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
 IGN-E-D9OL-H#70665,70665,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
 IGN-E-D9OL-H#70862,70862,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
+IGN-E-D9OL-H#70925,70925,15374,Kautra Kretainio g. 6 (coming soon),"Ignitis, UAB","Kretainio g. 6, Klaipėda, LT-94103, Lithuania",Klaipėda,55.683567,21.204586,IEC_62196_T2_COMBO,75,0.35 €/kWh
 IGN-E-DFMT-A,70700,15763,Kauno g. 10,"Ignitis, UAB",Kauno g. 10,Utena,55.49708,25.598721,IEC_62196_T2_COMBO,400,0.39 €/kWh
 IGN-E-DFMT-B,70701,15763,Kauno g. 10,"Ignitis, UAB",Kauno g. 10,Utena,55.49708,25.598721,IEC_62196_T2_COMBO,400,0.39 €/kWh
 IGN-E-DFMT-C,70702,15763,Kauno g. 10,"Ignitis, UAB",Kauno g. 10,Utena,55.49708,25.598721,IEC_62196_T2_COMBO,400,0.39 €/kWh
@@ -4733,6 +4741,8 @@ IGN-E-WT8C-A,69284,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Š
 IGN-E-WT8C-B,69285,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Šiauliai, Lithuania",Šiauliai,55.887217,23.376852,IEC_62196_T2_COMBO,50,0.35 €/kWh
 IGN-E-WT8C-C,69286,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Šiauliai, Lithuania",Šiauliai,55.887217,23.376852,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-WT8C-D,69287,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Šiauliai, Lithuania",Šiauliai,55.887217,23.376852,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-WT8C-D#69287,69287,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Šiauliai, Lithuania",Šiauliai,55.887217,23.376852,IEC_62196_T2,22,0.29 €/kWh
+IGN-E-WT8C-D#70905,70905,2603,Sodyba „Pušelė“,"Ignitis, UAB","Vyturių g. 20, Šiauliai, Lithuania",Šiauliai,55.887217,23.376852,IEC_62196_T2,22,0.29 €/kWh
 IGN-E-WXZH-A,69905,3160,Preilos g. 97B | Partner,"Ignitis, UAB","Preilos g. 97B, Preila, 93129 Neringos sav., ",Preila,55.36557,21.053824,IEC_62196_T2,22,0.4 €/kWh
 IGN-E-WXZH-B,69906,3160,Preilos g. 97B | Partner,"Ignitis, UAB","Preilos g. 97B, Preila, 93129 Neringos sav., ",Preila,55.36557,21.053824,IEC_62196_T2,22,0.4 €/kWh
 IGN-E-WZFW-A,70277,15395,Pramonės pr. 4,"Ignitis, UAB","Pramonės pr. 4, 51329 Kaunas, Lithuania",Kaunas,54.907188,23.981964,IEC_62196_T2_COMBO,360,0.39 €/kWh
@@ -4962,7 +4972,9 @@ IKR-E-PLPT-A,62302,14371,"Vilniaus g. 35A, Kretinga","Įkrautas, UAB","Vilniaus 
 IKR-E-Q51X-A,65976,15410,Kauno kolegija (Alytus),"Įkrautas, UAB",Studentų g. 17,Alytus,54.399761,24.067771,IEC_62196_T2,22,0.3 € + 0.3 €/kWh
 IKR-E-QT95-A,70682,3824,Dentavita,"Įkrautas, UAB","Taikos al. 24, 35149 Panevėžys, Lietuva",Panevėžys,55.73878,24.341301,IEC_62196_T2,22,0.3 € + 0.23 €/kWh
 IKR-E-QV8W-A,62477,14453,"V. Kudirkos g. 35, Jurbarkas","Įkrautas, UAB","V. Kudirkos g. 35, 74151 Jurbarkas, Lithuania",Jurbarkas,55.08699,22.774496,IEC_62196_T2,22,0.3 € + 0.35 €/kWh
+IKR-E-RTND-A,70904,503,Ikrautas HQ,"Įkrautas, UAB","Ozo g. 3, Vilnius",Vilnius,54.714756,25.285099,IEC_62196_T2,0,0.3 € + 0.25 €/kWh
 IKR-E-S8C0-A,19528,3642,Panevėžio butų ūkis,"Įkrautas, UAB","Beržų g. 48, 36144 Panevėžys, Lithuania",Panevėžio apskritis,55.720237,24.384104,IEC_62196_T2,22,0.3 € + 0.33 €/kWh
+IKR-E-T905-A,70903,503,Ikrautas HQ,"Įkrautas, UAB","Ozo g. 3, Vilnius",Vilnius,54.714756,25.285099,IEC_62196_T2,0,0.3 € + 0.25 €/kWh
 IKR-E-TK3E-A,62478,14453,"V. Kudirkos g. 35, Jurbarkas","Įkrautas, UAB","V. Kudirkos g. 35, 74151 Jurbarkas, Lithuania",Jurbarkas,55.08699,22.774496,IEC_62196_T2,22,0.3 € + 0.35 €/kWh
 IKR-E-U86M-A,62303,14371,"Vilniaus g. 35A, Kretinga","Įkrautas, UAB","Vilniaus g. 35A, 97102 Kretinga, Lithuania",Kretinga,55.899633,21.246548,IEC_62196_T2,22,0.3 € + 0.3 €/kWh
 IKR-E-UK90-A,70684,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena County,55.601826,26.560436,IEC_62196_T2,22,0.29 € + 0.07 €/kWh
