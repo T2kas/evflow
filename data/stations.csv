@@ -791,8 +791,8 @@ E85-P-ZWJ9-A,15950,2694,"Norfa XL, Baltų pr. 195, Kaunas","Enefit, UAB",Baltų 
 E85-P-ZWJ9-B,15951,2694,"Norfa XL, Baltų pr. 195, Kaunas","Enefit, UAB",Baltų pr. 195,Kaunas,54.9163396,23.8632364,IEC_62196_T2_COMBO,47,0.35 €/kWh
 E85-P-ZWO6-A,19451,3623,"Norfa XL Vilniaus g. 47B, Joniškis","Enefit, UAB","Vilniaus g. 47B, Joniškis",Joniškis,56.227959,23.6046193,IEC_62196_T2_COMBO,240,0.49 €/kWh
 E85-P-ZWO6-B,19452,3623,"Norfa XL Vilniaus g. 47B, Joniškis","Enefit, UAB","Vilniaus g. 47B, Joniškis",Joniškis,56.227959,23.6046193,IEC_62196_T2_COMBO,240,0.49 €/kWh
-ELD-E--403-A,39994,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E--403-B,39995,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
+ELD-E--403-A,39994,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E--403-B,39995,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-01H1-A,21716,4328,Eldrive Lithuania VIA SOLIS,"Eldrive Lithuania, UAB",B. Brazdžionio gatvė 12,Kaunas,54.933989,23.861444,IEC_62196_T2_COMBO,400,0.37 €/kWh
 ELD-E-01H1-B,21717,4328,Eldrive Lithuania VIA SOLIS,"Eldrive Lithuania, UAB",B. Brazdžionio gatvė 12,Kaunas,54.933989,23.861444,IEC_62196_T2_COMBO,400,0.37 €/kWh
 ELD-E-0GQ6-A,63012,14512,"Eldrive Lithuania Taikos g. 22, Mažeikiai","Eldrive Lithuania, UAB",Taikos gatvė 11,Mažeikiai,56.302653,22.32863,IEC_62196_T2_COMBO,50,0.37 €/kWh
@@ -832,8 +832,8 @@ ELD-E-314-A,20261,3391,Eldrive Lithuania Decathlon Vilnius,"Eldrive Lithuania, U
 ELD-E-314-B,20264,3391,Eldrive Lithuania Decathlon Vilnius,"Eldrive Lithuania, UAB",Vikingų g. 5,Vilnius,54.64982,25.279871,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-315-A,20262,3391,Eldrive Lithuania Decathlon Vilnius,"Eldrive Lithuania, UAB",Vikingų g. 5,Vilnius,54.64982,25.279871,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-315-B,20263,3391,Eldrive Lithuania Decathlon Vilnius,"Eldrive Lithuania, UAB",Vikingų g. 5,Vilnius,54.64982,25.279871,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-318-A,20277,3996,Eldrive Lithuania Mažeikių seniunija,"Eldrive Lithuania, UAB",Laisvės gatvė 39,Mažeikiai,56.314982,22.3406,IEC_62196_T2_COMBO,50,0.37 €/kWh
-ELD-E-318-B,20278,3996,Eldrive Lithuania Mažeikių seniunija,"Eldrive Lithuania, UAB",Laisvės gatvė 39,Mažeikiai,56.314982,22.3406,IEC_62196_T2_COMBO,50,0.37 €/kWh
+ELD-E-318-A,20277,3996,Eldrive Lithuania Mažeikių seniūnija,"Eldrive Lithuania, UAB",Laisvės gatvė 39,Mažeikiai,56.314982,22.3406,IEC_62196_T2_COMBO,50,0.37 €/kWh
+ELD-E-318-B,20278,3996,Eldrive Lithuania Mažeikių seniūnija,"Eldrive Lithuania, UAB",Laisvės gatvė 39,Mažeikiai,56.314982,22.3406,IEC_62196_T2_COMBO,50,0.37 €/kWh
 ELD-E-368-A,22424,4825,Eldrive Lithuania Rimi Domeikava,"Eldrive Lithuania, UAB",Vandžiogalos plentas 112,Domeikava,54.963987,23.911591,IEC_62196_T2_COMBO,200,0.37 €/kWh
 ELD-E-368-B,22425,4825,Eldrive Lithuania Rimi Domeikava,"Eldrive Lithuania, UAB",Vandžiogalos plentas 112,Domeikava,54.963987,23.911591,IEC_62196_T2_COMBO,200,0.37 €/kWh
 ELD-E-371-A,22135,4574,"Eldrive Lithuania Laisvės pr. 80, Vilnius","Eldrive Lithuania, UAB",Laisvės prospektas 80,Vilnius,54.723159,25.232572,IEC_62196_T2_COMBO,200,0.37 €/kWh
@@ -1013,10 +1013,10 @@ ELD-E-T221-A,68770,3449,Eldrive Lithuania Vienybės a. 1,"Eldrive Lithuania, UAB
 ELD-E-T221-B,68824,3449,Eldrive Lithuania Vienybės a. 1,"Eldrive Lithuania, UAB",Vienybės a. 1,Kaunas,54.899742,23.913218,IEC_62196_T2_COMBO,50,0.37 €/kWh
 ELD-E-T223-A,68771,3449,Eldrive Lithuania Vienybės a. 1,"Eldrive Lithuania, UAB",Vienybės a. 1,Kaunas,54.899742,23.913218,IEC_62196_T2_COMBO,50,0.37 €/kWh
 ELD-E-T223-B,68772,3449,Eldrive Lithuania Vienybės a. 1,"Eldrive Lithuania, UAB",Vienybės a. 1,Kaunas,54.899742,23.913218,IEC_62196_T2_COMBO,50,0.37 €/kWh
-ELD-E-T232-A,68813,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2_COMBO,150,0.37 €/kWh
-ELD-E-T232-B,68814,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2_COMBO,150,0.37 €/kWh
-ELD-E-T233-A,68815,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2_COMBO,150,0.37 €/kWh
-ELD-E-T233-B,68816,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2_COMBO,150,0.37 €/kWh
+ELD-E-T232-A,68813,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2_COMBO,150,0.37 €/kWh
+ELD-E-T232-B,68814,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2_COMBO,150,0.37 €/kWh
+ELD-E-T233-A,68815,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2_COMBO,150,0.37 €/kWh
+ELD-E-T233-B,68816,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2_COMBO,150,0.37 €/kWh
 ELD-E-T234-A,68769,3447,Eldrive Lithuania Hesburger Taikos 122,"Eldrive Lithuania, UAB","Taikos pr. 122-1, Kaunas",Kaunas,54.917444,24.037126,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-T234-B,68818,3447,Eldrive Lithuania Hesburger Taikos 122,"Eldrive Lithuania, UAB","Taikos pr. 122-1, Kaunas",Kaunas,54.917444,24.037126,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-T236-A,68820,3447,Eldrive Lithuania Hesburger Taikos 122,"Eldrive Lithuania, UAB","Taikos pr. 122-1, Kaunas",Kaunas,54.917444,24.037126,IEC_62196_T2,22,0.29 €/kWh
@@ -1121,14 +1121,14 @@ ELD-E-T401-A,26893,6828,"Eldrive Lithuania Žemaitijos g. 20, Mažeikiai","Eldri
 ELD-E-T401-B,26894,6828,"Eldrive Lithuania Žemaitijos g. 20, Mažeikiai","Eldrive Lithuania, UAB",Žemaitijos gatvė 20,Mažeikiai,56.305247,22.331425,IEC_62196_T2_COMBO,200,0.37 €/kWh
 ELD-E-T402-A,26895,6828,"Eldrive Lithuania Žemaitijos g. 20, Mažeikiai","Eldrive Lithuania, UAB",Žemaitijos gatvė 20,Mažeikiai,56.305247,22.331425,IEC_62196_T2_COMBO,200,0.37 €/kWh
 ELD-E-T402-B,26896,6828,"Eldrive Lithuania Žemaitijos g. 20, Mažeikiai","Eldrive Lithuania, UAB",Žemaitijos gatvė 20,Mažeikiai,56.305247,22.331425,IEC_62196_T2_COMBO,200,0.37 €/kWh
-ELD-E-T404-A,26889,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T404-B,26890,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T405-A,26891,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T405-B,26892,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T406-A,39996,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T406-B,39997,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T407-A,62360,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
-ELD-E-T407-B,62361,3400,Eldrive Lithuania Magnum -2 aukštas,"Eldrive Lithuania, UAB",Karaliaus Mindaugo Prospektas 38,Kaunas,54.893777,23.91573,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T404-A,26889,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T404-B,26890,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T405-A,26891,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T405-B,26892,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T406-A,39996,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T406-B,39997,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T407-A,62360,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
+ELD-E-T407-B,62361,3400,Eldrive Lithuania Magnum,"Eldrive Lithuania, UAB",Karaliaus Mindaugo pr. 38,Kaunas,54.893856,23.915584,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-T408-A,40002,3393,Eldrive Lithuania Prime Biurai,"Eldrive Lithuania, UAB",Savanorių pr. 367,Kaunas,54.922987,23.957963,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-T409-A,45044,6857,Eldrive Lithuania Kauno Dokas,"Eldrive Lithuania, UAB","P. Vileišio tiltas A, 44263 Kaunas, Lietuva",Kaunas,54.903198,23.895628,IEC_62196_T2,22,0.29 €/kWh
 ELD-E-T409-B,45045,6857,Eldrive Lithuania Kauno Dokas,"Eldrive Lithuania, UAB","P. Vileišio tiltas A, 44263 Kaunas, Lietuva",Kaunas,54.903198,23.895628,IEC_62196_T2,22,0.29 €/kWh
