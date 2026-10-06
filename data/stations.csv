@@ -5294,8 +5294,8 @@ STR-E-3W2P-B,44868,3210,"Šilutės pl. 49, Klaipėda","Stuart Energy, UAB","Šil
 STR-E-3WE5-A,68627,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.4 €/kWh
 STR-E-3YH3-A,44958,6801,"R. Kalantos g. 49, Kaunas","Stuart Energy, UAB","R. Kalantos g. 49, Kaunas",Kaunas,54.8975164,23.9919414,IEC_62196_T2,22,0.08 € + 0.34 €/kWh
 STR-E-3YH3-B,44959,6801,"R. Kalantos g. 49, Kaunas","Stuart Energy, UAB","R. Kalantos g. 49, Kaunas",Kaunas,54.8975164,23.9919414,IEC_62196_T2,22,0.08 € + 0.34 €/kWh
-STR-E-4156-A,62463,14447,"Aukštakalnio g.  2, Alytus","Stuart Energy, UAB","Aukštakalnio g.  2, Alytus",Alytus,54.3935533,24.0060976,IEC_62196_T2_COMBO,60,0.45 €/kWh
-STR-E-4156-B,62464,14447,"Aukštakalnio g.  2, Alytus","Stuart Energy, UAB","Aukštakalnio g.  2, Alytus",Alytus,54.3935533,24.0060976,IEC_62196_T2_COMBO,60,0.45 €/kWh
+STR-E-4156-A,62463,14447,"Aukštakalnio g.  2, Alytus","Stuart Energy, UAB","Aukštakalnio g.  2, Alytus",Alytus,54.3935533,24.0060976,IEC_62196_T2_COMBO,60,0.44 €/kWh
+STR-E-4156-B,62464,14447,"Aukštakalnio g.  2, Alytus","Stuart Energy, UAB","Aukštakalnio g.  2, Alytus",Alytus,54.3935533,24.0060976,IEC_62196_T2_COMBO,60,0.44 €/kWh
 STR-E-4270-A,67145,15441,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Savanorių pr. 28, Vilnius",Vilnius,54.674858,25.2528877,IEC_62196_T2,22,0.3 €/kWh
 STR-E-4270-B,67146,15441,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Savanorių pr. 28, Vilnius",Vilnius,54.674858,25.2528877,IEC_62196_T2,22,0.3 €/kWh
 STR-E-4350-A,70336,15771,"Laugalių g. 11, Gargždai","Stuart Energy, UAB","Laugalių g. 11, Gargždai",Gargždai,55.713695,21.3789225,IEC_62196_T2,22,0.5 €/kWh
