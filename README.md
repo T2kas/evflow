@@ -21,3 +21,12 @@ Būsenos laiko momentu T = paskutinis jungties įrašas su `timestamp_utc <= T` 
 python scraper.py   # vienas snapshot (tik standartinė biblioteka)
 python stats.py     # santrauka
 ```
+
+## Analizė (`explore.py` → `report.html`)
+```
+pip install pandas matplotlib
+git pull && python explore.py        # arba: python explore.py <data_dir> -o kitas.html
+```
+Ataskaitos turinys: duomenų sveikata (spragos >10 min), sesijos (Užimta → kita būsena; nepilnos neįtraukiamos į trukmes),
+Vilniaus užimtumas (top 15 stotelių, pagal valandą, ilgiausios DC sesijos), duomenų kokybė pagal operatorių ir „užstrigusios“ jungtys.
+Visi procentai yra laiko svertiniai; laikas per duomenų spragas neskaičiuojamas.
