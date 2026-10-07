@@ -5221,7 +5221,7 @@ STR-E-1GOO-A,44849,3189,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34
 STR-E-1GOO-B,44850,3189,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34, Vilnius",Vilnius,54.669829,25.2632497,IEC_62196_T2_COMBO,240,0.19 € + 0.27 €/kWh
 STR-E-1ME5-A,68741,15760,Elektronova Neries krant. 16,"Stuart Energy, UAB","Neries krant. 16, Kaunas",Kaunas,54.9135717,23.9040689,IEC_62196_T2,22,0.08 € + 0.46 €/kWh
 STR-E-1ME5-B,68742,15760,Elektronova Neries krant. 16,"Stuart Energy, UAB","Neries krant. 16, Kaunas",Kaunas,54.9135717,23.9040689,IEC_62196_T2,22,0.08 € + 0.46 €/kWh
-STR-E-1MHB-A,44822,3167,"Panerių g. 51, Vilnius","Stuart Energy, UAB","Panerių g. 51, Vilnius",Vilnius,54.6670173,25.2557712,IEC_62196_T2,22,0.84 €/kWh
+STR-E-1MHB-A,44822,3167,"Panerių g. 51, Vilnius","Stuart Energy, UAB","Panerių g. 51, Vilnius",Vilnius,54.6670173,25.2557712,IEC_62196_T2,22,0.83 €/kWh
 STR-E-1MJQ-A,68358,15688,TLT EMS 1-10,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.39 €/kWh
 STR-E-1X30-A,68626,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.53 €/kWh
 STR-E-1ZLC-A,44903,4788,"J. Jasinskio g. 2, Vilnius","Stuart Energy, UAB","J. Jasinskio g. 2, Vilnius",Vilnius,54.6873573,25.2669879,IEC_62196_T2,22,0.3 €/kWh
@@ -5670,7 +5670,7 @@ STR-E-LGVS-A,45022,6841,"Karalienės Barboros al. 2, Birštonas","Stuart Energy,
 STR-E-LGVS-B,45023,6841,"Karalienės Barboros al. 2, Birštonas","Stuart Energy, UAB","Karalienės Barboros al. 2, Birštonas",Birštonas,54.6106396,24.0199546,IEC_62196_T2,22,0.3 € + 0.35 €/kWh
 STR-E-LISV-A,68662,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.39 €/kWh
 STR-E-LKFQ-A,68710,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.39 €/kWh
-STR-E-LREY-A,44821,3166,"Panerių g. 51, Vilnius","Stuart Energy, UAB","Panerių g. 51, Vilnius",Vilnius,54.6670165,25.2557685,IEC_62196_T2,22,0.84 €/kWh
+STR-E-LREY-A,44821,3166,"Panerių g. 51, Vilnius","Stuart Energy, UAB","Panerių g. 51, Vilnius",Vilnius,54.6670165,25.2557685,IEC_62196_T2,22,0.83 €/kWh
 STR-E-LYEM-A,67135,15436,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Savanorių pr. 28, Vilnius",Vilnius,54.674858,25.2528877,IEC_62196_T2,22,0.3 €/kWh
 STR-E-LYEM-B,67136,15436,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Savanorių pr. 28, Vilnius",Vilnius,54.674858,25.2528877,IEC_62196_T2,22,0.3 €/kWh
 STR-E-M1IB-A,68705,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.39 €/kWh
