@@ -5193,8 +5193,8 @@ SET-E-0241-B,67728,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marij
 SET-E-I65P-A,68115,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marijampole,54.475761,23.221737,IEC_62196_T2_COMBO|CHADEMO,40|40,|
 STR-E-027B-A,44786,3135,"K. Donelaičio g. 65, Kaunas","Stuart Energy, UAB","K. Donelaičio g. 65, Kaunas",Kaunas,54.8984227,23.9156443,IEC_62196_T2,22,0.23 € + 0.39 €/kWh
 STR-E-027B-B,44787,3135,"K. Donelaičio g. 65, Kaunas","Stuart Energy, UAB","K. Donelaičio g. 65, Kaunas",Kaunas,54.8984227,23.9156443,IEC_62196_T2,22,0.23 € + 0.39 €/kWh
-STR-E-02VO-A,44855,3193,"Mindaugo g. 23, Kėdainiai","Stuart Energy, UAB","Mindaugo g. 23, Kėdainiai",Kėdainiai,55.2815884,23.9588782,IEC_62196_T2,22,0.41 €/kWh
-STR-E-02VO-B,44856,3193,"Mindaugo g. 23, Kėdainiai","Stuart Energy, UAB","Mindaugo g. 23, Kėdainiai",Kėdainiai,55.2815884,23.9588782,IEC_62196_T2,22,0.41 €/kWh
+STR-E-02VO-A,44855,3193,"Mindaugo g. 23, Kėdainiai","Stuart Energy, UAB","Mindaugo g. 23, Kėdainiai",Kėdainiai,55.2815884,23.9588782,IEC_62196_T2,22,0.42 €/kWh
+STR-E-02VO-B,44856,3193,"Mindaugo g. 23, Kėdainiai","Stuart Energy, UAB","Mindaugo g. 23, Kėdainiai",Kėdainiai,55.2815884,23.9588782,IEC_62196_T2,22,0.42 €/kWh
 STR-E-04YS-A,68657,15757,UAB Sistem laukas KAS2,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
 STR-E-051F-A,44988,6818,"Drobės g. 62, Kaunas","Stuart Energy, UAB","Drobės g. 62, Kaunas",Kaunas,54.8698593,23.9513317,IEC_62196_T2,22,0.08 € + 0.33 €/kWh
 STR-E-0698-A,68368,15689,TLT EMS 11-20,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.27 €/kWh
@@ -5532,9 +5532,9 @@ STR-E-9VY0-B,44768,1510,"Karalienės Barboros al. 2, Birštonas","Stuart Energy,
 STR-E-9WOB-A,67541,15553,DOMINATI stoteles (6vnt),"Stuart Energy, UAB","J. Janonio g. 1, Panevėžys",Panevėžys,55.741913,24.3349564,IEC_62196_T2_COMBO,250,0.25 €/kWh
 STR-E-9WY2-A,68377,15690,TLT EMS 21-30,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.27 €/kWh
 STR-E-A169-A,68601,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
-STR-E-A27N-A,44839,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,CHADEMO,50,0.41 €/kWh
-STR-E-A27N-B,44840,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,IEC_62196_T2_COMBO,50,0.41 €/kWh
-STR-E-A27N-C,44841,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,IEC_62196_T2,22,0.41 €/kWh
+STR-E-A27N-A,44839,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,CHADEMO,50,0.42 €/kWh
+STR-E-A27N-B,44840,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,IEC_62196_T2_COMBO,50,0.42 €/kWh
+STR-E-A27N-C,44841,3184,"J. Basanavičiaus g. 51A, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 51A, Kėdainiai",Kėdainiai,55.2876432,23.9741375,IEC_62196_T2,22,0.42 €/kWh
 STR-E-A442-A,68665,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.27 €/kWh
 STR-E-AABG-A,68350,15686,TLT Svylos g. 6,"Stuart Energy, UAB","Svylos gatvė 6, Vilnius",Vilnius,54.6420901,25.3073354,IEC_62196_T2,22,0.27 €/kWh
 STR-E-ACMT-A,68380,15690,TLT EMS 21-30,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.27 €/kWh
@@ -5552,8 +5552,8 @@ STR-E-ATSE-D,45021,6834,"Taikos g. 14, Druskininkai","Stuart Energy, UAB","Taiko
 STR-E-AUQ2-A,68604,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
 STR-E-AWF1-A,44986,6817,"Raudondvario pl. 93, Kaunas","Stuart Energy, UAB","Raudondvario pl. 93, Kaunas",Kaunas,54.9052517,23.8773232,IEC_62196_T2,22,0.08 € + 0.33 €/kWh
 STR-E-AWF1-B,44987,6817,"Raudondvario pl. 93, Kaunas","Stuart Energy, UAB","Raudondvario pl. 93, Kaunas",Kaunas,54.9052517,23.8773232,IEC_62196_T2,22,0.08 € + 0.33 €/kWh
-STR-E-AWJ9-A,44835,3181,"Didžiosios Rinkos a. 5, Kėdainiai","Stuart Energy, UAB","Didžiosios Rinkos a. 5, Kėdainiai",Kėdainiai,55.2844142,23.9818145,IEC_62196_T2,22,0.41 €/kWh
-STR-E-AWJ9-B,44836,3181,"Didžiosios Rinkos a. 5, Kėdainiai","Stuart Energy, UAB","Didžiosios Rinkos a. 5, Kėdainiai",Kėdainiai,55.2844142,23.9818145,IEC_62196_T2,22,0.41 €/kWh
+STR-E-AWJ9-A,44835,3181,"Didžiosios Rinkos a. 5, Kėdainiai","Stuart Energy, UAB","Didžiosios Rinkos a. 5, Kėdainiai",Kėdainiai,55.2844142,23.9818145,IEC_62196_T2,22,0.42 €/kWh
+STR-E-AWJ9-B,44836,3181,"Didžiosios Rinkos a. 5, Kėdainiai","Stuart Energy, UAB","Didžiosios Rinkos a. 5, Kėdainiai",Kėdainiai,55.2844142,23.9818145,IEC_62196_T2,22,0.42 €/kWh
 STR-E-B32B-A,44899,4784,"J. Jasinskio g. 2, Vilnius","Stuart Energy, UAB","J. Jasinskio g. 2, Vilnius",Vilnius,54.6873573,25.2669879,IEC_62196_T2,22,0.3 €/kWh
 STR-E-B36V-A,44904,4789,"Tauragės g. 1, Šilalė","Stuart Energy, UAB","Tauragės g. 1, Šilalė",Šilalė,55.4876063,22.1950447,IEC_62196_T2_COMBO,120,0.19 € + 0.44 €/kWh
 STR-E-B36V-B,44905,4789,"Tauragės g. 1, Šilalė","Stuart Energy, UAB","Tauragės g. 1, Šilalė",Šilalė,55.4876063,22.1950447,IEC_62196_T2_COMBO,120,0.19 € + 0.44 €/kWh
@@ -5777,8 +5777,8 @@ STR-E-T8Q7-A,67185,15461,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Sava
 STR-E-T8Q7-B,67186,15461,"Savanorių pr. 28, Vilnius","Stuart Energy, UAB","Savanorių pr. 28, Vilnius",Vilnius,54.674858,25.2528877,IEC_62196_T2,22,0.3 €/kWh
 STR-E-TKKA-A,62428,14427,"UAB ""Piniavos berzelis""","Stuart Energy, UAB","Pakaušių g. 18, Gegužinė",Gegužinė,55.8622229,24.338147,IEC_62196_T2_COMBO,150,0.25 €/kWh
 STR-E-TO2O-A,68364,15688,TLT EMS 1-10,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.27 €/kWh
-STR-E-TX67-A,44859,3195,"J. Basanavičiaus g. 93, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 93, Kėdainiai",Kėdainiai,55.2772582,23.9571479,IEC_62196_T2,22,0.41 €/kWh
-STR-E-TX67-B,44860,3195,"J. Basanavičiaus g. 93, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 93, Kėdainiai",Kėdainiai,55.2772582,23.9571479,IEC_62196_T2,22,0.41 €/kWh
+STR-E-TX67-A,44859,3195,"J. Basanavičiaus g. 93, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 93, Kėdainiai",Kėdainiai,55.2772582,23.9571479,IEC_62196_T2,22,0.42 €/kWh
+STR-E-TX67-B,44860,3195,"J. Basanavičiaus g. 93, Kėdainiai","Stuart Energy, UAB","J. Basanavičiaus g. 93, Kėdainiai",Kėdainiai,55.2772582,23.9571479,IEC_62196_T2,22,0.42 €/kWh
 STR-E-U3MD-A,68717,3182,"Nemuno g. 70, Panevėžys","Stuart Energy, UAB","Nemuno g. 70, Panevėžys",Panevėžys,55.7553039,24.3831234,IEC_62196_T2,22,0.22 €/kWh
 STR-E-U3MD-B,68718,3182,"Nemuno g. 70, Panevėžys","Stuart Energy, UAB","Nemuno g. 70, Panevėžys",Panevėžys,55.7553039,24.3831234,IEC_62196_T2,22,0.22 €/kWh
 STR-E-U41O-A,68616,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
@@ -5807,8 +5807,8 @@ STR-E-VBMP-A,68387,15691,TLT EMS 31-32,"Stuart Energy, UAB","Svylos gatvė 16, V
 STR-E-VJBJ-A,68643,15757,UAB Sistem laukas KAS2,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
 STR-E-VPDB-A,68367,15689,TLT EMS 11-20,"Stuart Energy, UAB","Svylos gatvė 16, Vilnius",Vilnius,54.6448796,25.3064294,IEC_62196_T2,22,0.27 €/kWh
 STR-E-VQ06-A,68635,15757,UAB Sistem laukas KAS2,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
-STR-E-VSDJ-A,44857,3194,"S. Dariaus ir S. Girėno g. 50A, Kėdainiai","Stuart Energy, UAB","S. Dariaus ir S. Girėno g. 50A, Kėdainiai",Kėdainiai,55.3092945,23.9794199,IEC_62196_T2,22,0.41 €/kWh
-STR-E-VSDJ-B,44858,3194,"S. Dariaus ir S. Girėno g. 50A, Kėdainiai","Stuart Energy, UAB","S. Dariaus ir S. Girėno g. 50A, Kėdainiai",Kėdainiai,55.3092945,23.9794199,IEC_62196_T2,22,0.41 €/kWh
+STR-E-VSDJ-A,44857,3194,"S. Dariaus ir S. Girėno g. 50A, Kėdainiai","Stuart Energy, UAB","S. Dariaus ir S. Girėno g. 50A, Kėdainiai",Kėdainiai,55.3092945,23.9794199,IEC_62196_T2,22,0.42 €/kWh
+STR-E-VSDJ-B,44858,3194,"S. Dariaus ir S. Girėno g. 50A, Kėdainiai","Stuart Energy, UAB","S. Dariaus ir S. Girėno g. 50A, Kėdainiai",Kėdainiai,55.3092945,23.9794199,IEC_62196_T2,22,0.42 €/kWh
 STR-E-VT0G-A,68707,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.27 €/kWh
 STR-E-VX2O-A,68614,15756,UAB Sistem pozeminis parkingas KAS1,"Stuart Energy, UAB","Savanorių pr. 276, Kaunas",Kaunas,54.9175287,23.9492233,IEC_62196_T2,22,0 € + 0.39 €/kWh
 STR-E-VXGH-A,68706,15758,TLT PCB Gaujos g. 4,"Stuart Energy, UAB","Gaujos g. 4, Vilnius",Vilnius,54.64512,25.3120299,IEC_62196_T2,22,0.27 €/kWh
