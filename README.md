@@ -6,8 +6,11 @@ Paleidžiama per cron-job.org → GitHub `workflow_dispatch` kas ~3 min. Vienas 
 ## Duomenys (`data/`)
 | Failas | Turinys |
 |---|---|
-| `stations.csv` | statiniai jungčių duomenys: `connector_id, evse_id, station_id, station_name, operator, address, city, lat, lon, connector_type, power_kw, tariff`. Perrašomas tik pasikeitus; dingusios jungtys paliekamos. |
+| `stations.csv` | statiniai jungčių duomenys: `connector_id, evse_id, station_id, station_name, operator, address, city, lat, lon, connector_type, power_kw, tariff, charger_id, owner, restriction, open_24_7, tariff_note`. `charger_id` jungia vieno fizinio įkroviklio kištukus (pvz. CHAdeMO+CCS+T2 – kai vienas naudojamas, kiti dažnai irgi rodomi „Užimta“, tad sesijas skaičiuok pagal `charger_id`). `restriction`: `CUSTOMERS` = tik klientams, `DISABLED` = neįgaliųjų vieta. Perrašomas tik pasikeitus; dingusios jungtys paliekamos. |
 | `status/YYYY-MM-DD.csv` | `timestamp_utc, connector_id, status` – tik būsenos pokyčiai + heartbeat kiekvienai jungčiai kas 30 min. Pirmas jungties įrašas = pradinė būsena. |
+| `prices/YYYY-MM-DD.csv` | `timestamp_utc, connector_id, tariff` – tarifo pokyčiai (dalis operatorių, pvz. Stuart Energy, Įkrautas, keičia kainą kas valandą pagal Nord Pool). Iki 2026-10-07 18 val. atkurta iš git istorijos. |
+| `freshness/YYYY-MM-DD.csv` | kas 30 min: `timestamp_utc, station_id, last_update_utc, age_min` – kada operatorius paskutinį kartą atsiuntė duomenis (API `lu`). Didelis `age_min` = būsena greičiausiai pasenusi. |
+| `payments.csv` | vienkartinis (`python enrich_payments.py`): mokėjimo būdai pagal stotelę. Nepilnas – svetainė turi info tik ~967 iš 2068 stotelių, „Per programėlę“ = 0 visiems. |
 | `last_status.json` | paskutinė būsena (`s`), API reikšmė (`raw`) ir paskutinio įrašo/heartbeat laikas (`hb`). |
 | `runs.csv` | kiekvieno paleidimo log'as: `timestamp_utc, connectors, changes, heartbeats, new_connectors, duration_s, error`. |
 
