@@ -36,6 +36,12 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
       "full_share",                            // laiko dalis, kai nebuvo nė vienos laisvos jungties
       "busy_by_hour": [24 skaičiai 0-1 | null] // užimtumas pagal Lietuvos valandą 0..23 („populiarūs laikai“)
     },
+    "groups": [{ "type": "IEC_62196_T2_COMBO", "power_kw": 150, "count": 4, "free": 2 }],  // filtrams pagal kištuką
+    "forecast_by_hour": {                    // kaip HERE availabilityProbabilities / predictedWaitTimes, tik valandiniai
+      "free_prob": [24 × 0-1 | null],        // tikimybė, kad bus bent viena laisva jungtis tą Lietuvos valandą
+      "wait_min":  [24 × min | null],        // vidutinis laukimas tą valandą (0 = paprastai laukti nereikia)
+      "confidence": 0.44                     // istorijos kiekis: 1.0 = ~savaitė duomenų
+    } | null,
     "connectors": [{
       "id", "charger_id", "type": "IEC_62196_T2_COMBO", "power_kw": 150, "class": "DC_150",
       "tariff": "0.42 €/kWh", "restriction": null | "CUSTOMERS" | "DISABLED",
@@ -61,7 +67,7 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
 ## `city_stats.json` (operatorių ir miesto dashboard'ui)
 
 `totals`, `vilnius` (+ `top_blocking`, `top_overstay` su koordinatėmis žemėlapiui), `busy_by_hour` (10 didžiausių miestų),
-`power_classes` (tipinės trukmės), `operators` (sesijos, užsistovėjimas, neveikiančios, tylinčios >24 val. stotelės), `top_blocking` (visa LT).
+`power_classes` (tipinės trukmės), `overstays` (kiekvienas užsistovėjimas `[station_id, city, overstay_min, blocking_min]` simuliatoriui), `operators` (sesijos, užsistovėjimas, neveikiančios, tylinčios >24 val. stotelės), `top_blocking` (visa LT).
 
 ## Kaip skaičiuojama (paaiškinimas useriui ir komisijai)
 

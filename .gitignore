@@ -3,3 +3,4 @@ __pycache__/
 report.html
 app_data/
 .DS_Store
+dashboard/index.html

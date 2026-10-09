@@ -226,6 +226,9 @@ def build_grid(events, stations, sessions, t0, t1):
     usable_ticks = Counter()                      # sid -> ticks observed
     blocking_ticks = Counter()                    # connector -> overstay ticks while station full
     status_ticks = defaultdict(Counter)           # sid -> status -> ticks
+    interval_block = Counter()                    # (connector, overstay_start) -> ticks while station full
+    timeline = defaultdict(list)                  # sid -> [(tick_no, local hour, station full?)]
+    tick_no = 0
 
     while tick <= t1:
         while i < n and events[i][0] <= tick:
@@ -248,6 +251,7 @@ def build_grid(events, stations, sessions, t0, t1):
             if not usable:
                 continue
             usable_ticks[sid] += 1
+            timeline[sid].append((tick_no, hour, free == 0))
             b = busy_hour[(sid, hour)]
             b[0] += busy / usable
             b[1] += 1
@@ -261,9 +265,47 @@ def build_grid(events, stations, sessions, t0, t1):
                     for os_, oe in over.get(c, ()):
                         if os_ <= tick < oe:
                             blocking_ticks[c] += 1
+                            interval_block[(c, os_)] += 1
                             break
         tick += step
-    return over, busy_hour, city_hour, full_ticks, usable_ticks, blocking_ticks, status_ticks
+        tick_no += 1
+    return (over, busy_hour, city_hour, full_ticks, usable_ticks, blocking_ticks, status_ticks,
+            interval_block, hourly_forecast(timeline))
+
+
+def hourly_forecast(timeline):
+    """Per station and local hour: P(at least one free connector) and mean wait.
+
+    Same idea as HERE's availabilityProbabilities / predictedWaitTimes, but hourly
+    because there are only a few days of history. Wait for a full tick = minutes until
+    the station next had a free connector (0 when something was free).
+    """
+    out = {}
+    for sid, rows in timeline.items():
+        waits = [0.0] * len(rows)
+        next_free = None
+        for k in range(len(rows) - 1, -1, -1):
+            no, _, full = rows[k]
+            if not full:
+                next_free = no
+            elif next_free is not None and next_free - no <= 36:   # ignore gaps > 3 h
+                waits[k] = (next_free - no) * TICK_MIN
+            else:
+                waits[k] = None
+        agg = defaultdict(lambda: [0, 0, 0.0, 0])          # hour -> [ticks, free ticks, wait sum, wait n]
+        for (no, hour, full), w in zip(rows, waits):
+            a = agg[hour]
+            a[0] += 1
+            a[1] += 0 if full else 1
+            if w is not None:
+                a[2] += w
+                a[3] += 1
+        out[sid] = {
+            "free_prob": [round(agg[h][1] / agg[h][0], 2) if agg[h][0] else None for h in range(24)],
+            "wait_min": [round(agg[h][2] / agg[h][3]) if agg[h][3] else None for h in range(24)],
+            "samples": [agg[h][0] for h in range(24)],
+        }
+    return out
 
 
 class EndModel:
@@ -327,8 +369,8 @@ def main():
 
     sessions, cur, since = sessions_and_current(events, stations)
     t0, t1 = events[0][0], events[-1][0]
-    over, busy_hour, city_hour, full_ticks, usable_ticks, blocking_ticks, status_ticks = build_grid(
-        events, stations, sessions, t0, t1)
+    (over, busy_hour, city_hour, full_ticks, usable_ticks, blocking_ticks, status_ticks,
+     interval_block, forecast) = build_grid(events, stations, sessions, t0, t1)
     model = EndModel(sessions, stations)
     observed_days = (t1 - t0).total_seconds() / 86400
 
@@ -402,6 +444,19 @@ def main():
             wait = max(0, min(rem)) if rem else None
 
         h = hours.get(str(sid))
+        grp = defaultdict(lambda: Counter())
+        for x in conn_out:
+            g = grp[(x["type"], x["power_kw"])]
+            g["count"] += 1
+            g["free"] += x["status"] == "Laisva"
+        groups_out = [{"type": t, "power_kw": kw, "count": g["count"], "free": g["free"]}
+                      for (t, kw), g in sorted(grp.items(), key=lambda kv: -kv[0][1])]
+        fc = forecast.get(sid)
+        if fc:
+            # confidence: how many 5-min observations back each hour (~12/h/day), capped at 1
+            n = sum(fc["samples"]) / 24
+            fc = {"free_prob": fc["free_prob"], "wait_min": fc["wait_min"],
+                  "confidence": round(min(1.0, n / (12 * 7)), 2)}
         out_stations.append({
             "id": sid,
             "name": r0["station_name"],
@@ -437,6 +492,8 @@ def main():
                 "busy_by_hour": [round(busy_hour[(sid, hr)][0] / busy_hour[(sid, hr)][1], 2)
                                  if busy_hour[(sid, hr)][1] else None for hr in range(24)],
             },
+            "groups": groups_out,
+            "forecast_by_hour": fc,
             "connectors": conn_out,
         })
 
@@ -446,12 +503,18 @@ def main():
     with open(os.path.join(args.out, "stations.json"), "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "stations": out_stations}, f, ensure_ascii=False, separators=(",", ":"))
 
-    write_city_stats(args.out, meta, out_stations, city_hour, stations, sessions, over)
+    # overstay intervals for the policy simulator: [station_id, city, overstay_min, blocking_min]
+    sim = []
+    for c, ivs in over.items():
+        for os_, oe in ivs:
+            sim.append([stations[c]["station_id"], stations[c]["city"],
+                        round((oe - os_).total_seconds() / 60), interval_block[(c, os_)] * TICK_MIN])
+    write_city_stats(args.out, meta, out_stations, city_hour, stations, sessions, over, sim)
     n_pred = sum(1 for s in out_stations for c in s["connectors"] if "prediction" in c)
     print(f"{len(out_stations)} stations, {len(sessions)} sessions, {n_pred} live predictions -> {args.out}/")
 
 
-def write_city_stats(out, meta, out_stations, city_hour, stations, sessions, over):
+def write_city_stats(out, meta, out_stations, city_hour, stations, sessions, over, sim):
     by_op = defaultdict(lambda: Counter())
     for s in out_stations:
         o = by_op[s["operator"]]
@@ -519,6 +582,7 @@ def write_city_stats(out, meta, out_stations, city_hour, stations, sessions, ove
         "power_classes": classes,
         "operators": operators,
         "top_blocking": top("blocking_hours"),
+        "overstays": {"fields": ["station_id", "city", "overstay_min", "blocking_min"], "rows": sim},
     }
     with open(os.path.join(out, "city_stats.json"), "w", encoding="utf-8") as f:
         json.dump(stats, f, ensure_ascii=False, indent=1)
