@@ -20,7 +20,7 @@ import statistics
 from collections import defaultdict
 from datetime import timedelta
 
-from export_app import (CDF_Q, LT, MIN_HOUR_TICKS, MIN_STATION_TICKS, EndModel, build_grid, level,
+from export_app import (CDF_Q, LT, station_wait, MIN_HOUR_TICKS, MIN_STATION_TICKS, EndModel, build_grid, level,
                         load_events, load_stations, max_kw, power_class, sessions_and_current)
 
 H = 30            # horizon the app shows in colour (p_free_30min)
@@ -147,6 +147,7 @@ def main():
                 print(f"  per {h:3d} min., sakėme {lo*100:3.0f}–{min(hi_, 1)*100:3.0f} %: vid. {100 * statistics.mean(x for x, _ in b):3.0f} %, "
                       f"iš tikrųjų {100 * statistics.mean(y for _, y in b):3.0f} % (n={len(b)})")
 
+    station_check(model, stations, ivs, cutoff, t_end)
     levels_check(events, stations, cutoff, t_end, ivs)
 
     if args.plot:
@@ -160,6 +161,46 @@ def p_by(cdf, t, qs=CDF_Q):
         if t <= m1:
             return q0 + (q1 - q0) * (t - m0) / (m1 - m0) if m1 > m0 else q1
     return qs[-1] + (1 - qs[-1]) * 0.5     # beyond the last quantile: between 95 % and 100 %
+
+
+def station_check(model, stations, ivs, cutoff, t_end):
+    """Full stations: does "9 of 10 times a connector frees up within X" hold?"""
+    conns_of = defaultdict(list)
+    for c, r in stations.items():
+        conns_of[r["station_id"]].append(c)
+    by_conn = defaultdict(list)
+    for c, s_, e in ivs:
+        by_conn[c].append((s_, e))
+    hits, n, t = 0, 0, cutoff
+    while t <= t_end:
+        for sid, conns in conns_of.items():
+            cur = []
+            for c in conns:
+                iv = next(((s_, e) for s_, e in by_conn.get(c, ()) if s_ <= t and (e is None or e > t)), None)
+                if iv is None:
+                    break
+                cur.append((c, iv))
+            else:
+                busy = []
+                for c, (s_, e) in cur:
+                    cls = power_class(max_kw(stations[c]["power_kw"]))
+                    el = (t - s_).total_seconds() / 60
+                    rem, _ = model.remaining(sid, cls, el, s_.astimezone(LT).hour) if el <= 1440 else (None, None)
+                    if rem is None:
+                        break
+                    busy.append((stations[c]["charger_id"], s_, cls, rem))
+                else:
+                    w = station_wait(busy)
+                    ends = [(e - t).total_seconds() / 60 for _, (s_, e) in cur if e is not None]
+                    first = min(ends) if ends else None
+                    if first is not None and (first <= w[1] or len(ends) == len(cur) or (t_end - t).total_seconds() / 60 > w[1]):
+                        hits += first <= w[1]
+                        n += 1
+                    elif first is None and (t_end - t).total_seconds() / 60 > w[1]:
+                        n += 1
+        t += timedelta(minutes=STEP_MIN)
+    if n:
+        print(f"\nPilnos stotelės, „9 iš 10 kartų vieta atsilaisvins per X“: pasitvirtino {100 * hits / n:.0f} % (n={n})")
 
 
 def levels_check(events, stations, cutoff, t_end, ivs):

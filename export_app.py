@@ -142,6 +142,29 @@ def combine_wait(samples, qs=CDF_Q):
     return out
 
 
+def station_wait(busy):
+    """When the first busy connector of a full station frees up.
+
+    busy: [(charger_id, busy_since, cls, sorted remaining samples)].
+    Plugs of one physical charger that turned busy within 5 min of each other almost always
+    mirror one car (the charger reports a single status), so they count as one session;
+    otherwise the station would look twice as likely to free up as it really is.
+    Returns (median, "9 of 10" bound, cdf at CDF_Q) or None.
+    """
+    kept = []
+    for ch, since, cls, smp in sorted(busy, key=lambda b: b[1]):
+        if any(k[0] == ch and abs((since - k[1]).total_seconds()) <= 300 for k in kept):
+            continue
+        kept.append((ch, since, cls, smp))
+    if not kept:
+        return None
+    samples = [k[3] for k in kept]
+    hi_q = max(HI_Q[k[2][:2]] for k in kept)
+    cdf = combine_wait(samples)
+    hi = combine_wait(samples, qs=(hi_q,))[0]
+    return cdf[CDF_Q.index(0.5)], max(round5(hi, up=True), 5), cdf
+
+
 def is_night(dt):
     h = dt.astimezone(LT).hour
     return h >= 20 or h < 7
@@ -518,11 +541,9 @@ def main():
         elif statuses["Laisva"]:
             wait, wait_by, wait_cdf = 0, 0, None
         else:
-            w = combine_wait([x["prediction"]["_samples"] for x in conn_out
-                              if x["status"] == "Užimta" and "prediction" in x])
-            wait = w[CDF_Q.index(0.5)] if w else None
-            wait_by = max(round5(w[CDF_Q.index(0.9)], up=True), 5) if w else None
-            wait_cdf = w
+            w = station_wait([(x["charger_id"], since[x["id"]][0], x["class"], x["prediction"]["_samples"])
+                              for x in conn_out if x["status"] == "Užimta" and "prediction" in x])
+            wait, wait_by, wait_cdf = w if w else (None, None, None)
         for x in conn_out:
             x.get("prediction", {}).pop("_samples", None)
 
