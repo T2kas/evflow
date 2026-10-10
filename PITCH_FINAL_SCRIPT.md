@@ -1,141 +1,187 @@
 # EVFlow finalas: kalbėjimo scenarijus (Tautvydas ir Tadas)
 
-Skaidrės: https://claude.ai/artifact/5nsvdVvRqLekzJowioS23z (atsisiųsti PPTX ir PDF; PDF privalomas iki 13:00).
-Formatas: **3 min. iššūkis ir sprendimas + 2 min. demo + 3 min. klausimai.** Skaidrių neskaitome – jose tik skaičiai ir vaizdai, mes pasakojame.
-Skaičiai iš duomenų 2026-10-10. Ryte prieš finalą: `git pull && python3 export_app.py && python3 backtest.py` ir patikrinkite, ar skaičiai nepasikeitė.
+Skaidrės: `~/Desktop/EVFlow_pitch/`
+- `EVFlow_finalas.key` – rodymui (su pastabomis);
+- `.pptx` – Canva / Google Drive;
+- `.pdf` – privalomas iki 13:00.
+
+**Formatas pagal pitch gidą:** 3 min. pristatymas (be demo) → 2 min. demo → 3 min. klausimai.
+
+**Taisyklės:**
+- Skaidrių neskaitome: jose tik skaičiai ir vaizdai, mes pasakojame.
+- Kas netelpa į laiką, to nėra. Repetuojame su laikmačiu bent 3 kartus.
+
+**Skaičiai:** iš 2026-10-10 duomenų. Jie tie patys, kuriuos rodo valdymo skydelis video įraše (~380 val. blokavimo, ~210 val. su taisykle). Ryte atsidarykite skydelį ir patikrinkite, ar dar sutampa.
+
+## Laiko planas
 
 | # | Skaidrė | Laikas | Kalba |
 |---|---|---|---|
-| 1 | Viršelis | 0:00–0:12 | Tautvydas, Tadas |
-| 2 | Problema | 0:12–0:30 | Tadas |
-| 3 | Skaičiai | 0:30–0:50 | Tautvydas |
-| 4 | Atviri duomenys | 0:50–1:02 | Tautvydas |
-| 5 | Trys dalykai | 1:02–1:15 | Tadas |
-| 6 | Vairuotojui | 1:15–1:30 | Tadas |
-| 7 | Užimtumo žemėlapis | 1:30–1:40 | Tadas |
-| 8 | Atsakingas elgesys | 1:40–1:55 | Tautvydas |
-| 9 | Valdymo skydelis | 1:55–2:03 | Tautvydas |
-| 10 | Tikslumas | 2:03–2:18 | Tautvydas |
-| 11 | Kuo skiriamės | 2:18–2:30 | Tadas |
-| 12 | Demo | 2:30–4:20 | abu |
-| 13 | Verslo modelis | 4:20–4:38 | Tadas |
-| 14 | Nauda Vilniui | 4:38–4:50 | Tautvydas |
-| 15 | Kas toliau | 4:50–4:58 | Tadas |
-| 16 | Pabaiga | 4:58–5:00 | abu |
-| 17–18 | Priedai | tik klausimams | – |
+| 1 | EVFlow (viršelis) | 0:00–0:10 | abu |
+| 2 | Stotelė užimta | 0:10–0:25 | Tadas |
+| 3 | Ką rodo duomenys | 0:25–0:45 | Tautvydas |
+| 4 | Atviri duomenys → įžvalga | 0:45–1:02 | Tautvydas |
+| 5 | Sprendimas | 1:02–1:25 | Tadas |
+| 6 | Kaip skatiname atlaisvinti vietą | 1:25–1:45 | Tautvydas |
+| 7 | Ar galima pasitikėti? | 1:45–2:08 | Tautvydas |
+| 8 | Kas naudoja ir kas moka | 2:08–2:27 | Tadas |
+| 9 | Nauda Vilniui | 2:27–2:45 | Tautvydas |
+| 10 | Kas toliau | 2:45–3:00 | Tadas |
+| 11 | Demo | 3:00–3:08 | Tadas |
+| 12 | Programėlė vairuotojui (video) | 3:08–4:05 | Tadas |
+| 13 | Kelionės planavimas (video) | 4:05–4:25 | Tadas |
+| 14 | Skydelis operatoriams ir miestui (video) | 4:25–4:58 | Tautvydas |
+| 15 | EVFlow. Atvažiuok, kai bus laisva. | 4:58–5:00 → klausimai | abu |
+| 16–18 | Priedai | tik jei klausia | – |
+
+**Atmintinė, kas po ko (jei pasimesite):**
+
+> komanda → problema → skaičiai → duomenys → sprendimas → elgesys → tikslumas → kas moka → nauda miestui → kas toliau → DEMO
 
 ---
 
-## 1. Viršelis (0:00–0:12)
+# 1 DALIS: PRISTATYMAS (3 min.)
 
+### 1. Viršelis (0:00–0:10)
 **Tautvydas:** Aš Tautvydas…
 **Tadas:** …o aš Tadas. Kuriame EVFlow – programėlę, kuri parodo, kada užimta įkrovimo stotelė atsilaisvins, ir skatina vairuotojus laiku atlaisvinti vietą.
 
-## 2. Problema (0:12–0:30)
+### 2. Stotelė užimta (0:10–0:25)
+**Tadas:** Turbūt pažįstama: atvažiuoji prie stotelės, o ji užimta. Nors automobilis jau seniai pasikrovęs ir tiesiog stovi. Programėlės parodo tik „užimta“. Nežinai, kiek laukti, ar čia dažnai pilna, ar verta važiuoti kitur.
 
-**Tadas:** Turbūt pažįstama situacija: atvažiuoji prie stotelės, o ji užimta. Nors automobilis jau seniai pasikrovęs ir tiesiog stovi. Programėlės parodo tik „užimta“ – ir viskas. Nežinai, kiek teks laukti, ar ši stotelė apskritai dažnai būna pilna, ar verta važiuoti kitur.
+### 3. Ką rodo duomenys (0:25–0:45)
+**Tautvydas:** Mes tai suskaičiavome. Vilniuje beveik kas trečias įkrovimas trunka ilgiau, nei reikia pasikrauti. Dėl to kasdien susidaro apie trys šimtai aštuoniasdešimt valandų, kai visa stotelė pilna, o automobilis joje jau pasikrovęs. Visi operatoriai kartu dėl to per metus neparduoda elektros už iki aštuonių šimtų tūkstančių eurų.
 
-## 3. Skaičiai (0:30–0:50)
+### 4. Atviri duomenys → įžvalga (0:45–1:02)
+**Tautvydas:** Viskas iš atvirų Via Lietuva duomenų. Nuo spalio šeštosios kas dvi minutes renkame kiekvienos stotelės būseną. Tai visi dvidešimt du operatoriai ir jau 1,2 milijono įrašų. Štai Vilnius ketvirtą valandą: raudonos stotelės tuo metu dažniau užimtos nei laisvos.
 
-**Tautvydas:** Mes tai suskaičiavome. Vilniuje beveik kas trečias įkrovimas trunka ilgiau, nei automobiliui reikia pasikrauti. Dėl to kasdien susidaro apie trys šimtai devyniasdešimt valandų, kai visa stotelė užimta ir kitas vairuotojas negali krauti. Visi operatoriai kartu dėl to per metus neparduoda elektros už iki aštuonių šimtų tūkstančių eurų.
+### 5. Sprendimas (1:02–1:25)
+**Tadas:** Iš to padarėme tris dalykus:
+- Vairuotojui rodome, kada užimta stotelė atsilaisvins ir kada ji dažniausiai laisva.
+- Skatiname laiku atlaisvinti vietą.
+- Operatoriams ir miestui duodame valdymo skydelį.
 
-## 4. Atviri duomenys (0:50–1:02)
+Kitos programėlės rodo tik „laisva arba užimta“ savo tinkle. Mes rodome laiką, visus dvidešimt du operatorius ir skatiname elgtis atsakingai.
 
-**Tautvydas:** Viskas iš atvirų Via Lietuva duomenų. Nuo spalio šeštosios kas porą minučių renkame kiekvienos Lietuvos stotelės būseną: du tūkstančiai stotelių, visi dvidešimt du operatoriai, jau 1,2 milijono įrašų.
+### 6. Kaip skatiname atlaisvinti vietą (1:25–1:45)
+**Tautvydas:** Atvažiavęs vairuotojas paspaudžia „Kraunu čia“. Kai automobilis turėtų būti pasikrovęs, programėlė primena jį patraukti. Tikriname pagal Via Lietuva duomenis, tad apgauti nepavyks. Patraukei laiku – gauni taškų prizams ir operatorių nuolaidoms. Vėluoji – krenta įvertinimas.
 
-## 5. Trys dalykai (1:02–1:15)
+### 7. Ar galima pasitikėti? (1:45–2:08)
+**Tautvydas:** Ar galima pasitikėti? Algoritmą apmokėme su ankstesnėmis dienomis ir patikrinome su tuo, kas realiai nutiko kitą dieną. Tai beveik keturiasdešimt tūkstančių prognozių. Kai sakėme „dažniausiai laisva“, stotelė tikrai buvo laisva devyniasdešimt aštuonis procentus laiko. O kai sakome, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko, taip nutinka devyniasdešimt keturiais atvejais iš šimto.
 
-**Tadas:** Iš to padarėme tris dalykus: prognozę vairuotojui, motyvaciją elgtis atsakingai ir valdymo skydelį operatoriams bei miestui.
+### 8. Kas naudoja ir kas moka (2:08–2:27)
+**Tadas:** Kas moka?
+- Vairuotojams programėlė nemokama, jie ja naudojasi kasdien.
+- Moka operatoriai: prenumerata už valdymo skydelį pagal jungčių skaičių, nes jiems tai daugiau parduotos elektros.
+- Miestas perka licenciją planavimui.
+- Partneriai finansuoja prizus, nes gauna klientų, kurie kraunasi šalia.
 
-## 6. Vairuotojui (1:15–1:30)
+### 9. Nauda Vilniui (2:27–2:45)
+**Tautvydas:** Nauda Vilniui: vien taisyklė „penkiolika minučių nemokamai po įkrovimo“ atlaisvintų apie du šimtus dešimt valandų pilnų stotelių per dieną. Tai daugiau įkrovimų be naujų stotelių statybos. Miestas mato, kur vakarais trūksta stotelių, ir gali išbandyti taisykles prieš jas įvesdamas.
 
-**Tadas:** Vairuotojas vietoj „užimta“ mato, per kiek laiko stotelė greičiausiai atsilaisvins. Paspaudęs stotelę – kuriomis valandomis ji dažniausiai laisva. Žemėlapyje gali atsifiltruoti pigiausią ar greitą krovimą, o prieš ilgesnę kelionę programėlė pasiūlo, kur sustoti pasikrauti.
-
-## 7. Užimtumo žemėlapis (1:30–1:40)
-
-**Tadas:** Štai Vilnius šešią vakaro: raudonos stotelės tuo metu dažniausiai pilnos. Vairuotojas renkasi laisvesnę – ir esamos stotelės naudojamos tolygiau.
-
-## 8. Atsakingas elgesys (1:40–1:55)
-
-**Tautvydas:** Kai automobilis turėtų būti pasikrovęs, programėlė primena jį patraukti. Patraukei laiku – gauni taškų prizams ar operatorių krovimo nuolaidoms. Vėluoji – krenta įvertinimas. Tikriname pagal Via Lietuva duomenis, tad apgauti nepavyks. O užstatytą vietą gali nufotografuoti – pranešimas nukeliauja operatoriui.
-
-## 9. Valdymo skydelis (1:55–2:03)
-
-**Tautvydas:** Operatoriai ir miestas mato, kur stotelės užimtos, bet nekrauna, kas neveikia ir kiek elektros neparduodama.
-
-## 10. Tikslumas (2:03–2:18)
-
-**Tautvydas:** Ar galima pasitikėti? Algoritmą apmokėme su ankstesnėmis dienomis ir patikrinome su tuo, kas realiai nutiko kitą dieną – beveik keturiasdešimt tūkstančių prognozių. Kai sakėme, kad stotelė dažniausiai laisva, ji tikrai buvo laisva devyniasdešimt aštuonis procentus laiko. O kai sakome, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko – taip nutinka devyniasdešimt keturiais atvejais iš šimto.
-
-## 11. Kuo skiriamės (2:18–2:30)
-
-**Tadas:** Nuo kitų programėlių skiriamės trimis dalykais. Rodome ne tik ar užimta, bet ir kada atsilaisvins bei kaip dažnai čia pilna. Visi operatoriai vienoje vietoje. Ir ne tik informuojame, bet ir skatiname laiku atlaisvinti vietą. Parodysime gyvai.
-
-## 12. Demo (2:30–4:20)
-
-Telefono ekranas ant projektoriaus. **Atsarginis variantas:** įrašytas demo video tame pačiame kompiuteryje.
-
-**Tadas (programėlė, ~1:10):**
-- „Tai veikianti programėlė su šios dienos duomenimis. Žalia – laisva, raudona – užimta, oranžinė – kažkas stovi per ilgai.“
-- „Esu prie VILNIUS TECH. Paspaudžiu artimiausią stotelę – ji pilna, bet greičiausiai atsilaisvins po penkiolikos minučių. O grafikas rodo, kad šiuo metu čia dažniausiai užimta.“
-- „Man reikia greitai ir pigiai – įsijungiu filtrus ir matau laisvą stotelę netoliese. Važiuoju per programėlę arba Waze.“
-- „Atvažiavęs – ‚Kraunu čia‘. Kai būsiu pasikrovęs, gausiu priminimą, o patraukęs laiku – taškų.“
-
-**Tautvydas (pranešimas ir valdymo skydelis, ~0:40):**
-- „Jei kas nors užstatė vietą – nufotografuoju, duomenys ir kiti vairuotojai patvirtina, pranešimas keliauja operatoriui.“
-- „O tai operatoriaus vaizdas: kas šiuo metu stovi per ilgai, kas neveikia. Ir taisyklių simuliatorius: penkios nemokamos minutės, paskui penkiasdešimt centų už minutę – iškart matai, kiek blokavimo tai panaikintų.“
-
-## 13. Verslo modelis (4:20–4:38)
-
-**Tadas:** Kas moka? Vairuotojams programėlė nemokama. Moka operatoriai – už valdymo skydelį, kaina pagal jungčių skaičių. Jie taip pat gali turėti mūsų programėlę su savo logotipu. Miestas perka licenciją planavimui, o partneriai finansuoja prizus, nes gauna klientų, kurie kraunasi šalia.
-
-## 14. Nauda Vilniui (4:38–4:50)
-
-**Tautvydas:** Vien taisyklė „penkiolika minučių nemokamai po įkrovimo“ Vilniuje atlaisvintų apie du šimtus šešiolika valandų per dieną. Daugiau įkrovimų – be naujų stotelių statybos.
-
-## 15. Kas toliau (4:50–4:58)
-
-**Tadas:** Toliau – pilotas su vienu operatoriumi ir Vilniaus savivaldybe. Tam mums reikia operatoriaus ir savivaldybės kontakto.
-
-## 16. Pabaiga (4:58–5:00)
-
-**Abu:** EVFlow. Atvažiuok, kai bus laisva.
+### 10. Kas toliau (2:45–3:00)
+**Tadas:** Toliau – pilotas su vienu operatoriumi ir Vilniaus savivaldybe. Su operatoriaus duomenimis tiksliai žinosime, kada automobilis baigė krauti. Tam mums reikia operatoriaus ir savivaldybės kontakto. O dabar parodysime, kaip tai veikia.
 
 ---
 
-## Komisijos klausimai: trumpi atsakymai
+# 2 DALIS: DEMO (2 min.)
 
-Susitarimas: **Tautvydas** – duomenys ir modelis, **Tadas** – verslas ir plėtra. Pirma atsakymas, tada paaiškinimas.
+**Kaip darome.** Telefoną su programėle **paduodame komisijai**, kad pabandytų patys. Ekrane tuo metu **paleidžiame įrašą**, kad matytų visa salė ir kad demo veiktų net su lėtu internetu. Kalbame pagal įrašą.
 
-**Kuo skiriatės nuo esamų programėlių?**
-Jos rodo tik „laisva / užimta“ savo tinkle. Mes – kada atsilaisvins ir kaip dažnai pilna, visi 22 operatoriai vienoje vietoje, ir skatiname laiku atlaisvinti vietą.
+**Prieš finalą:**
+- Įdėkite 2 programėlės ekrano įrašus į 12 ir 13 skaidrę (dabar ten rėmeliai „ĮDĖKITE VIDEO“).
+- Video skaidrėse paleidžiamas paspaudus. Keynote galite nustatyti, kad prasidėtų automatiškai: Movie → Start automatically.
+- Telefone iš anksto atidarykite programėlę, be prisijungimų, prie VILNIUS TECH.
 
-**Kaip žinote, kad automobilis jau nebekrauna?**
-Viešas API to neskiria, todėl vertiname pagal laiką: per ilgas = ilgiau, nei net lėtai kraunantis automobilis pasikrautų 20–80 % toje jungtyje, plius 15 min. Su operatoriaus duomenimis (OCPP) tai būtų tikslu – tai mūsų piloto tikslas. (Priedo skaidrė 17.)
+### 11. Demo (3:00–3:08)
+**Tadas:** Telefoną duodame jums – galite bandyti patys. Ekrane rodome tą patį.
+
+### 12. Programėlė vairuotojui (3:08–4:05), video
+**Tadas:**
+1. Tai veikianti programėlė su šios dienos duomenimis. Žalia – laisva, raudona – užimta.
+2. Esu prie VILNIUS TECH. Artimiausia stotelė pilna, bet greičiausiai atsilaisvins po maždaug penkiolikos minučių. Grafikas rodo, kad šiuo metu čia dažniausiai užimta.
+3. Man reikia greitai. Įsijungiu filtrus ir matau laisvą stotelę netoliese.
+4. Atvažiavęs spaudžiu „Kraunu čia“. Gausiu priminimą, o patraukęs laiku – taškų.
+5. Jei kas užstatė vietą, nufotografuoju, ir pranešimas keliauja operatoriui.
+
+### 13. Kelionės planavimas (4:05–4:25), video
+**Tadas:** Prieš ilgesnę kelionę įvedu, kur važiuoju. Programėlė pasiūlo, kur sustoti pasikrauti, ir renkasi stoteles, kurios tuo metu dažniausiai laisvos.
+
+### 14. Skydelis operatoriams ir miestui (4:25–4:58), video
+**Tautvydas:** Tai operatoriaus ir miesto vaizdas: kas šiuo metu stovi per ilgai, kas neveikia. O čia taisyklių simuliatorius. Pasirenki, pavyzdžiui, penkiolika nemokamų minučių po įkrovimo, ir iškart matai, kiek valandų blokavimo tai panaikintų ir kiek papildomų įkrovimų atsirastų.
+
+### 15. Pabaiga (4:58–5:00)
+**Abu:** EVFlow. Atvažiuok, kai bus laisva. Ačiū – laukiame klausimų.
+*(Šią skaidrę paliekame per klausimus.)*
+
+---
+
+# 3 DALIS: KLAUSIMAI (3 min.)
+
+**Kas atsako:**
+- **Tautvydas** – duomenys ir modelis.
+- **Tadas** – verslas ir plėtra.
+
+Pirma trumpas atsakymas, tada paaiškinimas. Jei nežinome: „Dar nežinome, bet darytume taip…“
+
+Komisijoje bus Cognizant (technologijos), Vilniaus savivaldybė (miestas) ir Ignitis (verslas, operatorius).
+
+**Kuo skiriatės nuo esamų programėlių?** *(16 priedas)*
+Jos rodo tik „laisva / užimta“ savo tinkle. Mes rodome, kada stotelė atsilaisvins ir kaip dažnai ji pilna, visi 22 operatoriai yra vienoje vietoje, ir skatiname laiku atlaisvinti vietą.
+
+**Kaip žinote, kad automobilis jau nebekrauna?** *(17 priedas)*
+Viešas API to neskiria, todėl vertiname pagal laiką. Per ilgas įkrovimas yra toks, kuris trunka ilgiau, nei net lėtai kraunantis automobilis pasikrautų nuo 20 iki 80 % toje jungtyje, plius 15 min. Su operatoriaus duomenimis tai būtų tikslu. Tai mūsų piloto tikslas.
 
 **Iš kur duomenys ilgalaikėje perspektyvoje?**
-Via Lietuva atviras API – jį renkame nuo spalio 6 d., kas ~2 min., automatiškai. Pilotas su operatoriumi pridėtų tikslią krovimo pabaigą.
+Iš Via Lietuva atviro API. Renkame juos nuo spalio 6 d., kas ~2 min., automatiškai. Pilotas su operatoriumi pridėtų tikslią krovimo pabaigą.
 
 **Kas už tai mokės?**
-Operatoriai – prenumerata pagal jungčių skaičių; jiems tai daugiau parduotos elektros. Miestas – licencija planavimui. Vairuotojams nemokama.
+Operatoriai – prenumerata pagal jungčių skaičių, nes jiems tai daugiau parduotos elektros. Miestas – licencija planavimui. Vairuotojams nemokama.
 
-**Kas demo metu veikė tikrai, o kas maketas?**
-Tikrai: duomenų rinkimas, prognozės, programėlė su gyvais duomenimis, filtrai, kelionės planavimas, priminimai ir taškų tikrinimas pagal duomenis, valdymo skydelis, simuliatorius. Maketas: prizų parduotuvė (partneriai pavyzdiniai), operatorių nuolaidos ir pranešimų perdavimas operatoriui.
+**Kas demo metu veikė tikrai, o kas yra maketas?**
+- **Veikia tikrai:**
+  - duomenų rinkimas ir prognozės;
+  - programėlė su gyvais duomenimis;
+  - filtrai ir kelionės planavimas;
+  - priminimai ir taškų tikrinimas pagal duomenis;
+  - valdymo skydelis ir simuliatorius.
+- **Maketas:**
+  - prizų parduotuvė (partneriai pavyzdiniai);
+  - operatorių nuolaidos;
+  - pranešimų perdavimas operatoriui.
 
 **Ar prognozės tikslios?**
-Taip, patikrinta su kita diena: „dažniausiai laisva“ – 98 % laiko laisva; „atsilaisvins iki nurodyto laiko“ pilnoje stotelėje – 94 %. Istorija dar tik kelios dienos, modelis persimoko kas kelias minutes ir tikslėja.
+Taip, patikrinome su kita diena:
+- kai rodome „dažniausiai laisva“, stotelė buvo laisva 98 % laiko;
+- kai sakome „atsilaisvins iki nurodyto laiko“ pilnoje stotelėje, taip nutinka 94 % atvejų.
+
+Istorija dar tik kelios dienos, modelis persimoko kas kelias minutes ir tikslėja.
 
 **Iš kur 800 tūkst. €?**
-Viršutinė riba, visi operatoriai kartu, Vilniuje: blokuotos valandos × tipinė jungties galia × stotelės tarifas. Dalis vairuotojų būtų nuvažiavę kitur.
+Tai viršutinė riba visiems operatoriams kartu, Vilniuje. Skaičiuojame taip: blokuotos valandos × tipinė jungties galia × stotelės tarifas. Dalis vairuotojų būtų nuvažiavę kitur.
 
 **Kokia nauda miestui?**
-Daugiau įkrovimų be naujų stotelių: 15 min. taisyklė ≈ 216 val. per dieną. Plius matyti, kur vakarais trūksta stotelių, ir galima išbandyti taisykles prieš jas įvedant.
+Daugiau įkrovimų be naujų stotelių: 15 min. taisyklė atlaisvintų ~210 val. per dieną. Be to, matyti, kur vakarais trūksta stotelių, ir taisykles galima išbandyti prieš jas įvedant.
 
-**O jei kabelis ištrauktas, bet automobilis stovi?**
-Stotelė tada rodo „laisva“ – tai pagauna vairuotojų pranešimai su nuotrauka. (Priedo skaidrė 18.)
+**O jei kabelis ištrauktas, bet automobilis stovi?** *(18 priedas)*
+Tada stotelė rodo „laisva“. Tokius atvejus pagauna vairuotojų pranešimai su nuotrauka.
 
 **Asmens duomenys nuotraukose?**
 Kol kas tai prototipas. Prieš paleidimą pridėsime automatinį numerių paslėpimą, o pilna nuotrauka keliaus tik operatoriui.
 
+**Ignitis jau turi mokestį už stovėjimą – kam mes?**
+Mokestis baudžia po fakto ir galioja tik savame tinkle. Mes iš anksto parodome laiką ir priminimą, skatiname taškais ir apimame visus operatorius. Operatoriui padedame pasirinkti tinkamą taisyklę su simuliatoriumi.
+
 **Plėtra?**
-Visa Lietuva jau duomenyse; tas pats metodas tinka bet kuriai šaliai, kur operatoriai teikia OCPI duomenis.
+Visa Lietuva jau yra duomenyse. Tas pats metodas tinka bet kuriai šaliai, kur operatoriai teikia OCPI duomenis.
+
+---
+
+## Prieš finalą (checklist)
+
+- [ ] Įdėti programėlės ir kelionės planavimo ekrano įrašus į 12 ir 13 skaidres.
+- [ ] Iš naujo eksportuoti PDF (Keynote → File → Export To → PDF) ir įkelti į Google Drive iki 13:00. Patikrinti nuorodą inkognito lange.
+- [ ] Prezentacijos kompiuteryje turi būti įdiegti DM Sans ir Montserrat šriftai, kitaip Keynote juos pakeis.
+- [ ] Telefone atidaryta programėlė, įkrauta baterija, išjungti pranešimai.
+- [ ] 3 repeticijos su laikmačiu: pristatymas ≤ 3:00, demo ≤ 2:00.
+- [ ] Ryte patikrinti skaičius skydelyje (~380 val., ~210 val., 29 %).
