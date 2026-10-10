@@ -58,8 +58,8 @@ Nuo kitų programėlių skiriamės trimis dalykais. Rodome ne tik ar stotelė u�
 **2:10 – Tautvydas:**
 Ar galima tuo pasitikėti? Patikrinome. EVFlow algoritmą apmokėme su ankstesnių dienų duomenimis, o jo prognozes palyginome su tuo, kas realiai nutiko kitą dieną. Beveik keturiasdešimt tūkstančių prognozių.
 
-**2:18 – Tautvydas:** *(ekrane: `pitch_accuracy.png` ir `backtest.png`)*
-Kai EVFlow sakė, kad stotelė tuo metu dažniausiai laisva, ji iš tikrųjų buvo laisva devyniasdešimt aštuonis procentus laiko. Kai sakė, kad yra septyniasdešimt procentų tikimybė vietai atsilaisvinti per pusvalandį, realybėje atsilaisvino lygiai septyniasdešimt procentų. Mūsų prognozės sutampa su realybe.
+**2:18 – Tautvydas:** *(ekrane: `pitch_accuracy.png`, dideli skaičiai 98 % ir 94 %)*
+Rezultatas: kai EVFlow sako, kad stotelė bus laisva, devyniasdešimt aštuoniais atvejais iš šimto ji tikrai laisva. O kai sako, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko, tai pasitvirtina devyniasdešimt keturiais atvejais iš šimto.
 
 **2:28 – Tadas:**
 Kas moka? Vairuotojams programėlė nemokama.
