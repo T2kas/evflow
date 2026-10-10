@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>evflow · stotelių suvestinė</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* One operator console. Top: filters + live state. Then the numbers, the map with what is
+   happening now, the policy simulator, when it happens, and who is responsible. */
+:root {
+  --bg: #f4f5f3;
+  --panel: #ffffff;
+  --sunk: #f8f9f7;
+  --ink: #161a17;
+  --ink-2: #4b534e;
+  --ink-3: #7a827d;
+  --line: #e1e4e0;
+  --line-2: #cfd4cf;
+  --free: #12805a;
+  --free-soft: #e3f2eb;
+  --busy: #c98a12;
+  --busy-soft: #faf0d9;
+  --hot: #d14a1d;
+  --hot-soft: #fbe8de;
+  --off: #9aa19c;
+  --bar: #2f6fd0;
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1210; --panel: #171b18; --sunk: #131614; --ink: #edf0ed; --ink-2: #b2bab4; --ink-3: #848c86;
+    --line: #262b27; --line-2: #343a35; --free: #3cc48c; --free-soft: #15301f; --busy: #e2a93a; --busy-soft: #33280f;
+    --hot: #f07a49; --hot-soft: #3a1f14; --off: #5f6761; --bar: #4f8de6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1210; --panel: #171b18; --sunk: #131614; --ink: #edf0ed; --ink-2: #b2bab4; --ink-3: #848c86;
+  --line: #262b27; --line-2: #343a35; --free: #3cc48c; --free-soft: #15301f; --busy: #e2a93a; --busy-soft: #33280f;
+  --hot: #f07a49; --hot-soft: #3a1f14; --off: #5f6761; --bar: #4f8de6; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+button, select, input { font: inherit; color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 15px; }
+p { margin: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-2); }
+.dim { color: var(--ink-3); }
+.small { font-size: 12px; }
+:focus-visible { outline: 2px solid var(--bar); outline-offset: 2px; }
+
+/* ---------- top bar */
+.top { position: sticky; top: 0; z-index: 1000; background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top-in { max-width: 1440px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 10px; margin-right: auto; }
+.brand b { font: 700 17px var(--sans); letter-spacing: -0.02em; }
+.brand b i { font-style: normal; color: var(--free); }
+.brand span { color: var(--ink-3); font-size: 13px; }
+.seg { display: inline-flex; background: var(--sunk); border: 1px solid var(--line); border-radius: 7px; padding: 2px; }
+.seg button { border: 0; background: transparent; padding: 4px 11px; border-radius: 5px; cursor: pointer; color: var(--ink-2); font-size: 13px; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 0 0 1px var(--line-2); }
+select { background: var(--panel); border: 1px solid var(--line-2); border-radius: 7px; padding: 5px 28px 5px 10px; font-size: 13px;
+  appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ink-3) 50%), linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%; background-size: 5px 5px; background-repeat: no-repeat; max-width: 220px; }
+.live { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--free); box-shadow: 0 0 0 3px var(--free-soft); }
+.dot.stale { background: var(--busy); box-shadow: 0 0 0 3px var(--busy-soft); }
+.dot.err { background: var(--hot); box-shadow: 0 0 0 3px var(--hot-soft); }
+.icon-btn { border: 1px solid var(--line-2); background: var(--panel); border-radius: 7px; width: 30px; height: 30px; display: grid; place-items: center; cursor: pointer; color: var(--ink-2); }
+.icon-btn svg { width: 15px; height: 15px; }
+
+/* ---------- page */
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 64px; display: grid; gap: 20px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.ph { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 14px 16px 0; flex-wrap: wrap; }
+.ph p { font-size: 12px; color: var(--ink-3); }
+.pb { padding: 14px 16px 16px; }
+
+.kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.kpi { padding: 14px 16px; border-right: 1px solid var(--line); display: grid; gap: 2px; align-content: start; }
+.kpi:last-child { border-right: 0; }
+.kpi .l { font-size: 12px; color: var(--ink-2); }
+.kpi .v { font: 500 24px/1.2 var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.kpi .v small { font-size: 13px; color: var(--ink-3); margin-left: 3px; letter-spacing: 0; }
+.kpi .s { font-size: 11.5px; color: var(--ink-3); }
+.kpi.hot .v { color: var(--hot); }
+@media (max-width: 1180px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .kpi:nth-child(3) { border-right: 0; } .kpi:nth-child(-n+3) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kpi { border-right: 0 !important; border-bottom: 1px solid var(--line); } .kpi:nth-child(odd) { border-right: 1px solid var(--line) !important; } }
+
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 20px; }
+@media (max-width: 1080px) { .main { grid-template-columns: 1fr; } }
+.mapwrap { position: relative; display: flex; flex-direction: column; }
+#map { height: 600px; border-radius: 0 0 10px 10px; background: var(--sunk); z-index: 0; }
+@media (max-width: 1080px) { #map { height: 440px; } }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); padding: 10px 16px; border-top: 1px solid var(--line); }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+.leaflet-container { font: inherit; background: var(--sunk); }
+.leaflet-tile-pane { filter: grayscale(1) contrast(.85) brightness(1.06) opacity(.75); }
+.map-dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(1) brightness(.75) contrast(.9) opacity(.8); }
+.leaflet-control-attribution { font-size: 10px; background: color-mix(in srgb, var(--panel) 80%, transparent) !important; color: var(--ink-3); }
+.leaflet-control-attribution a { color: var(--ink-2); }
+.leaflet-bar a { background: var(--panel); color: var(--ink); border-color: var(--line) !important; }
+.leaflet-tooltip.tt { background: var(--ink); color: var(--bg); border: 0; border-radius: 6px; padding: 6px 9px; font-size: 12px; box-shadow: none; }
+.leaflet-tooltip.tt::before { display: none; }
+
+/* side panel */
+.side { display: flex; flex-direction: column; max-height: 680px; }
+@media (max-width: 1080px) { .side { max-height: 560px; } }
+.tabs { display: flex; gap: 2px; padding: 10px 12px 0; border-bottom: 1px solid var(--line); }
+.tabs button { border: 0; background: none; padding: 8px 8px 10px; cursor: pointer; color: var(--ink-3); font-size: 13px; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.tabs .count { font: 500 11px var(--mono); color: var(--ink-3); margin-left: 4px; }
+.list { overflow-y: auto; flex: 1; }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 11px 16px; border-bottom: 1px solid var(--line); cursor: pointer; text-align: left; width: 100%; background: none; border-left: 0; border-right: 0; border-top: 0; }
+.item:hover { background: var(--sunk); }
+.item .n { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item .m { font-size: 12px; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; grid-column: 1; }
+.item .r { grid-row: 1 / span 2; grid-column: 2; text-align: right; align-self: center; }
+.item .r b { display: block; font: 500 15px var(--mono); }
+.item .r span { font-size: 11px; color: var(--ink-3); }
+.empty { padding: 32px 16px; color: var(--ink-3); text-align: center; font-size: 13px; }
+.listnote { padding: 10px 16px; font-size: 12px; color: var(--ink-3); border-bottom: 1px solid var(--line); background: var(--sunk); }
+
+/* station detail */
+.detail { overflow-y: auto; flex: 1; }
+.dh { padding: 14px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+.back { justify-self: start; border: 0; background: none; padding: 0; color: var(--bar); cursor: pointer; font-size: 12.5px; margin-bottom: 4px; }
+.dh h3 { font-size: 16px; line-height: 1.3; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.stats div { padding: 10px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; }
+.stats div:nth-child(3n) { border-right: 0; }
+.stats div:nth-last-child(-n+3) { border-bottom: 0; }
+.stats b { font: 500 15px var(--mono); }
+.stats span { font-size: 11px; color: var(--ink-3); }
+.sec { padding: 12px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.sec h4 { margin: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+.conn { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; }
+.conn .t { font-weight: 500; }
+.conn .x { font-size: 12px; color: var(--ink-3); grid-column: 1 / -1; }
+.chip { font: 500 11px var(--mono); padding: 2px 7px; border-radius: 99px; white-space: nowrap; align-self: start; }
+.chip.free { background: var(--free-soft); color: var(--free); }
+.chip.busy { background: var(--busy-soft); color: var(--busy); }
+.chip.hot { background: var(--hot-soft); color: var(--hot); }
+.chip.off { background: var(--sunk); color: var(--ink-3); box-shadow: inset 0 0 0 1px var(--line); }
+.spark { width: 100%; height: 56px; display: block; }
+.spark rect { fill: var(--line-2); }
+.spark rect.now { fill: var(--ink); }
+.spark text { fill: var(--ink-3); font: 10px var(--mono); }
+
+/* simulator */
+.sim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+@media (max-width: 900px) { .sim { grid-template-columns: 1fr; } }
+.ctrls { padding: 16px; display: grid; gap: 18px; border-right: 1px solid var(--line); align-content: start; }
+@media (max-width: 900px) { .ctrls { border-right: 0; border-bottom: 1px solid var(--line); } }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button { border: 1px solid var(--line-2); background: var(--panel); border-radius: 99px; padding: 4px 11px; cursor: pointer; font-size: 12.5px; color: var(--ink-2); }
+.presets button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.ctl { display: grid; gap: 4px; }
+.ctl label { display: flex; justify-content: space-between; gap: 10px; font-weight: 500; font-size: 13px; }
+.ctl output { font: 500 13px var(--mono); }
+.ctl .h { font-size: 12px; color: var(--ink-3); }
+input[type=range] { width: 100%; accent-color: var(--ink); margin: 4px 0 0; }
+.out { padding: 16px; display: grid; gap: 16px; align-content: start; }
+.hero { display: grid; gap: 2px; }
+.hero .l { font-size: 12.5px; color: var(--ink-2); }
+.hero .v { font: 500 40px/1.1 var(--mono); letter-spacing: -0.03em; color: var(--free); font-variant-numeric: tabular-nums; }
+.hero .v small { font-size: 16px; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
+.cmp { display: grid; gap: 6px; }
+.cmp .row { display: grid; grid-template-columns: 120px minmax(0, 1fr) 96px; gap: 10px; align-items: center; font-size: 12.5px; }
+.cmp .track { display: block; height: 10px; background: var(--sunk); border-radius: 3px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+.cmp .fill { display: block; height: 100%; border-radius: 3px; transition: width .25s ease; }
+.cmp .row span:last-child { text-align: right; font-family: var(--mono); white-space: nowrap; }
+.grid4 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.grid4 div { background: var(--panel); padding: 10px 12px; display: grid; }
+.grid4 b { font: 500 17px var(--mono); }
+.grid4 span { font-size: 11.5px; color: var(--ink-3); }
+
+/* hours + classes */
+.two { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 1000px) { .two { grid-template-columns: 1fr; } }
+.hours svg { width: 100%; height: auto; display: block; overflow: visible; }
+.hours text { fill: var(--ink-3); font: 11px var(--mono); }
+.hours line { stroke: var(--line); }
+.hours rect.b { fill: var(--bar); opacity: .85; }
+.hours rect.b.now { fill: var(--ink); opacity: 1; }
+.hours rect.b.on { fill: var(--hot); opacity: 1; }
+.hours rect.hit { fill: transparent; }
+.readout { font-size: 12.5px; color: var(--ink-2); min-height: 1.5em; margin-top: 6px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-weight: 500; font-size: 11.5px; color: var(--ink-3); padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.r, td.r { text-align: right; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--line); }
+td.r { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+tbody tr:last-child td { border-bottom: 0; }
+th button { border: 0; background: none; padding: 0; cursor: pointer; color: inherit; font: inherit; }
+th button[aria-sort]::after { content: " ↓"; }
+th button[aria-sort="ascending"]::after { content: " ↑"; }
+tbody.click tr { cursor: pointer; }
+tbody.click tr:hover td { background: var(--sunk); }
+tr.sel td { background: var(--free-soft) !important; }
+.tbl { overflow-x: auto; }
+.bar-in { display: inline-block; height: 6px; border-radius: 2px; background: var(--hot); vertical-align: middle; margin-right: 8px; opacity: .8; }
+
+details.how { font-size: 13px; color: var(--ink-2); }
+details.how summary { cursor: pointer; font-weight: 600; color: var(--ink); padding: 14px 16px; }
+details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; }
+
+.boot { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); z-index: 2000; color: var(--ink-2); font-size: 13px; }
+.boot[hidden] { display: none; }
+</style>
+</head>
+<body>
+<div class="boot" id="boot">Kraunami duomenys…</div>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>ev<i>flow</i></b><span>Operatoriams ir miestui</span></div>
+    <div class="seg" role="group" aria-label="Teritorija">
+      <button type="button" data-scope="vil" aria-pressed="true">Vilnius</button>
+      <button type="button" data-scope="lt" aria-pressed="false">Visa Lietuva</button>
+    </div>
+    <select id="op" aria-label="Operatorius"><option value="">Visi operatoriai</option></select>
+    <div class="live" id="live"><span class="dot" id="live-dot"></span><span id="live-txt">–</span></div>
+    <button class="icon-btn" id="theme" type="button" aria-label="Perjungti šviesų / tamsų režimą">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <section class="panel kpis" id="kpis" aria-label="Pagrindiniai rodikliai"></section>
+
+  <section class="main">
+    <div class="panel mapwrap">
+      <div class="ph" style="padding-bottom:12px">
+        <h2 id="map-title">Žemėlapis</h2>
+        <div class="seg" role="group" aria-label="Žemėlapio sluoksnis">
+          <button type="button" data-layer="now" aria-pressed="true">Dabar</button>
+          <button type="button" data-layer="hist" aria-pressed="false">Blokavimas per istoriją</button>
+        </div>
+      </div>
+      <div id="map" role="application" aria-label="Stotelių žemėlapis"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <aside class="panel side" id="side">
+      <div id="side-list">
+        <div class="tabs" role="tablist">
+          <button role="tab" data-tab="now" aria-selected="true">Stovi per ilgai<span class="count" id="c-now"></span></button>
+          <button role="tab" data-tab="block" aria-selected="false">Daugiausia blokuoja</button>
+          <button role="tab" data-tab="care" aria-selected="false">Reikia priežiūros<span class="count" id="c-care"></span></button>
+        </div>
+      </div>
+      <div class="list" id="list"></div>
+      <div class="detail" id="detail" hidden></div>
+    </aside>
+  </section>
+
+  <section class="panel">
+    <div class="ph">
+      <h2>Ką pakeistų taisyklė po įkrovimo</h2>
+      <p id="sim-note">Pagal visus užfiksuotus užsistovėjimus pasirinktoje teritorijoje</p>
+    </div>
+    <div class="sim" style="margin-top:12px; border-top:1px solid var(--line)">
+      <div class="ctrls">
+        <div class="presets" role="group" aria-label="Pavyzdinės taisyklės">
+          <button type="button" data-preset="none">Kaip dabar</button>
+          <button type="button" data-preset="ignitis" aria-pressed="true">15 min. nemokamai</button>
+          <button type="button" data-preset="tesla">5 min., 0,50 €/min.</button>
+          <button type="button" data-preset="soft">30 min. + priminimas</button>
+        </div>
+        <div class="ctl">
+          <label for="grace">Nemokamas laikas po įkrovimo <output id="grace-o"></output></label>
+          <input type="range" id="grace" min="0" max="120" step="5" value="15">
+          <span class="h">Tiek minučių po numatytos įkrovimo pabaigos galima stovėti be pasekmių.</span>
+        </div>
+        <div class="ctl">
+          <label for="comply">Patrauks laiku <output id="comply-o"></output></label>
+          <input type="range" id="comply" min="0" max="100" step="5" value="60">
+          <span class="h">Kokia dalis vairuotojų pasikeis dėl mokesčio ar priminimo. 60 % yra atsargus spėjimas.</span>
+        </div>
+        <div class="ctl">
+          <label for="fee">Mokestis likusiems <output id="fee-o"></output></label>
+          <input type="range" id="fee" min="0" max="1" step="0.05" value="0.3">
+          <span class="h">Eurai už minutę po nemokamo laiko, daugiausia už 60 min. per įkrovimą. Tesla Europoje ima 0,50–1 €/min.</span>
+        </div>
+      </div>
+      <div class="out">
+        <div class="hero">
+          <span class="l">Atsilaisvintų pilnose stotelėse per dieną</span>
+          <span class="v"><span id="r-hours">0</span><small>val.</small></span>
+        </div>
+        <div class="cmp" aria-label="Blokavimas prieš ir po">
+          <div class="row"><span>Blokuojama dabar</span><span class="track"><span class="fill" id="b-now" style="background:var(--hot)"></span></span><span id="b-now-v"></span></div>
+          <div class="row"><span>Su taisykle</span><span class="track"><span class="fill" id="b-after" style="background:var(--free)"></span></span><span id="b-after-v"></span></div>
+        </div>
+        <div class="grid4">
+          <div><b id="r-charges">0</b><span>papildomų įkrovimų per dieną</span></div>
+          <div><b id="r-energy">0</b><span>papildomai parduota energijos per mėn.*</span></div>
+          <div><b id="r-fee">0</b><span>mokesčio pajamos per mėn.</span></div>
+          <div><b id="r-share">0</b><span>mažiau blokavimo</span></div>
+        </div>
+        <p class="small dim">* Viršutinė riba: atsilaisvinęs laikas × tipinė jungties galia × stotelės tarifas. Dalis vairuotojų būtų nuvažiavę kitur.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="two">
+    <div class="panel hours">
+      <div class="ph"><h2>Kada stotelės užimtos</h2><p>Užimtų jungčių dalis pagal valandą, Lietuvos laikas</p></div>
+      <div class="pb">
+        <svg id="hours" viewBox="0 0 720 210" role="img" aria-label="Užimtumas pagal valandą"></svg>
+        <p class="readout" id="hours-r"></p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h2>Kiek trunka įkrovimas</h2><p>Visa Lietuva</p></div>
+      <div class="tbl" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Jungtis</th><th class="r">Mediana</th><th class="r">90 % baigia per</th><th class="r">Riba</th></tr></thead>
+          <tbody id="classes"></tbody>
+        </table>
+      </div>
+      <p class="small dim" style="padding:10px 12px 14px">Riba: tiek reikia lėtai kraunančiam automobiliui 20→80 % (36 kWh) šioje jungtyje + 15 min. Ilgiau stovintis laikomas užsistovėjusiu.</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="ph"><h2>Operatoriai</h2><p>Paspauskite eilutę, kad matytumėte tik to operatoriaus stoteles</p></div>
+    <div class="tbl" style="margin-top:8px">
+      <table>
+        <thead><tr id="ops-head"></tr></thead>
+        <tbody id="ops" class="click"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <details class="how">
+      <summary>Kaip skaičiuojama</summary>
+      <ul>
+        <li>Šaltinis: Via Lietuva atviras įkrovimo stotelių API (ev.vialietuva.lt). Visų LT jungčių būsena nuskaitoma kas 2–3 min. nuo 2026-10-06.</li>
+        <li><b>Įkrovimas</b>: jungtis „Užimta“ nuo prijungimo iki atsijungimo. Kelių kištukų įkrovikliuose dvigubų sesijų yra &lt;1 %.</li>
+        <li><b>Užsistovėjimas</b>: įkrovimas truko ilgiau nei riba (lentelė „Kiek trunka įkrovimas“). Naktinės AC sesijos (pradžia 20:00–07:00) neskaičiuojamos.</li>
+        <li><b>Blokavimas</b>: užsistovėjimo laikas, kai visoje stotelėje nebuvo nė vienos laisvos jungties, t. y. kažkas norėjo, bet negalėjo krauti.</li>
+        <li><b>Neparduota energija</b>: blokavimo valandos × tipinė galia (AC iki 11 kW, DC 60 % nominalios, ne daugiau 100 kW) × stotelės tarifas. Tai viršutinė riba.</li>
+        <li><b>Tyli</b>: operatorius daugiau nei 24 val. neatsiuntė duomenų, todėl stotelės būsena greičiausiai pasenusi.</li>
+        <li>API neskiria „krauna“ nuo „baigė, bet stovi prijungtas“, todėl užsistovėjimas yra įvertis pagal laiką. Su operatoriaus OCPP duomenimis jis būtų tikslus.</li>
+      </ul>
+    </details>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  const LIVE = "https://raw.githubusercontent.com/T2kas/evflow/app-data/";
+  const LOCAL = "../app_data/";
+  const REFRESH_MS = 180000;
+  const $ = id => document.getElementById(id);
+  const qs = new URLSearchParams(location.search);
+
+  // ---------- state
+  const store = {
+    get(k, d) { try { return localStorage.getItem("evflow-" + k) ?? d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem("evflow-" + k, v); } catch (e) {} },
+  };
+  const state = {
+    scope: store.get("scope", "vil"),
+    op: qs.get("op") || "",
+    layer: "now",
+    tab: "now",
+    selected: null,
+    sort: { key: "blockDay", dir: -1 },
+  };
+  let ST = [], CS = null, META = null, DAYS = 1, SRC = "";
+
+  // ---------- helpers
+  const fmt = (n, d = 0) => (n == null || isNaN(n)) ? "–" :
+    Number(n).toLocaleString("lt-LT", { maximumFractionDigits: d, minimumFractionDigits: d });
+  const eur = n => n >= 10000 ? fmt(n / 1000, 0) + " tūkst. €" : fmt(n) + " €";
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const shortOp = s => String(s || "").replace(/,?\s*UAB\s*$/i, "").replace(/^UAB\s+/i, "").trim();
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const plug = t => ({ IEC_62196_T2_COMBO: "CCS2", IEC_62196_T2: "Type 2", CHADEMO: "CHAdeMO", DOMESTIC_F: "Schuko" })[t] || (t || "").replace(/_/g, " ");
+  const effKw = kw => kw < 43 ? (kw > 11 ? 11 : Math.min(kw, 7.4)) : Math.min(kw * 0.6, 100);
+  const price = st => {
+    const ps = st.connectors.map(c => /([\d]+[.,]?\d*)\s*€\/kWh/.exec(c.tariff || "")).filter(Boolean).map(m => parseFloat(m[1].replace(",", ".")));
+    if (!ps.length) return 0.35;
+    ps.sort((a, b) => a - b); return ps[Math.floor(ps.length / 2)];
+  };
+  const ltHour = () => +new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/Vilnius" }).format(new Date()) % 24;
+  const minsAgo = iso => Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+  // A connector "busy" for over a day, or a station silent for over a day, is almost always a stuck
+  // status on the operator side, not a parked car. Those go to "needs care", not to overstays.
+  const STUCK_MIN = 1440;
+  const silent = s => (s.reliability.data_age_min || 0) > STUCK_MIN;
+  const stuck = (s, c) => c.status === "Užimta" && (silent(s) || (c.busy_min || 0) > STUCK_MIN);
+  const overNow = s => s.connectors.filter(c => c.overstay && !stuck(s, c));
+  const ago = m => m < 1 ? "ką tik" : m < 60 ? `prieš ${m} min.` : m < 1440 ? `prieš ${Math.round(m / 60)} val.` : `prieš ${Math.round(m / 1440)} d.`;
+
+  // ---------- data
+  async function getJson(url) {
+    const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status + " " + url);
+    return r.json();
+  }
+  async function load() {
+    const order = qs.get("src") === "local" ? [LOCAL] : [LIVE, LOCAL];
+    let err;
+    for (const base of order) {
+      try {
+        const [st, cs] = await Promise.all([getJson(base + "stations.json"), getJson(base + "city_stats.json")]);
+        return { st, cs, src: base === LIVE ? "GitHub" : "vietiniai failai" };
+      } catch (e) { err = e; }
+    }
+    throw err;
+  }
+  async function refresh(first) {
+    try {
+      const { st, cs, src } = await load();
+      if (!first && META && new Date(st.meta.data_until_utc) <= new Date(META.data_until_utc)) { tick(); return; }
+      ST = st.stations.map(s => ({ ...s, operator: (s.operator || "").trim() }));
+      for (const s of ST) {
+        s._price = price(s);
+        s._eff = effKw(s.max_power_kw || 0);
+      }
+      CS = cs; META = st.meta; DAYS = Math.max(META.history_days || 1, 0.1); SRC = src;
+      if (first) fillOps();
+      render(first);
+      $("live-dot").className = "dot";
+    } catch (e) {
+      console.error(e);
+      $("live-dot").className = "dot err";
+      $("live-txt").textContent = "Nepavyko atnaujinti";
+      if (first) $("boot").textContent = "Nepavyko gauti duomenų. Patikrinkite internetą arba paleiskite: python3 dashboard/serve.py --local";
+      return;
+    }
+    $("boot").hidden = true;
+    tick();
+  }
+  function tick() {
+    if (!META) return;
+    const m = minsAgo(META.data_until_utc);
+    $("live-dot").className = m > 15 ? "dot stale" : "dot";
+    $("live-txt").textContent = `Duomenys ${ago(m)} · ${fmt(DAYS, 1)} d. istorijos · ${SRC}`;
+  }
+
+  // ---------- filters
+  function inScope(s) {
+    return (state.scope === "lt" || s.city === "Vilnius") && (!state.op || s.operator === state.op);
+  }
+  const scoped = () => ST.filter(inScope);
+
+  function fillOps() {
+    const by = {};
+    for (const s of ST) by[s.operator] = (by[s.operator] || 0) + s.counts.total;
+    const ops = Object.entries(by).sort((a, b) => b[1] - a[1]).map(([o]) => o);
+    $("op").innerHTML = `<option value="">Visi operatoriai</option>` + ops.map(o => `<option value="${esc(o)}">${esc(shortOp(o))}</option>`).join("");
+    if (!ops.includes(state.op)) state.op = "";
+    $("op").value = state.op;
+  }
+
+  // ---------- aggregate
+  function agg(list) {
+    const a = { stations: list.length, conns: 0, sessions: 0, over: 0, blockH: 0, lostEur: 0, overNow: 0, broken: 0, stuck: 0, silent: 0, free: 0, busy: 0 };
+    for (const s of list) {
+      const h = s.history || {};
+      a.conns += s.counts.total; a.sessions += h.sessions || 0; a.over += h.overstay_sessions || 0;
+      a.blockH += h.blocking_hours || 0; a.lostEur += (h.blocking_hours || 0) * s._eff * s._price;
+      a.overNow += overNow(s).length; a.broken += s.counts.broken || 0;
+      a.stuck += s.connectors.filter(c => stuck(s, c)).length;
+      a.free += s.counts.free || 0; a.busy += s.counts.busy || 0;
+      if (silent(s)) a.silent++;
+    }
+    return a;
+  }
+
+  // ---------- KPIs
+  function renderKpis(list) {
+    const a = agg(list);
+    const k = (l, v, s, cls = "") => `<div class="kpi ${cls}"><span class="l">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`;
+    $("kpis").innerHTML = [
+      k("Įkrovimų per dieną", fmt(a.sessions / DAYS), `${fmt(a.stations)} stotelių · ${fmt(a.conns)} jungčių`),
+      k("Užsitęsia ilgiau nei reikia", fmt(a.sessions ? a.over / a.sessions * 100 : 0) + "<small>%</small>", `${fmt(a.over / DAYS)} įkrovimų per dieną`, "hot"),
+      k("Blokuota per dieną", fmt(a.blockH / DAYS) + "<small>val.</small>", "stotelė pilna, kažkas negali krauti", "hot"),
+      k("Neparduota energija", eur(a.lostEur / DAYS) + "<small>/d.</small>", "viršutinė riba dėl blokavimo"),
+      k("Stovi per ilgai dabar", fmt(a.overNow), `automobilių · ${fmt(a.busy)} jungčių užimta`, a.overNow ? "hot" : ""),
+      k("Neveikia dabar", fmt(a.broken), `jungčių · dar ${fmt(a.stuck)} užstrigo, ${fmt(a.silent)} stotelių tyli`),
+    ].join("");
+  }
+
+  // ---------- map
+  let map, tiles, layer, fittedFor = "";
+  function tileUrl() {
+    const dark = document.documentElement.dataset.theme === "dark" ||
+      (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("map-dark", dark);
+    return "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  }
+  function initMap() {
+    map = L.map("map", { preferCanvas: true, zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView([54.69, 25.27], 12);
+    tiles = L.tileLayer(tileUrl(), { maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+    layer = L.layerGroup().addTo(map);
+  }
+  function stationColor(s) {
+    if (state.layer === "hist") return (s.history.blocking_hours || 0) > 0 ? css("--hot") : css("--off");
+    if (silent(s)) return css("--off");
+    if (overNow(s).length) return css("--hot");
+    if (s.counts.free) return css("--free");
+    if (s.counts.busy) return css("--busy");
+    return css("--off");
+  }
+  function stationRadius(s, maxB) {
+    if (state.layer === "hist") {
+      const b = s.history.blocking_hours || 0;
+      return b > 0 ? 4 + 16 * Math.sqrt(b / maxB) : 2.5;
+    }
+    return 3 + Math.min(7, Math.sqrt(s.counts.total) * 1.6);
+  }
+  function renderMap(list) {
+    layer.clearLayers();
+    const maxB = Math.max(1, ...list.map(s => s.history.blocking_hours || 0));
+    const ring = css("--panel");
+    const sorted = [...list].sort((a, b) => state.layer === "hist"
+      ? (a.history.blocking_hours || 0) - (b.history.blocking_hours || 0)
+      : (overNow(a).length ? 2 : a.counts.busy ? 1 : 0) - (overNow(b).length ? 2 : b.counts.busy ? 1 : 0));
+    for (const s of sorted) {
+      if (!s.lat || !s.lon) continue;
+      const hist = state.layer === "hist", col = stationColor(s), muted = col === css("--off");
+      const m = L.circleMarker([s.lat, s.lon], {
+        radius: stationRadius(s, maxB), color: s.id === state.selected ? css("--ink") : ring,
+        weight: s.id === state.selected ? 2.5 : 1, fillColor: col, fillOpacity: muted ? 0.45 : (hist ? 0.75 : 0.9),
+      });
+      const line = hist
+        ? `Blokavo ${fmt((s.history.blocking_hours || 0) / DAYS, 1)} val./d. · užsitęsia ${s.history.overstay_share != null ? fmt(s.history.overstay_share * 100) + " %" : "–"}`
+        : `${s.counts.free}/${s.counts.total} laisvos${overNow(s).length ? ` · ${overNow(s).length} stovi per ilgai` : ""}${silent(s) ? " · duomenys pasenę" : ""}${s.counts.broken ? ` · ${s.counts.broken} neveikia` : ""}`;
+      m.bindTooltip(`<b>${esc(s.name)}</b><br>${esc(shortOp(s.operator))} · ${line}`, { className: "tt", direction: "top", offset: [0, -4] });
+      m.on("click", () => select(s.id));
+      m.addTo(layer);
+    }
+    const key = state.scope + "|" + state.op;
+    if (fittedFor !== key) {
+      fittedFor = key;
+      const pts = list.filter(s => s.lat && s.lon);
+      if (pts.length) {
+        const lat = pts.map(s => s.lat).sort((a, b) => a - b), lon = pts.map(s => s.lon).sort((a, b) => a - b);
+        const q = (a, p) => a[Math.floor(p * (a.length - 1))];
+        map.fitBounds([[q(lat, .02), q(lon, .02)], [q(lat, .98), q(lon, .98)]], { padding: [20, 20] });
+      }
+    }
+    const lg = state.layer === "hist"
+      ? [["--hot", "blokavo kitus (dydis = valandos)"], ["--off", "be blokavimo"]]
+      : [["--free", "yra laisva jungtis"], ["--busy", "visos užimtos"], ["--hot", "kažkas stovi per ilgai"], ["--off", "neveikia / nėra duomenų"]];
+    $("legend").innerHTML = lg.map(([c, t]) => `<span><i style="background:var(${c})"></i>${t}</span>`).join("") +
+      `<span class="dim" style="margin-left:auto">${state.layer === "hist" ? "per " + fmt(DAYS, 1) + " d." : "būsena " + ago(minsAgo(META.data_until_utc))}</span>`;
+    $("map-title").textContent = (state.scope === "vil" ? "Vilnius" : "Lietuva") + (state.op ? " · " + shortOp(state.op) : "");
+  }
+
+  // ---------- side list
+  function overNowItems(list) {
+    const rows = [];
+    for (const s of list) for (const c of overNow(s)) rows.push({ s, c });
+    rows.sort((a, b) => (b.c.overstay_min || 0) - (a.c.overstay_min || 0));
+    return rows;
+  }
+  function careItems(list) {
+    const rows = [];
+    for (const s of list) {
+      const age = s.reliability.data_age_min || 0, st = s.connectors.filter(c => stuck(s, c) && !silent(s));
+      if (age > STUCK_MIN) rows.push({ s, why: `Tyli ${ago(age).replace("prieš ", "")}`, w: 3e6 + age });
+      else if (st.length) rows.push({ s, why: `Užimta >${fmt(Math.max(...st.map(c => c.busy_min)) / 1440)} d., užstrigo?`, w: 2.5e6 + st.length });
+      else if (s.counts.total && s.counts.broken === s.counts.total) rows.push({ s, why: `Neveikia visos ${s.counts.total} jungt.`, w: 2e6 + s.counts.total });
+      else if (s.counts.broken) rows.push({ s, why: `Neveikia ${s.counts.broken} iš ${s.counts.total}`, w: 1e6 + s.counts.broken });
+      else if (s.reliability.never_used && s.counts.total) rows.push({ s, why: "Niekas nekrovė", w: 0 });
+    }
+    return rows.sort((a, b) => b.w - a.w);
+  }
+  function renderList(list) {
+    const now = overNowItems(list), care = careItems(list);
+    $("c-now").textContent = now.length;
+    $("c-care").textContent = care.length;
+    document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === state.tab));
+    let html = "";
+    if (state.tab === "now") {
+      html = `<div class="listnote">Jungtys, kurios užimtos ilgiau, nei reikia pasikrauti. Būsena ${ago(minsAgo(META.data_until_utc))}</div>`;
+      html += now.length ? now.slice(0, 200).map(({ s, c }) =>
+        `<button class="item" data-id="${esc(s.id)}"><span class="n">${esc(s.name)}</span>
+          <span class="m">${esc(shortOp(s.operator))} · ${plug(c.type)} ${fmt(c.power_kw)} kW · užimta ${fmt(c.busy_min)} min.${s.counts.free ? "" : " · stotelė pilna"}</span>
+          <span class="r"><b style="color:var(--hot)">+${fmt(c.overstay_min)}</b><span>min. per ilgai</span></span></button>`).join("")
+        : `<div class="empty">Šiuo metu niekas nestovi ilgiau nei reikia.</div>`;
+    } else if (state.tab === "block") {
+      const top = list.filter(s => (s.history.blocking_hours || 0) > 0).sort((a, b) => b.history.blocking_hours - a.history.blocking_hours).slice(0, 50);
+      html = `<div class="listnote">Kiek valandų per dieną stotelė buvo pilna dėl užsistovėjusių automobilių.</div>`;
+      html += top.length ? top.map(s =>
+        `<button class="item" data-id="${esc(s.id)}"><span class="n">${esc(s.name)}</span>
+          <span class="m">${esc(shortOp(s.operator))} · ${fmt(s.history.sessions_per_day, 1)} įkr./d. · užsitęsia ${fmt((s.history.overstay_share || 0) * 100)} %</span>
+          <span class="r"><b>${fmt(s.history.blocking_hours / DAYS, 1)}</b><span>val./d.</span></span></button>`).join("")
+        : `<div class="empty">Blokavimo neužfiksuota.</div>`;
+    } else {
+      html = `<div class="listnote">Operatorius nesiunčia duomenų, jungtis neveikia arba „užimta“ ilgiau nei parą (beveik visada užstrigusi būsena, ne automobilis).</div>`;
+      html += care.length ? care.slice(0, 200).map(({ s, why }) =>
+        `<button class="item" data-id="${esc(s.id)}"><span class="n">${esc(s.name)}</span>
+          <span class="m">${esc(shortOp(s.operator))} · ${esc(s.address || s.city)}</span>
+          <span class="r"><span class="chip ${why.startsWith("Tyli") || why.startsWith("Niekas") ? "off" : why.startsWith("Užimta") ? "busy" : "hot"}">${esc(why)}</span></span></button>`).join("")
+        : `<div class="empty">Viskas veikia.</div>`;
+    }
+    $("list").innerHTML = html;
+  }
+
+  // ---------- station detail
+  function select(id) {
+    state.selected = id;
+    const s = ST.find(x => x.id === id);
+    if (!s) return;
+    $("side-list").hidden = true; $("list").hidden = true; $("detail").hidden = false;
+    renderDetail(s);
+    renderMap(scoped());
+    if (map && s.lat) map.panTo([s.lat, s.lon], { animate: true });
+  }
+  function closeDetail() {
+    state.selected = null;
+    $("side-list").hidden = false; $("list").hidden = false; $("detail").hidden = true;
+    if (META) renderMap(scoped());
+  }
+  function renderDetail(s) {
+    const h = s.history || {}, r = s.reliability || {};
+    const lag = minsAgo(META.data_until_utc);
+    const conns = s.connectors.map(c => {
+      let chip, x = "";
+      if (c.status === "Laisva") chip = `<span class="chip free">Laisva</span>`;
+      else if (c.status === "Užimta") {
+        const busy = (c.busy_min || 0) + lag, over = c.overstay || busy > c.expected_charge_min;
+        chip = stuck(s, c) ? `<span class="chip off">Užstrigo?</span>` : over ? `<span class="chip hot">+${fmt(busy - c.expected_charge_min)} min.</span>` : `<span class="chip busy">Užimta</span>`;
+        x = `Užimta ${c.busy_min_is_lower_bound ? ">" : ""}${fmt(busy)} min. · norma ${fmt(c.expected_charge_min)} min.`;
+        if (c.prediction) x += ` · ${fmt(c.prediction.p_free_30min * 100)} % atsilaisvins per 30 min.`;
+      } else chip = `<span class="chip off">${esc(c.status)}</span>`;
+      return `<div class="conn"><span class="t">${plug(c.type)} · ${fmt(c.power_kw)} kW <span class="dim small">${esc(c.tariff || "")}</span></span>${chip}${x ? `<span class="x">${x}</span>` : ""}</div>`;
+    }).join("");
+    const bh = h.busy_by_hour || [], hr = ltHour();
+    const bw = 300 / 24;
+    const bars = bh.map((v, i) => {
+      const hh = Math.max(1, (v || 0) * 40);
+      return `<rect class="${i === hr ? "now" : ""}" x="${i * bw + 1}" y="${42 - hh}" width="${bw - 2}" height="${hh}" rx="1.5"><title>${String(i).padStart(2, "0")}:00 — ${v == null ? "nėra duomenų" : fmt(v * 100) + " % užimta"}</title></rect>`;
+    }).join("") + [0, 6, 12, 18].map(i => `<text x="${i * bw + 1}" y="55">${String(i).padStart(2, "0")}</text>`).join("");
+    const lost = (h.blocking_hours || 0) * s._eff * s._price / DAYS;
+    $("detail").innerHTML = `
+      <div class="dh">
+        <button class="back" id="back" type="button">← Atgal į sąrašą</button>
+        <h3>${esc(s.name)}</h3>
+        <span class="small muted">${esc(shortOp(s.operator))} · ${esc(s.address)}, ${esc(s.city)}</span>
+      </div>
+      <div class="stats">
+        <div><b>${h.sessions ? fmt(h.sessions_per_day, 1) : "–"}</b><span>įkrovimų per d.</span></div>
+        <div><b>${h.median_session_min != null ? fmt(h.median_session_min) + " min." : "–"}</b><span>tipinė trukmė</span></div>
+        <div><b style="color:${(h.overstay_share || 0) >= .3 ? "var(--hot)" : "inherit"}">${h.overstay_share != null ? fmt(h.overstay_share * 100) + " %" : "–"}</b><span>užsitęsia</span></div>
+        <div><b>${fmt((h.blocking_hours || 0) / DAYS, 1)} val.</b><span>blokuota per d.</span></div>
+        <div><b>${lost ? eur(lost) : "0 €"}</b><span>neparduota per d.</span></div>
+        <div><b>${fmt(r.score)}</b><span>patikimumas /100</span></div>
+      </div>
+      <div class="sec"><h4>Jungtys dabar</h4>${conns}</div>
+      <div class="sec"><h4>Užimtumas pagal valandą</h4><svg class="spark" viewBox="0 0 300 58" preserveAspectRatio="none">${bars}</svg></div>
+      <div class="sec"><span class="small dim">Operatorius paskutinį kartą atsiuntė duomenis ${r.data_age_min != null ? ago(r.data_age_min) : "–"}${r.never_used ? " · per visą stebėjimą niekas nekrovė" : ""}.</span></div>`;
+    $("back").onclick = closeDetail;
+  }
+
+  // ---------- simulator
+  const PRESETS = {
+    none: { grace: 120, comply: 0, fee: 0 },
+    ignitis: { grace: 15, comply: 60, fee: 0.3 },
+    tesla: { grace: 5, comply: 75, fee: 0.5 },
+    soft: { grace: 30, comply: 40, fee: 0 },
+  };
+  const FEE_CAP_MIN = 60;   // operators cap idle fees; bill at most an hour per charge
+  function renderSim() {
+    const G = +$("grace").value, C = +$("comply").value / 100, F = +$("fee").value;
+    $("grace-o").textContent = G + " min.";
+    $("comply-o").textContent = Math.round(C * 100) + " %";
+    $("fee-o").textContent = F.toFixed(2).replace(".", ",") + " €/min.";
+    const byId = new Map(scoped().map(s => [s.id, s]));
+    let freed = 0, block = 0, feeMin = 0, charges = 0, energyEur = 0;
+    for (const [sid, , o, b] of CS.overstays.rows) {
+      const s = byId.get(sid);
+      if (!s) continue;
+      block += b;
+      const past = Math.max(0, o - G);
+      const f = o ? b * (past / o) * C : 0;
+      freed += f; feeMin += Math.min(past, FEE_CAP_MIN) * (1 - C);
+      charges += f / Math.max(30, s.history.median_session_min || 60);
+      energyEur += f / 60 * s._eff * s._price;
+    }
+    const perDay = freed / 60 / DAYS, blockDay = block / 60 / DAYS;
+    $("r-hours").textContent = fmt(perDay, perDay < 10 ? 1 : 0);
+    $("r-charges").textContent = fmt(charges / DAYS);
+    $("r-energy").textContent = eur(energyEur / DAYS * 30);
+    $("r-fee").textContent = eur(feeMin * F / DAYS * 30);
+    $("r-share").textContent = block ? fmt(freed / block * 100) + " %" : "–";
+    $("b-now").style.width = blockDay ? "100%" : "0";
+    $("b-after").style.width = blockDay ? ((blockDay - perDay) / blockDay * 100) + "%" : "0";
+    $("b-now-v").textContent = fmt(blockDay) + " val./d.";
+    $("b-after-v").textContent = fmt(blockDay - perDay) + " val./d.";
+    document.querySelectorAll(".presets button").forEach(b => {
+      const p = PRESETS[b.dataset.preset];
+      b.setAttribute("aria-pressed", p.grace === G && p.comply === Math.round(C * 100) && Math.abs(p.fee - F) < 1e-9);
+    });
+  }
+
+  // ---------- hours
+  function renderHours(list) {
+    const sum = Array(24).fill(0), w = Array(24).fill(0);
+    for (const s of list) (s.history.busy_by_hour || []).forEach((v, i) => { if (v != null) { sum[i] += v * s.counts.total; w[i] += s.counts.total; } });
+    const vals = sum.map((v, i) => w[i] ? v / w[i] : 0);
+    const W = 720, H = 210, L = 36, B = 24, T = 10;
+    const max = Math.max(0.1, Math.ceil(Math.max(...vals) * 10 + 0.5) / 10);
+    const bw = (W - L) / 24, y = v => T + (H - B - T) * (1 - v / max), now = ltHour();
+    let svg = "";
+    const step = max > 0.5 ? 0.2 : 0.1;
+    for (let g = 0; g <= max + 1e-9; g += step) svg += `<line x1="${L}" x2="${W}" y1="${y(g)}" y2="${y(g)}"/><text x="${L - 8}" y="${y(g) + 4}" text-anchor="end">${Math.round(g * 100)}%</text>`;
+    vals.forEach((v, h) => {
+      const x = L + h * bw + 3, top = y(v);
+      svg += `<rect class="b ${h === now ? "now" : ""}" data-h="${h}" x="${x}" y="${top}" width="${bw - 6}" height="${Math.max(0, H - B - top)}" rx="2"/>`;
+      svg += `<rect class="hit" data-h="${h}" x="${L + h * bw}" y="${T}" width="${bw}" height="${H - B - T}"/>`;
+      if (h % 3 === 0) svg += `<text x="${x + (bw - 6) / 2}" y="${H - 6}" text-anchor="middle">${String(h).padStart(2, "0")}</text>`;
+    });
+    const el = $("hours"); el.innerHTML = svg;
+    const peak = vals.indexOf(Math.max(...vals));
+    const say = h => `${String(h).padStart(2, "0")}:00–${String((h + 1) % 24).padStart(2, "0")}:00 užimta ${fmt(vals[h] * 100)} % jungčių`;
+    const base = `Piko metas ${say(peak)}. Dabar (${String(now).padStart(2, "0")}:00) – ${fmt(vals[now] * 100)} %.`;
+    $("hours-r").textContent = base;
+    el.querySelectorAll("rect.hit").forEach(r => r.addEventListener("mouseenter", () => {
+      const h = +r.dataset.h;
+      el.querySelectorAll("rect.b").forEach(b => b.classList.toggle("on", +b.dataset.h === h));
+      $("hours-r").textContent = say(h) + ".";
+    }));
+    el.onmouseleave = () => { el.querySelectorAll("rect.b").forEach(b => b.classList.remove("on")); $("hours-r").textContent = base; };
+  }
+
+  function renderClasses() {
+    const names = { AC_11: "AC iki 11 kW", AC_22: "AC 22 kW", DC_50: "DC 50 kW", DC_100: "DC 100 kW", DC_150: "DC 150 kW+" };
+    const h = m => m >= 90 ? fmt(m / 60, 1) + " val." : fmt(m) + " min.";
+    $("classes").innerHTML = ["DC_150", "DC_100", "DC_50", "AC_22", "AC_11"].filter(k => CS.power_classes[k]).map(k => {
+      const c = CS.power_classes[k];
+      return `<tr><td>${names[k]}<div class="small dim">${fmt(c.sessions)} įkrovimų</div></td><td class="r">${h(c.p50_min)}</td><td class="r">${h(c.p90_min)}</td><td class="r">${h(c.expected_charge_min)}</td></tr>`;
+    }).join("");
+  }
+
+  // ---------- operators
+  const COLS = [
+    ["name", "Operatorius", false], ["stations", "Stotelės", true], ["perDay", "Įkrovimų/d.", true], ["share", "Užsitęsia", true],
+    ["blockDay", "Blokuota val./d.", true], ["lostDay", "Neparduota/d.", true], ["overNow", "Per ilgai dabar", true], ["broken", "Neveikia", true], ["silent", "Tyli >24 val.", true],
+  ];
+  function renderOps() {
+    const groups = {};
+    for (const s of ST) if (state.scope === "lt" || s.city === "Vilnius") (groups[s.operator] = groups[s.operator] || []).push(s);
+    let rows = Object.entries(groups).map(([name, list]) => {
+      const a = agg(list);
+      return { name, stations: a.stations, perDay: a.sessions / DAYS, share: a.sessions ? a.over / a.sessions : null,
+        blockDay: a.blockH / DAYS, lostDay: a.lostEur / DAYS, overNow: a.overNow, broken: a.broken, silent: a.silent, sessions: a.sessions };
+    }).filter(r => r.sessions >= 10 || r.stations >= 10);
+    const { key, dir } = state.sort;      // dir 1 = ascending, -1 = descending
+    rows.sort((a, b) => key === "name"
+      ? dir * shortOp(a.name).localeCompare(shortOp(b.name), "lt")
+      : dir * ((a[key] ?? -1) - (b[key] ?? -1)));
+    const maxBlock = Math.max(1e-9, ...rows.map(r => r.blockDay));
+    $("ops-head").innerHTML = COLS.map(([k, label, num]) => `<th class="${num ? "r" : ""}"><button type="button" data-sort="${k}" ${state.sort.key === k ? `aria-sort="${state.sort.dir > 0 ? "ascending" : "descending"}"` : ""}>${label}</button></th>`).join("");
+    $("ops").innerHTML = rows.map(r => `<tr data-op="${esc(r.name)}" class="${r.name === state.op ? "sel" : ""}">
+      <td>${esc(shortOp(r.name))}</td><td class="r">${fmt(r.stations)}</td><td class="r">${fmt(r.perDay)}</td>
+      <td class="r" style="color:${(r.share || 0) >= .3 ? "var(--hot)" : "inherit"}">${r.share == null ? "–" : fmt(r.share * 100) + " %"}</td>
+      <td class="r"><span class="bar-in" style="width:${Math.round(r.blockDay / maxBlock * 60)}px"></span>${fmt(r.blockDay, 1)}</td>
+      <td class="r">${eur(r.lostDay)}</td><td class="r">${fmt(r.overNow)}</td><td class="r">${fmt(r.broken)}</td><td class="r">${fmt(r.silent)}</td></tr>`).join("");
+  }
+
+  // ---------- render all
+  function render(first) {
+    document.querySelectorAll("[data-scope]").forEach(b => b.setAttribute("aria-pressed", b.dataset.scope === state.scope));
+    document.querySelectorAll("[data-layer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layer === state.layer));
+    const list = scoped();
+    if (first) { initMap(); renderClasses(); }
+    renderKpis(list);
+    renderMap(list);
+    renderList(list);
+    renderSim();
+    renderHours(list);
+    renderOps();
+    $("sim-note").textContent = `Pagal ${fmt(CS.overstays.rows.filter(r => list.some(s => s.id === r[0])).length)} užfiksuotų užsistovėjimų per ${fmt(DAYS, 1)} d.`;
+    if (state.selected) { const s = ST.find(x => x.id === state.selected); if (s) renderDetail(s); }
+  }
+
+  // ---------- events
+  document.querySelectorAll("[data-scope]").forEach(b => b.onclick = () => {
+    state.scope = b.dataset.scope; store.set("scope", state.scope); closeDetail(); render();
+  });
+  document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => { state.layer = b.dataset.layer; render(); });
+  document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderList(scoped()); });
+  $("op").onchange = e => { state.op = e.target.value; closeDetail(); render(); };
+  $("list").onclick = e => { const it = e.target.closest(".item"); if (it) select(it.dataset.id); };
+  $("ops").onclick = e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    state.op = state.op === tr.dataset.op ? "" : tr.dataset.op; $("op").value = state.op; closeDetail(); render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  $("ops-head").onclick = e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const k = b.dataset.sort;
+    state.sort = state.sort.key === k ? { key: k, dir: -state.sort.dir } : { key: k, dir: k === "name" ? 1 : -1 };
+    renderOps();
+  };
+  ["grace", "comply", "fee"].forEach(id => $(id).addEventListener("input", renderSim));
+  document.querySelectorAll(".presets button").forEach(b => b.onclick = () => {
+    const p = PRESETS[b.dataset.preset];
+    $("grace").value = p.grace; $("comply").value = p.comply; $("fee").value = p.fee; renderSim();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && state.selected) closeDetail(); });
+
+  // theme
+  const saved = store.get("theme", "");
+  if (saved) document.documentElement.dataset.theme = saved;
+  $("theme").onclick = () => {
+    const dark = document.documentElement.dataset.theme === "dark" ||
+      (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.dataset.theme = dark ? "light" : "dark";
+    store.set("theme", document.documentElement.dataset.theme);
+    if (tiles) tiles.setUrl(tileUrl());
+    if (META) render();
+  };
+
+  refresh(true);
+  setInterval(() => refresh(false), REFRESH_MS);
+  setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>

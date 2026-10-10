@@ -33,3 +33,10 @@ git pull && python explore.py        # arba: python explore.py <data_dir> -o kit
 Ataskaitos turinys: duomenų sveikata (spragos >10 min), sesijos (Užimta → kita būsena; nepilnos neįtraukiamos į trukmes),
 Vilniaus užimtumas (top 15 stotelių, pagal valandą, ilgiausios DC sesijos), duomenų kokybė pagal operatorių ir „užstrigusios“ jungtys.
 Visi procentai yra laiko svertiniai; laikas per duomenų spragas neskaičiuojamas.
+
+## Dashboard operatoriams ir miestui (`dashboard/`)
+```
+python3 dashboard/serve.py           # http://localhost:8000/dashboard/ – gyvi duomenys iš GitHub, atsinaujina kas 3 min.
+python3 dashboard/serve.py --local   # pirma paleidžia export_app.py ir rodo vietinius app_data/ (be GitHub)
+```
+Rodo: rodiklius, žemėlapį (dabartinė būsena arba blokavimas per istoriją), kas stovi per ilgai dabar, ką reikia taisyti, taisyklių simuliatorių, užimtumą pagal valandą ir operatorių palyginimą. Filtras pagal operatorių: viršuje arba paspaudus operatoriaus eilutę.
