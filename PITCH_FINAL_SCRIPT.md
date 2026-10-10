@@ -54,22 +54,22 @@ Pažiūrėjome, kiek to yra Vilniuje. Beveik kas trečias įkrovimas trunka ilgi
 Visa tai skaičiuojame iš atvirų Via Lietuva duomenų. Nuo spalio 6 dienos kas dvi minutes renkame kiekvienos Lietuvos stotelės būseną. Tai 22 operatoriai ir jau 1,2 milijono įrašų. Pavyzdžiui, čia Vilnius 16 valandą. Raudonos stotelės tuo metu dažniau užimtos nei laisvos.
 
 ### 5. Sprendimas (1:02–1:25)
-Todėl sukūrėme EVFlow. Vairuotojas mato, kada užimta stotelė atsilaisvins ir kada ji dažniausiai laisva. Programėlė skatina laiku atlaisvinti vietą. O operatoriai ir miestas gauna valdymo skydelį, kur matyti, kuri stotelė užimta, bet nekrauna. Kitos programėlės rodo tik „laisva“ arba „užimta“ ir tik savo tinkle. Mes rodome laiką ir visus 22 operatorius vienoje vietoje.
+Vairuotojas EVFlow programėlėje mato, kada užimta stotelė atsilaisvins ir kada ji dažniausiai laisva. Programėlė skatina laiku atlaisvinti vietą. O operatoriai ir miestas gauna valdymo skydelį, kur matyti, kuri stotelė užimta, bet nekrauna. Kitos programėlės rodo tik „laisva“ arba „užimta“ savo tinkle, o mes rodome laiką ir visus 22 operatorius vienoje vietoje.
 
 ### 6. Kaip skatiname atlaisvinti vietą (1:25–1:45)
 Kaip skatiname? Atvažiavęs vairuotojas paspaudžia „Krauti čia“. Kai automobilis turėtų būti pasikrovęs, programėlė primena jį patraukti. Tikriname pagal Via Lietuva duomenis, tad apgauti nepavyks. Patraukei laiku, gauni taškų, kuriuos gali iškeisti į prizus ar operatorių nuolaidas. Vėluoji, krenta tavo įvertinimas.
 
 ### 7. Prognozių tikslumas (1:45–2:08)
-Ar prognozėmis galima pasitikėti? Patikrinome. Algoritmą apmokėme su ankstesnių dienų duomenimis ir palyginome su tuo, kas iš tikrųjų nutiko kitą dieną. Tai beveik 40 tūkstančių prognozių. Kai rodėme „dažniausiai laisva“, stotelė tikrai buvo laisva 98 procentus laiko. O kai sakome, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko, taip nutinka 94 kartus iš 100.
+Ar galima pasitikėti? Patikrinome beveik 40 tūkstančių prognozių: modelį apmokėme su ankstesnėmis dienomis ir palyginome su tuo, kas iš tikrųjų nutiko kitą dieną. Pilnoje stotelėje vieta atsilaisvino iki mūsų nurodyto laiko 96 kartus iš 100. O spalvos atitinka tikrovę: žaliose stotelėse laisva vieta buvo 98 procentus laiko, raudonose tik pusę.
 
 ### 8. Verslo modelis (2:08–2:27)
 Kas už tai moka? Vairuotojams programėlė nemokama. Moka operatoriai: prenumerata už valdymo skydelį pagal jungčių skaičių, nes jiems tai daugiau parduotos elektros. Miestas perka licenciją stotelių planavimui. O partneriai finansuoja prizus, nes gauna klientų, kurie kraunasi šalia. Taip laimi visi.
 
 ### 9. Nauda Vilniui (2:27–2:45)
-Ką tai duoda Vilniui? Jei 6 iš 10 vairuotojų patrauktų automobilį per 15 minučių po įkrovimo, pilnų stotelių laikas sutrumpėtų maždaug 210 valandų per dieną. Būtent to siekia mūsų priminimai ir taškai. Tai daugiau įkrovimų be naujų stotelių statybos.
+Ką tai duoda Vilniui? Jei 6 iš 10 vairuotojų patrauktų automobilį per 15 minučių po įkrovimo, kasdien būtų 210 valandų mažiau pilnų stotelių. Tai apie 53 papildomi įkrovimai per dieną be naujų stotelių ir iki 35 tūkstančių eurų daugiau parduotos elektros per mėnesį. To ir siekia mūsų priminimai bei taškai.
 
 ### 10. Kas toliau (2:45–3:00)
-Kitas žingsnis: išbandyti EVFlow su vienu operatoriumi Vilniuje. Jo duomenys parodytų tikslią krovimo pabaigą, o mes pamatuotume, kiek sumažėja užsistovėjimas. Tam ieškome operatoriaus, kuris norėtų išbandyti, ir savivaldybės kontakto. O dabar parodysiu, kaip tai veikia.
+Kas toliau? Norime EVFlow paleisti su vienu operatoriumi Vilniuje ir pamatuoti, kiek mažiau užsistovima. Su jo duomenimis prognozės bus dar tikslesnės. Tam reikia operatoriaus, kuris norėtų pradėti kartu, ir kontakto savivaldybėje. O dabar parodysiu, kaip tai veikia.
 
 ---
 
@@ -114,7 +114,7 @@ Komisijoje sėdi Cognizant (technologijos), Vilniaus savivaldybė (miestas) ir I
 Jos rodo tik „laisva“ arba „užimta“ ir tik savo tinkle. Mes rodome, kada stotelė atsilaisvins ir kaip dažnai ji būna pilna. Visi 22 operatoriai yra vienoje vietoje, ir mes skatiname laiku atlaisvinti vietą.
 
 **Kaip žinote, kad automobilis jau nebekrauna?** *(18 priedas)*
-Viešas API to neparodo, todėl vertiname pagal laiką. Per ilgas įkrovimas yra toks, kuris trunka ilgiau, nei net lėtai kraunantis automobilis pasikrautų nuo 20 iki 80 % toje jungtyje, plius 15 minučių. Su operatoriaus duomenimis tai būtų tikslu, todėl ir norime bandymo su operatoriumi.
+Viešas API to neparodo, todėl vertiname pagal laiką. Per ilgas įkrovimas yra toks, kuris trunka ilgiau, nei net lėtai kraunantis automobilis pasikrautų nuo 20 iki 80 % toje jungtyje, plius 15 minučių. Su operatoriaus duomenimis tai būtų tikslu, todėl norime pradėti su vienu operatoriumi.
 
 **Iš kur imsite duomenis ateityje?**
 Iš Via Lietuva atviro API. Renkame juos automatiškai kas 2 minutes nuo spalio 6 d. Operatoriaus duomenys pridėtų tikslią krovimo pabaigą.
@@ -127,13 +127,13 @@ Operatoriai moka prenumeratą pagal jungčių skaičių, nes jiems tai daugiau p
 - **Maketas:** prizų parduotuvė (partneriai pavyzdiniai), operatorių nuolaidos ir pranešimo perdavimas operatoriui.
 
 **Ar prognozės tikslios?**
-Taip, tikrinome su kita diena. Kai rodome „dažniausiai laisva“, stotelė buvo laisva 98 % laiko. Kai sakome, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko, taip nutinka 94 % atvejų. Istorija kol kas kelių dienų, bet modelis persimoko kas kelias minutes ir vis tikslėja.
+Taip, tikrinome su kita diena. Kai rodome „dažniausiai laisva“, stotelė buvo laisva 98 % laiko. Kai sakome, kad pilnoje stotelėje vieta atsilaisvins iki nurodyto laiko, taip nutinka 96 % atvejų. Istorija kol kas kelių dienų, bet modelis persimoko kas kelias minutes ir vis tikslėja.
 
 **Iš kur 800 tūkst. €?**
 Tai viršutinė riba visiems operatoriams Vilniuje kartu. Skaičiuojame taip: blokuotos valandos × tipinė jungties galia × stotelės tarifas. Dalis vairuotojų būtų tiesiog nuvažiavę kitur.
 
-**Iš kur 210 valandų?**
-Iš mūsų simuliatoriaus. Jei 6 iš 10 vairuotojų patrauktų automobilį per 15 minučių po įkrovimo, pilnų stotelių laikas sumažėtų nuo ~380 iki ~170 valandų per dieną. Kuo daugiau žmonių patraukia laiku, tuo daugiau laimima, ir būtent tam skirti priminimai bei taškai.
+**Iš kur 210 valandų, 53 įkrovimai ir 35 tūkst. €?**
+Iš mūsų simuliatoriaus su Vilniaus duomenimis. Jei 6 iš 10 vairuotojų patrauktų automobilį per 15 minučių po įkrovimo, pilnų stotelių laikas sumažėtų nuo ~380 iki ~170 valandų per dieną. Atlaisvintą laiką paverčiame įkrovimais pagal tipinę tos stotelės sesijos trukmę, o eurus skaičiuojame pagal jungties galią ir tarifą, todėl tai viršutinė riba. Kuo daugiau žmonių patraukia laiku, tuo didesnė nauda, ir būtent tam skirti priminimai bei taškai.
 
 **Kokia nauda miestui?**
 Daugiau įkrovimų be naujų stotelių. Be to, miestas mato, kur vakarais trūksta stotelių, ir gali išbandyti taisykles prieš jas įvesdamas.
@@ -159,4 +159,4 @@ Duomenyse jau yra visa Lietuva. Tas pats metodas tinka bet kuriai šaliai, kur o
 - [ ] Patikrinti video: Keynote spausti ▶ Play (redagavimo lange video nesisuka).
 - [ ] Telefonas: programėlė atidaryta, baterija įkrauta, pranešimai išjungti.
 - [ ] 3 repeticijos su laikmačiu.
-- [ ] Ryte skydelyje patikrinti skaičius (~380 val., ~210 val., 29 %).
+- [ ] Ryte skydelyje patikrinti skaičius (~380 val., ~210 val., 53 įkrovimai, 35 tūkst. €, 29 %).
