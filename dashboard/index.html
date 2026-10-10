@@ -370,7 +370,7 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         <li><b>Blokavimas</b>: užsistovėjimo laikas, kai visoje stotelėje nebuvo nė vienos laisvos jungties, t. y. kažkas norėjo, bet negalėjo krauti.</li>
         <li><b>Neparduota energija</b>: blokavimo valandos × tipinė galia (AC iki 11 kW, DC 60 % nominalios, ne daugiau 100 kW) × stotelės tarifas. Tai viršutinė riba.</li>
         <li><b>Ar rasi vietą</b>: kokią dalį laiko tą valandą stotelėje buvo bent viena laisva jungtis. Žalia ≥80 %, geltona 50–80 %, raudona &lt;50 %. Backtest'as: kitą parą žaliose stotelėse laisva vieta buvo 98 % laiko, geltonose 72 %, raudonose 53 %.</li>
-        <li><b>Kada atsilaisvins</b>: iš praeities tos pačios galios įkrovimų, kurie jau truko tiek pat. „8 iš 10 kartų per X min.“ yra 80-asis procentilis; backtest'e pasitvirtino 77 % atvejų.</li>
+        <li><b>Kada atsilaisvins</b>: iš praeities tos pačios galios įkrovimų, kurie jau truko tiek pat. „Greičiausiai ~X“ yra mediana, „9 iš 10 kartų per Y“ – 90-asis procentilis (AC 93-iasis, nes AC sunkiau nuspėti); backtest'e pasitvirtino 90 % atvejų ir AC, ir DC.</li>
         <li><b>Tyli</b>: operatorius daugiau nei 24 val. neatsiuntė duomenų, todėl stotelės būsena greičiausiai pasenusi.</li>
         <li>API neskiria „krauna“ nuo „baigė, bet stovi prijungtas“, todėl užsistovėjimas yra įvertis pagal laiką. Su operatoriaus OCPP duomenimis jis būtų tikslus.</li>
       </ul>
@@ -675,9 +675,9 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
       `<span class="${i === now ? "now" : ""}" style="background:${lvColor(l)}" title="${hh(i)} – ${lvName(l)}"></span>`).join("");
     let wait = "";
     if (s.counts.free) wait = `Dabar laisvos <b>${s.counts.free}</b> iš ${s.counts.total}.`;
-    else if (s.wait_range_min && s.expected_wait_min != null) {
-      const m = Math.max(0, s.expected_wait_min - lag), hi = Math.max(0, s.wait_range_min[1] - lag);
-      wait = `Visos užimtos. Greičiausiai atsilaisvins per <b>~${dur(m)}</b>, 8 iš 10 kartų per <b>${dur(hi)}</b>`;
+    else if (s.wait_likely_by_min != null && s.expected_wait_min != null) {
+      const m = Math.max(0, s.expected_wait_min - lag), hi = Math.max(0, s.wait_likely_by_min - lag);
+      wait = `Visos užimtos. Greičiausiai atsilaisvins per <b>~${dur(m)}</b>, 9 iš 10 kartų per <b>${dur(hi)}</b>`;
     } else wait = "Visos užimtos, prognozei per mažai duomenų.";
     return `<div class="sec"><h4>Ar rasi vietą</h4>
       <span class="lvl"><i style="background:${lvColor(lv)}"></i>${hh(now)}: ${lvName(lv)}</span>
@@ -696,8 +696,8 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         chip = stuck(s, c) ? `<span class="chip off">Užstrigo?</span>` : over ? `<span class="chip hot">+${fmt(busy - c.expected_charge_min)} min.</span>` : `<span class="chip busy">Užimta</span>`;
         x = `Užimta ${c.busy_min_is_lower_bound ? ">" : ""}${fmt(busy)} min. · norma ${fmt(c.expected_charge_min)} min.`;
         if (c.prediction && !stuck(s, c)) {
-          const rem = Math.max(0, c.prediction.expected_remaining_min - lag), hi = c.prediction.remaining_range_min ? Math.max(0, c.prediction.remaining_range_min[1] - lag) : null;
-          x += ` · greičiausiai per ~${dur(rem)}${hi != null ? `, 8 iš 10 kartų per ${dur(hi)}` : ""}`;
+          const rem = Math.max(0, c.prediction.expected_remaining_min - lag), hi = c.prediction.likely_by_min != null ? Math.max(0, c.prediction.likely_by_min - lag) : null;
+          x += ` · greičiausiai per ~${dur(rem)}${hi != null ? `, 9 iš 10 kartų per ${dur(hi)}` : ""}`;
         }
       } else chip = `<span class="chip off">${esc(c.status)}</span>`;
       return `<div class="conn"><span class="t">${plug(c.type)} · ${fmt(c.power_kw)} kW <span class="dim small">${esc(c.tariff || "")}</span></span>${chip}${x ? `<span class="x">${x}</span>` : ""}</div>`;

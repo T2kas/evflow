@@ -22,7 +22,8 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
     "max_power_kw": 150,
     "counts": { "total", "free", "busy", "broken", "unknown", "overstaying" },
     "expected_wait_min": 0 | 23 | null,      // 0 = yra laisva jungtis; null = nežinoma. Kada atsilaisvins PIRMA iš užimtų jungčių (mediana)
-    "wait_range_min": [0, 40] | null,        // [10-as, 80-as procentilis]; rodyk tik viršų: „8 iš 10 kartų per 40 min.“
+    "wait_likely_by_min": 40 | null,         // „9 iš 10 kartų atsilaisvins per 40 min.“ (pirma iš užimtų jungčių); 0 = yra laisva
+    "wait_cdf_min": [3, 6, 9, 12, 15, 19, 24, 30, 40, 52] | null,  // laukimo minutės ties meta.cdf_quantiles (10 %, 20 % … 90 %, 95 %)
     "availability": {                        // AR RASI VIETĄ: pagal istoriją, nepriklauso nuo dabartinės būsenos
       "level": "green" | "yellow" | "red" | null,   // dabartinei Lietuvos valandai; null = mažai duomenų
       "level_overall": "green" | ...,               // visos paros
@@ -61,7 +62,8 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
       "prediction": {                        // gali nebūti, jei per mažai istorijos
         "p_free_15min": 0.24, "p_free_30min": 0.64, "p_free_60min": 0.92,
         "expected_remaining_min": 23,        // mediana
-        "remaining_range_min": [0, 50],      // [10-as, 80-as procentilis]; rodyk „8 iš 10 kartų per 50 min.“
+        "likely_by_min": 50,                 // „9 iš 10 kartų atsilaisvina per 50 min.“ (backtest: 90 % AC ir DC)
+        "remaining_cdf_min": [2, 6, 10, 15, 23, 30, 38, 45, 50, 70],  // likusios minutės ties meta.cdf_quantiles
         "basis": "stotelės istorija", "basis_n": 25,
         "explain": "Iš 25 panašių įkrovimų (stotelės istorija), kurie jau truko 4 min., 64 % baigėsi per 30 min."
       }
@@ -73,7 +75,9 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
 `class`: `AC_11` (≤11 kW), `AC_22` (<43), `DC_50` (43–60), `DC_100` (61–149), `DC_150` (150+).
 
 `meta.availability_levels`: `{"green": 0.8, "yellow": 0.5, "labels": {...}}`. Žalia = laisva vieta ≥80 % laiko tą valandą („Dažniausiai laisva“), geltona 50–80 % („Kartais užimta“), raudona <50 % („Dažnai užimta“). Ribas imk iš čia, nekoduok app'e.
-Backtest'as (`python backtest.py`): kitą parą žaliose stotelėse laisva vieta buvo 98 % laiko, geltonose 72 %, raudonose 53 %; „8 iš 10 kartų per X min.“ pasitvirtino 77 %.
+Backtest'as (`python backtest.py`): kitą parą žaliose stotelėse laisva vieta buvo 98 % laiko, geltonose 72 %, raudonose 53 %; „9 iš 10 kartų per X min.“ pasitvirtino 90 % (AC ir DC); tikimybė „atsilaisvins iki T“ iš `*_cdf_min` sutampa su realybe ±3 p. p.
+
+**Tikimybė atsilaisvinti iki laiko T** (T minučių nuo dabar, atėmus lag): tiesinė interpoliacija tarp taškų `(0 min, 0)`, `(cdf[i], cdf_quantiles[i])`; po paskutinio taško – 97 %. Pvz. `cdf = [..]`, T = 45 → tarp 80 % (40 min) ir 90 % (50 min) → 85 %.
 
 ## `city_stats.json` (operatorių ir miesto dashboard'ui)
 

@@ -54,7 +54,11 @@ LEVEL_GREEN = 0.8       # free at least 8 times out of 10
 LEVEL_YELLOW = 0.5      # free at least half the time
 MIN_HOUR_TICKS = 24     # 5-min observations of a clock hour (~2 days) before trusting that hour
 MIN_STATION_TICKS = 288 # one day of observations before trusting the station at all
-INTERVAL = (0.1, 0.8)   # range of remaining minutes; the app shows the upper end: "8 times out of 10 within B min."
+# "9 times out of 10 it frees up within B min." AC stays (all-day office parking) are harder to predict,
+# so a higher quantile is needed there to really cover 9 of 10 (backtest: q=0.9 covered only 85 % on AC).
+HI_Q = {"AC": 0.93, "DC": 0.9}
+# Remaining-minutes distribution shipped to the app, so it can answer "will it free up by 15:30?"
+CDF_Q = (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95)
 
 
 def parse_ts(s):
@@ -116,7 +120,7 @@ def round5(x, up=False):
     return int(-(-x // 5) * 5) if up else int(x // 5 * 5)
 
 
-def combine_wait(samples, qs=(INTERVAL[0], 0.5, INTERVAL[1])):
+def combine_wait(samples, qs=CDF_Q):
     """Minutes until the first of several busy connectors frees up.
 
     samples: one sorted list of possible remaining minutes per busy connector (from EndModel).
@@ -411,12 +415,12 @@ class EndModel:
         for h in (15, 30, 60):
             out[f"p_free_{h}min"] = round(bisect.bisect_right(rem, h) / len(rem), 2)
         out["expected_remaining_min"] = round(statistics.median(rem))
-        lo, hi = round5(quantile(rem, INTERVAL[0])), round5(quantile(rem, INTERVAL[1]), up=True)
-        out["remaining_range_min"] = [lo, max(hi, lo + 5)]
+        hi = max(round5(quantile(rem, HI_Q[cls[:2]]), up=True), 5)
+        out["likely_by_min"] = hi                                   # "9 iš 10 kartų per {hi} min."
+        out["remaining_cdf_min"] = [round(quantile(rem, q)) for q in CDF_Q]
         out["explain"] = (
-            f"Iš {len(rem)} panašių įkrovimų ({basis}), kurie jau truko {round(elapsed)} min., "
-            f"{round(out['p_free_30min'] * 100)} % baigėsi per 30 min., "
-            f"8 iš 10 baigėsi per {max(hi, lo + 5)} min."
+            f"Iš {len(rem)} panašių įkrovimų ({basis}), kurie jau truko {round(elapsed)} min.: "
+            f"pusė baigėsi per {out['expected_remaining_min']} min., 9 iš 10 per {hi} min."
         )
         out["_samples"] = rem
         return out
@@ -510,14 +514,15 @@ def main():
         silent = data_age is not None and data_age > STUCK_MIN
         # waiting estimate: 0 if a free connector, else when the first busy connector frees up
         if silent:
-            wait, wait_range = None, None
+            wait, wait_by, wait_cdf = None, None, None
         elif statuses["Laisva"]:
-            wait, wait_range = 0, [0, 0]
+            wait, wait_by, wait_cdf = 0, 0, None
         else:
             w = combine_wait([x["prediction"]["_samples"] for x in conn_out
                               if x["status"] == "Užimta" and "prediction" in x])
-            wait = w[1] if w else None
-            wait_range = [round5(w[0]), max(round5(w[2], up=True), round5(w[0]) + 5)] if w else None
+            wait = w[CDF_Q.index(0.5)] if w else None
+            wait_by = max(round5(w[CDF_Q.index(0.9)], up=True), 5) if w else None
+            wait_cdf = w
         for x in conn_out:
             x.get("prediction", {}).pop("_samples", None)
 
@@ -568,7 +573,8 @@ def main():
                        "broken": statuses["Neveikia"], "unknown": statuses["Nežinoma"],
                        "overstaying": sum(1 for x in conn_out if x.get("overstay"))},
             "expected_wait_min": wait,
-            "wait_range_min": wait_range,
+            "wait_likely_by_min": wait_by,
+            "wait_cdf_min": wait_cdf,
             "availability": availability,
             "reliability": {
                 "score": reliability,
@@ -599,7 +605,7 @@ def main():
             "availability_levels": {"green": LEVEL_GREEN, "yellow": LEVEL_YELLOW,
                                     "labels": {"green": "Dažniausiai laisva", "yellow": "Kartais užimta",
                                                "red": "Dažnai užimta", "unknown": "Mažai duomenų"}},
-            "interval": "8 iš 10"}
+            "cdf_quantiles": list(CDF_Q)}
     with open(os.path.join(args.out, "stations.json"), "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "stations": out_stations}, f, ensure_ascii=False, separators=(",", ":"))
 

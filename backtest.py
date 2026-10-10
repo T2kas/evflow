@@ -20,7 +20,7 @@ import statistics
 from collections import defaultdict
 from datetime import timedelta
 
-from export_app import (LT, MIN_HOUR_TICKS, MIN_STATION_TICKS, EndModel, build_grid, level,
+from export_app import (CDF_Q, LT, MIN_HOUR_TICKS, MIN_STATION_TICKS, EndModel, build_grid, level,
                         load_events, load_stations, max_kw, power_class, sessions_and_current)
 
 H = 30            # horizon the app shows in colour (p_free_30min)
@@ -72,12 +72,14 @@ def main():
                 continue
             y = 1 if e is not None and e <= t + timedelta(minutes=H) else 0
             remaining = (e - t).total_seconds() / 60 if e is not None else None
-            hi = p["remaining_range_min"][1]
+            hi = p["likely_by_min"]
             if e is not None:
                 within = (e - t).total_seconds() / 60 <= hi
             else:
                 within = False if (t_end - t).total_seconds() / 60 > hi else None
-            rows.append({"p": p[f"p_free_{H}min"], "base": class_rate.get(cls, 0.5), "y": y, "within": within,
+            by = {h: (p_by(p["remaining_cdf_min"], h), None if e is None and (t_end - t).total_seconds() / 60 < h
+                      else int(e is not None and (e - t).total_seconds() / 60 <= h)) for h in (60, 120, 240)}
+            rows.append({"by": by, "p": p[f"p_free_{H}min"], "base": class_rate.get(cls, 0.5), "y": y, "within": within,
                          "cls": cls, "pred_rem": p["expected_remaining_min"], "rem": remaining})
         t += timedelta(minutes=STEP_MIN)
 
@@ -129,13 +131,35 @@ def main():
 
     known = [r["within"] for r in rows if r["within"] is not None]
     if known:
-        print(f"\n„8 iš 10 kartų atsilaisvina per X min.“: iš tikrųjų per X min. atsilaisvino "
+        print(f"\n„9 iš 10 kartų atsilaisvina per X min.“: iš tikrųjų per X min. atsilaisvino "
               f"{100 * sum(known) / len(known):.0f} % (n={len(known)})")
+        for g in ("AC", "DC"):
+            k = [r["within"] for r in rows if r["within"] is not None and r["cls"].startswith(g)]
+            if k:
+                print(f"  {g}: {100 * sum(k) / len(k):.0f} % (n={len(k)})")
+
+    print("\n„Tikimybė atsilaisvinti iki tavo laiko“ (iš remaining_cdf_min, kaip skaičiuoja app'as):")
+    for h in (60, 120, 240):
+        k = [r["by"][h] for r in rows if r["by"][h][1] is not None]
+        for lo, hi_ in ((0, .3), (.3, .7), (.7, 1.01)):
+            b = [(pp, y) for pp, y in k if lo <= pp < hi_]
+            if b:
+                print(f"  per {h:3d} min., sakėme {lo*100:3.0f}–{min(hi_, 1)*100:3.0f} %: vid. {100 * statistics.mean(x for x, _ in b):3.0f} %, "
+                      f"iš tikrųjų {100 * statistics.mean(y for _, y in b):3.0f} % (n={len(b)})")
 
     levels_check(events, stations, cutoff, t_end, ivs)
 
     if args.plot:
         plot(calib, args.plot, model_b, base_b, len(rows))
+
+
+def p_by(cdf, t, qs=CDF_Q):
+    """P(frees up within t minutes) by linear interpolation of the shipped quantiles."""
+    pts = [(0.0, 0.0)] + list(zip(cdf, qs))
+    for (m0, q0), (m1, q1) in zip(pts, pts[1:]):
+        if t <= m1:
+            return q0 + (q1 - q0) * (t - m0) / (m1 - m0) if m1 > m0 else q1
+    return qs[-1] + (1 - qs[-1]) * 0.5     # beyond the last quantile: between 95 % and 100 %
 
 
 def levels_check(events, stations, cutoff, t_end, ivs):
