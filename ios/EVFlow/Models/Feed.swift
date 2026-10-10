@@ -21,9 +21,36 @@ struct Meta: Codable {
     let generatedUtc: Date
     let dataUntilUtc: Date
     let historyDays: Double?
+    /// thresholds + names of the "will I find a spot" levels (never hard-coded in the app)
+    let availabilityLevels: AvailabilityLevels?
+    /// quantiles of every `*_cdf_min` array, e.g. [0.1, 0.2, … 0.9, 0.95]
+    let cdfQuantiles: [Double]?
 
     enum CodingKeys: String, CodingKey {
         case generatedUtc = "generated_utc", dataUntilUtc = "data_until_utc", historyDays = "history_days"
+        case availabilityLevels = "availability_levels", cdfQuantiles = "cdf_quantiles"
+    }
+}
+
+struct AvailabilityLevels: Codable, Equatable {
+    /// share of time with a free connector: ≥ green → green, ≥ yellow → yellow, else red
+    let green: Double?
+    let yellow: Double?
+    /// "green" / "yellow" / "red" / "unknown" → display name
+    let labels: [String: String]?
+}
+
+/// History-based "will I find a spot", independent of the current status.
+struct Availability: Codable, Equatable {
+    /// "green" | "yellow" | "red" for the current Vilnius hour; nil = little data
+    let level: String?
+    let levelOverall: String?
+    let freeShareOverall: Double?
+    /// 24 values, Europe/Vilnius hours
+    let levelByHour: [String?]?
+
+    enum CodingKeys: String, CodingKey {
+        case level, levelOverall = "level_overall", freeShareOverall = "free_share_overall", levelByHour = "level_by_hour"
     }
 }
 
@@ -42,6 +69,11 @@ struct Station: Codable, Identifiable {
     let counts: Counts
     /// 0 = a connector is free right now; nil = unknown
     let expectedWaitMin: Int?
+    /// "9 iš 10 kartų atsilaisvins per N min." (first of the busy connectors); 0 = a connector is free
+    let waitLikelyByMin: Int?
+    /// wait minutes at meta.cdfQuantiles
+    let waitCdfMin: [Int]?
+    let availability: Availability?
     let reliability: Reliability
     let history: History
     let groups: [ConnectorGroup]
@@ -52,6 +84,7 @@ struct Station: Codable, Identifiable {
         case id, name, `operator`, address, city, lat, lon, payments, counts, reliability, history, groups, connectors
         case open24_7 = "open_24_7", openNow = "open_now", maxPowerKw = "max_power_kw"
         case expectedWaitMin = "expected_wait_min", forecastByHour = "forecast_by_hour"
+        case waitLikelyByMin = "wait_likely_by_min", waitCdfMin = "wait_cdf_min", availability
     }
 
     var coordinate: CLLocationCoordinate2D? {
@@ -152,6 +185,10 @@ struct Prediction: Codable {
     let pFree60min: Double
     /// may be negative (the session is already longer than expected)
     let expectedRemainingMin: Int
+    /// "9 iš 10 kartų atsilaisvina per N min." (calibrated server side: 90 % in the backtest, AC and DC)
+    let likelyByMin: Int?
+    /// remaining minutes at meta.cdfQuantiles
+    let remainingCdfMin: [Int]?
     let basis: String
     let basisN: Int
     let explain: String
@@ -160,6 +197,7 @@ struct Prediction: Codable {
         case basis, explain
         case pFree15min = "p_free_15min", pFree30min = "p_free_30min", pFree60min = "p_free_60min"
         case expectedRemainingMin = "expected_remaining_min", basisN = "basis_n"
+        case likelyByMin = "likely_by_min", remainingCdfMin = "remaining_cdf_min"
     }
 }
 

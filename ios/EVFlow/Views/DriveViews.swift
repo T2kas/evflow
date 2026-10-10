@@ -58,21 +58,14 @@ struct RoutePreview: View {
                         Text(fmtKm(rt.km)).font(.system(size: 16)).foregroundStyle(W.text2)
                     }
                     Text(rt.via.isEmpty ? r.v.s.address : "Per \(rt.via)").font(.system(size: 17, weight: .semibold)).lineLimit(1).padding(.top, 6)
-                    Text("Atvyksi \(hhmm(.now.addingTimeInterval(Double(rt.minutes) * 60))) · \(arrivalText(r.v.s, driveMin: rt.minutes, lag: app.lag, now: .now))")
+                    Text("Atvyksi \(hhmm(.now.addingTimeInterval(Double(rt.minutes) * 60))) · \(arrivalText(r.v.s, driveMin: rt.minutes, lag: app.lag, now: .now, levels: app.meta?.availabilityLevels))")
                         .font(.system(size: 15)).foregroundStyle(W.text2).padding(.top, 4)
                     // waiting long here and a clearly better station nearby → suggest it
                     if let alt = betterOption(than: r, among: app.recos) {
                         let extra = alt.drive - rt.minutes
-                        HStack(spacing: 10) {
-                            Text("\(alt.v.s.name): \(alt.wait == 0 ? "laisva" : "~\(alt.wait) min. laukti"), \(extra >= 0 ? "+" : "−")\(abs(extra)) min. kelio")
-                                .font(.system(size: 14, weight: .semibold)).lineLimit(2)
-                            Spacer(minLength: 4)
-                            Button("Važiuoti ten") { app.selectedId = alt.id; app.startRoute() }
-                                .font(.system(size: 14, weight: .semibold)).foregroundStyle(.white)
-                                .padding(.horizontal, 12).frame(height: 32).background(Capsule().fill(W.green))
+                        SuggestRow(text: "\(alt.v.s.name): \(alt.wait == 0 ? "laisva" : "~\(alt.wait) min. laukti"), \(extra >= 0 ? "+" : "−")\(abs(extra)) min. kelio") {
+                            app.selectedId = alt.id; app.startRoute()
                         }
-                        .padding(12)
-                        .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(W.green.opacity(0.1)))
                         .padding(.top, 10)
                     }
                 } else {
@@ -103,6 +96,24 @@ struct RoutePreview: View {
         }
     }
 
+}
+
+/// Green "go there instead" row: route preview (clearly better station) and station card (wait hard to predict).
+struct SuggestRow: View {
+    let text: String
+    let go: () -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Text(text).font(.system(size: 14, weight: .semibold)).lineLimit(2)
+            Spacer(minLength: 4)
+            Button("Važiuoti ten", action: go)
+                .font(.system(size: 14, weight: .semibold)).foregroundStyle(.white)
+                .padding(.horizontal, 12).frame(height: 32).background(Capsule().fill(W.green))
+        }
+        .padding(12)
+        .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(W.green.opacity(0.1)))
+    }
 }
 
 // MARK: - Turn-by-turn simulation (drives the route at ~8x speed)

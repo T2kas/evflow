@@ -30,7 +30,8 @@ struct StationSheet: View {
                             .frame(width: 56, height: 56).background(Circle().fill(W.field))
                     }
                     .accessibilityLabel("Skenuoti QR")
-                    Button { app.go(to: v) } label: {
+                    // route first ("Važiuojam / Ne"); the map-app picker lives there, so you only pick once
+                    Button { app.startRoute() } label: {
                         Text("Važiuojam").font(.system(size: 18, weight: .semibold)).foregroundStyle(.white)
                             .frame(maxWidth: .infinity).frame(height: 56).background(Capsule().fill(W.blue))
                     }
@@ -47,8 +48,12 @@ struct StationSheet: View {
         let wait = arrivalWait(s, driveMin: drive, lag: lag, arrivalHour: vilniusHour(now.addingTimeInterval(Double(drive) * 60)))
         let level = reliabilityLevel(s.reliability)
         // one quiet line, only when there is something worth saying
-        let hint = [level == .reliable ? nil : reliabilityText(level),
-                    drive > liveHorizonMin ? arrivalText(s, driveMin: drive, lag: lag, now: now) : nil].compactMap { $0 }
+        let hint = [level == .reliable ? nil : reliabilityText(level)].compactMap { $0 }
+        // history at the arrival hour – text only, no coloured dot (map colours mean "now")
+        let usual = availabilityText(s, arrival: now.addingTimeInterval(Double(drive) * 60), now: now, levels: app.meta?.availabilityLevels)
+        // 9 iš 10 kartų laukimas baigiasi per waitHi; over 3 h it says little → "Sunku nuspėti" + a free station nearby
+        let hardWait = wait > 0 && hardToPredict(s.waitLikelyByMin)
+        let waitHi = hardWait ? nil : likelyByNow(s.waitLikelyByMin, lag: lag).flatMap { $0 > wait + 2 ? $0 : nil }
         return VStack(alignment: .leading, spacing: 0) {
             // header
             HStack(alignment: .center, spacing: 12) {
@@ -64,10 +69,35 @@ struct StationSheet: View {
             // three key numbers
             StatStrip(items: [
                 .init(value: "\(v.free)/\(v.total)", label: "laisvos", color: v.free > 0 ? W.greenFg : W.redFg),
-                wait == 0 ? .init(value: "\(drive) min", label: "kelio") : .init(value: "~\(tileMin(wait))", label: "laukti", color: W.orangeFg),
+                wait == 0 ? .init(value: "\(drive) min", label: "kelio")
+                    : hardWait ? .init(value: "?", label: "laukti", color: W.orangeFg)
+                    : .init(value: "~\(tileMin(wait))", label: waitHi.map { "laukti · iki \(tileMin($0))" } ?? "laukti", color: W.orangeFg),
                 .init(value: v.price.map { String(format: "%.2f €", $0).replacingOccurrences(of: ".", with: ",") } ?? "—", label: "už kWh"),
             ])
             .padding(.top, 16)
+
+            if hardWait, let raw = s.waitLikelyByMin {
+                Text(hardToPredictText(likelyBy: raw, lag: lag))
+                    .font(.system(size: 14, weight: .semibold)).foregroundStyle(W.orangeFg)
+                    .multilineTextAlignment(.center).frame(maxWidth: .infinity).padding(.top, 12)
+                if let alt = nearestFreeOption(than: r, among: app.recos) {
+                    SuggestRow(text: "\(alt.v.s.name): laisva, \(alt.drive) min. kelio") { app.selectedId = alt.id; app.startRoute() }
+                        .padding(.top, 8)
+                }
+            }
+
+            if let usual {
+                VStack(spacing: 3) {
+                    HStack(spacing: 6) {
+                        Icon("clock", size: 15, color: W.text2)
+                        Text(usual).font(.system(size: 14, weight: .semibold)).foregroundStyle(W.text)
+                    }
+                    if let share = freeShareText(s, historyDays: app.meta?.historyDays) {
+                        Text(share).font(.system(size: 12.5)).foregroundStyle(W.text3)
+                    }
+                }
+                .frame(maxWidth: .infinity).padding(.top, 12)
+            }
 
             if !hint.isEmpty {
                 Text(hint.joined(separator: " · "))
@@ -144,7 +174,10 @@ struct CompactConnectorRow: View {
         switch state {
         case .overstay: return "+\(gt)\(c.overstayByNow(lag: lag)) min per ilgai"
         case .busy:
-            if let rem = c.remainingNow(lag: lag) { return "atsilaisvins \(freesInShort(remainingNow: rem))" }
+            if let raw = c.prediction?.likelyByMin, hardToPredict(raw) { return hardToPredictText(likelyBy: raw, lag: lag) }
+            if let rem = c.remainingNow(lag: lag) {
+                return "atsilaisvins \(freesInShortLikely(remainingNow: rem, likelyBy: c.prediction?.likelyByMin, lag: lag))"
+            }
             return c.busyNow(lag: lag).map { "\(gt)\($0) min" }
         default: return nil
         }

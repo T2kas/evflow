@@ -1,19 +1,21 @@
 import SwiftUI
 import AVFoundation
 
-/// Back camera via AVFoundation. In the Simulator (no camera) a demo frame is used instead.
+/// Back camera via AVFoundation. Only the Simulator (no camera) uses a demo frame; a phone never shows a placeholder.
 final class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     let session = AVCaptureSession()
     private let output = AVCapturePhotoOutput()
     private var onPhoto: ((UIImage) -> Void)?
     @Published var available = false
+    /// camera permission refused – the screen says so instead of showing anything fake
+    @Published var denied = false
 
     func start() {
         #if targetEnvironment(simulator)
         available = false
         #else
         AVCaptureDevice.requestAccess(for: .video) { ok in
-            guard ok else { return }
+            guard ok else { DispatchQueue.main.async { self.denied = true }; return }
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in self?.configure() }
         }
         #endif
@@ -34,7 +36,12 @@ final class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelega
     func stop() { DispatchQueue.global().async { [session] in if session.isRunning { session.stopRunning() } } }
 
     func capture(_ done: @escaping (UIImage) -> Void) {
-        guard available else { done(UIImage(named: "demo_report_photo") ?? UIImage()); return }
+        guard available else {
+            #if targetEnvironment(simulator)
+            done(UIImage(named: "demo_report_photo") ?? UIImage())
+            #endif
+            return // phone: the camera isn't live yet – ignore the tap rather than send a placeholder
+        }
         onPhoto = done
         output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
     }
@@ -79,7 +86,18 @@ struct CameraScreen: View {
                 .overlay {
                     if let shot { Image(uiImage: shot).resizable().scaledToFill() }
                     else if cam.available { PreviewLayer(session: cam.session) }
-                    else { Image("demo_report_photo").resizable().scaledToFill() }
+                    else {
+                        #if targetEnvironment(simulator)
+                        Image("demo_report_photo").resizable().scaledToFill()
+                        #else
+                        // black while the camera starts; a note if access was refused
+                        if cam.denied {
+                            Text("Leisk EVFlow naudoti kamerą: Nustatymai → EVFlow → Kamera")
+                                .font(.system(size: 15, weight: .semibold)).foregroundStyle(.white)
+                                .multilineTextAlignment(.center).padding(32)
+                        }
+                        #endif
+                    }
                 }
                 .clipped()
                 .blur(radius: phase == .live ? 0 : 6)

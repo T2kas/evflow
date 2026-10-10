@@ -83,6 +83,13 @@ struct RootView: View {
             default: EmptyView()
             }
 
+            // "Planavimas": full-screen trip planner slides up over everything
+            if app.planner {
+                TripPlannerScreen()
+                    .transition(.move(edge: .bottom))
+                    .zIndex(4)
+            }
+
             // "Važiuojam": which map app – dim fades, sheet slides (separate transitions)
             if app.navDialog {
                 Color.black.opacity(0.3).ignoresSafeArea()

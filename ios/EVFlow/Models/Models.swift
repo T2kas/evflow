@@ -85,6 +85,24 @@ func makeView(_ s: Station, lag: Int) -> StationView? {
 
 // MARK: - Recommendation
 
+/// Minimum power for "Greitas krovimas"
+let fastChargeMinKw = 50.0
+
+/// "Greitas krovimas": fast DC only; "Pigiausias krovimas": stations with a known price.
+func matchesFilter(_ v: StationView, _ f: Filter) -> Bool {
+    switch f {
+    case .all: true
+    case .fast: v.dc && v.maxKw >= fastChargeMinKw
+    case .cheap: v.price != nil
+    }
+}
+
+/// Cheapest first (ties: sooner) for "Pigiausias krovimas"; otherwise best drive + wait first.
+func sortForFilter(_ recos: [Reco], filter: Filter) -> [Reco] {
+    guard filter == .cheap else { return recos }
+    return recos.sorted { ($0.v.price ?? .infinity, $0.score) < ($1.v.price ?? .infinity, $1.score) }
+}
+
 struct Reco: Identifiable {
     let v: StationView
     let km: Double
@@ -92,9 +110,13 @@ struct Reco: Identifiable {
     let drive: Int
     /// expected wait on arrival (`arrivalWait`)
     let wait: Int
-    var score: Int { drive + wait }
+    /// usually full at the arrival hour (history level red) → +10 min on the score
+    var busyAtArrival = false
+    var score: Int { drive + wait + (busyAtArrival ? busyAtArrivalPenaltyMin : 0) }
     var id: String { v.id }
-    var explanation: String { "\(drive) min. kelio + ~\(wait) min. laukimo" }
+    var explanation: String {
+        "\(drive) min. kelio + ~\(wait) min. laukimo" + (busyAtArrival ? " · dažnai užimta tuo metu" : "")
+    }
 }
 
 /// Stations worth sending someone to: located, not closed, a compatible unrestricted working connector, reliability ≥ 50.

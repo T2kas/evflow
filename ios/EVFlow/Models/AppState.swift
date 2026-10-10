@@ -53,6 +53,11 @@ final class AppState: ObservableObject {
     let location = LocationService()
     private let arrival = ArrivalWatcher()
 
+    /// "Planavimas": full-screen trip planner (destination → stops → when)
+    @Published var planner = false
+    func openPlanner() { withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) { planner = true } }
+    func closePlanner() { withAnimation(.spring(response: 0.32, dampingFraction: 0.9)) { planner = false } }
+
     /// "Važiuojam": app picker (Apple / Google / Waze / here)
     @Published var navDialog = false
     /// last pick (shown first) and the optional "always use" choice from the profile
@@ -145,6 +150,7 @@ final class AppState: ObservableObject {
         switch s {
         case "station": screen = .station
         case "navPicker": screen = .station; navDialog = true
+        case "planner", "tripStops", "tripTime", "tripPlan": selectedId = nil; planner = true
         case "arrived": screen = .arrived
         case "route", "nav": startRoute(); if s == "nav" { Task { try? await Task.sleep(for: .seconds(3)); screen = .nav } }
         case "connector":
@@ -172,7 +178,10 @@ final class AppState: ObservableObject {
     }
 
     var mapViews: [StationView] {
-        views.filter { (filter != .fast || $0.dc) && (!freeOnly || $0.free > 0) }
+        views.filter {
+            matchesFilter($0, filter) && (!freeOnly || $0.free > 0)
+                && showsOnMap(pin: $0.pin, selected: $0.id == selectedId, showBroken: false) // broken / silent > 24 h: hidden
+        }
     }
 
     func refreshRecos() {
@@ -180,7 +189,7 @@ final class AppState: ObservableObject {
         recosFrom = from
         recoTask?.cancel()
         recoTask = Task {
-            let r = await recommend(pool, from: from, plugType: plug, now: .now, eta: eta)
+            let r = sortForFilter(await recommend(pool, from: from, plugType: plug, now: .now, eta: eta), filter: self.filter)
             if !Task.isCancelled { recos = r }
         }
     }
@@ -203,7 +212,9 @@ final class AppState: ObservableObject {
         guard let id = selectedId, let v = views.first(where: { $0.id == id }) else { return nil }
         if let r = recos.first(where: { $0.id == id }) { return r }
         let km = haversineKm(user, v.coordinate), drive = driveMinutes(km)
-        return Reco(v: v, km: km, drive: drive, wait: arrivalWait(v.s, driveMin: drive, lag: v.lag, arrivalHour: vilniusHour(.now.addingTimeInterval(Double(drive) * 60))))
+        let h = vilniusHour(.now.addingTimeInterval(Double(drive) * 60))
+        return Reco(v: v, km: km, drive: drive, wait: arrivalWait(v.s, driveMin: drive, lag: v.lag, arrivalHour: h),
+                    busyAtArrival: busyAtArrival(v.s, arrivalHour: h))
     }
 
     var selectedConnector: ConnectorView? {

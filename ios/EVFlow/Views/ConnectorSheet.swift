@@ -40,6 +40,10 @@ struct ConnectorSheet: View {
                     if state == .free || state == .broken || state == .unknown {
                         Text(headline).font(.system(size: 16, weight: .semibold)).foregroundStyle(color).padding(.top, 14)
                     }
+                    if state == .busy, let rem = c.remainingNow(lag: lag),
+                       let line = likelySentence(remainingNow: rem, likelyBy: c.prediction?.likelyByMin, lag: lag) {
+                        Text(line).font(.system(size: 16, weight: .semibold)).foregroundStyle(W.text).padding(.top, 14)
+                    }
 
                     Text("~\(tileMin(app.chargeTime(c).minutes)) pasikrauti · \(c.priceText)/kWh · +\(Rewards.onTimePoints) taškų")
                         .font(.system(size: 14)).foregroundStyle(W.text2).padding(.top, 14)
@@ -117,7 +121,8 @@ struct ConnectorSheet: View {
             return Gauge(progress: 1, value: "+\(gt)\(c.overstayByNow(lag: lag))", label: "min per ilgai", tint: W.orange)
         case .busy:
             let busy = c.busyNow(lag: lag) ?? 0
-            if let rem = c.remainingNow(lag: lag) {
+            // hard to predict: no "most likely" number, just how long it has been busy
+            if let rem = c.remainingNow(lag: lag), !hardToPredict(c.prediction?.likelyByMin) {
                 return Gauge(progress: Double(busy) / Double(max(1, busy + max(0, rem))),
                              value: rem <= 0 ? "~0" : freesInShort(remainingNow: rem).replacingOccurrences(of: " min.", with: ""),
                              label: rem > 90 ? "iki atsilaisvins" : "min. iki atsilaisvins")

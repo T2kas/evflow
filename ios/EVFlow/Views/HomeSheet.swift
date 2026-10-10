@@ -111,9 +111,12 @@ struct HomeSheet: View {
                 if q.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 9) {
+                            // filters: map + list; tapping the active one goes back to "Visi"
                             FilterChip(emoji: "k_plug", title: "Visi", on: app.filter == .all) { app.filter = .all }
-                            FilterChip(emoji: "k_bolt", title: "Greitas krovimas", on: false) { go(.fast) }
-                            FilterChip(emoji: "k_coin", title: "Pigiausias krovimas", on: false) { go(.cheap) }
+                            FilterChip(emoji: "k_bolt", title: "Greitas krovimas", on: app.filter == .fast) { app.filter = app.filter == .fast ? .all : .fast }
+                            FilterChip(emoji: "k_coin", title: "Pigiausias krovimas", on: app.filter == .cheap) { app.filter = app.filter == .cheap ? .all : .cheap }
+                            FilterChip(emoji: "k_bot", title: "Planavimas", on: app.planner) { app.openPlanner() }
+
                         }
                         .padding(.horizontal, W.margin).padding(.vertical, 1)
                     }
@@ -123,7 +126,7 @@ struct HomeSheet: View {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         if q.isEmpty {
-                            Text("Rekomenduojama dabar")
+                            Text(app.filter == .fast ? "Greitas krovimas šalia" : app.filter == .cheap ? "Pigiausias krovimas šalia" : "Rekomenduojama dabar")
                                 .font(.system(size: 13)).foregroundStyle(Color(hex: 0x3c4043))
                                 .padding(.top, 34).padding(.bottom, 0)
                             ForEach(Array(app.recos.prefix(expanded ? 10 : 3).enumerated()), id: \.element.id) { i, r in

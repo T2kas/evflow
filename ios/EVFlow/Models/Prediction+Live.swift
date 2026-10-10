@@ -82,7 +82,9 @@ func waitNow(_ s: Station, lag: Int) -> Int? {
 /// Big line on the station card.
 func stationHeadline(_ s: Station, lag: Int) -> String {
     guard let w = waitNow(s, lag: lag) else { return "Užimta" }
-    return w == 0 ? "Yra laisvų vietų (\(s.counts.free)/\(s.counts.total))" : "Laukimas ~\(w) min."
+    if w == 0 { return "Yra laisvų vietų (\(s.counts.free)/\(s.counts.total))" }
+    if let raw = s.waitLikelyByMin, hardToPredict(raw) { return hardToPredictText(likelyBy: raw, lag: lag) }
+    return "Laukimas \(waitShortLikely(s, lag: lag) ?? "~\(w) min.")"
 }
 
 enum ReliabilityLevel { case reliable, sometimes, often, neverUsed }
@@ -113,14 +115,16 @@ func arrivalWait(_ s: Station, driveMin: Int, lag: Int, arrivalHour: Int) -> Int
     return s.forecastByHour?.waitMin[safe: arrivalHour].flatMap { $0 } ?? 15
 }
 
-/// "Ar bus laisva, kai atvažiuosiu"
-func arrivalText(_ s: Station, driveMin: Int, lag: Int, now: Date) -> String {
+/// "Ar bus laisva, kai atvažiuosiu": live data up to 15 min away, then the history level at the arrival hour.
+func arrivalText(_ s: Station, driveMin: Int, lag: Int, now: Date, levels: AvailabilityLevels? = nil) -> String {
     if driveMin <= liveHorizonMin {
         if s.counts.free > 0 { return "Greičiausiai rasi laisvą vietą" }
         if let w = waitNow(s, lag: lag) { return "Dabar visos užimtos, laukimas ~\(max(0, w - driveMin)) min." }
         return "Dabar visos vietos užimtos"
     }
-    let h = vilniusHour(now.addingTimeInterval(Double(driveMin) * 60))
+    let arrival = now.addingTimeInterval(Double(driveMin) * 60)
+    if let t = availabilityText(s, arrival: arrival, now: now, levels: levels) { return t }
+    let h = vilniusHour(arrival)
     guard let f = s.forecastByHour, let p = f.freeProb[safe: h].flatMap({ $0 }) else {
         return "Šiai valandai prognozės nėra"
     }

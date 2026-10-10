@@ -11,7 +11,7 @@ private func connector(status: String = ConnectorStatus.busy, expected: Int = 39
               restriction: nil, status: status, statusSince: since, expectedChargeMin: expected,
               busyMin: status == ConnectorStatus.busy ? busy : nil, busyMinIsLowerBound: false,
               overstay: status == ConnectorStatus.busy ? overstay : nil, overstayMin: 0,
-              prediction: remaining.map { Prediction(pFree15min: 0.2, pFree30min: 0.6, pFree60min: 0.9, expectedRemainingMin: $0,
+              prediction: remaining.map { Prediction(pFree15min: 0.2, pFree30min: 0.6, pFree60min: 0.9, expectedRemainingMin: $0, likelyByMin: nil, remainingCdfMin: nil,
                                                      basis: "stotelės istorija", basisN: 25, explain: "…") })
 }
 
@@ -288,5 +288,230 @@ struct FeedDecodingTests {
         let url = try #require(Bundle.main.url(forResource: "stations", withExtension: "json"))
         let f = try Feed.decode(Data(contentsOf: url))
         #expect(f.stations.count > 1000)
+    }
+}
+
+// MARK: - availability levels, 9-of-10 times, map filter
+
+/// Station with history levels (12:00 green via `level`, 18:00 red, 09:00 null) and a 9-of-10 wait time.
+private func availStation(level: String? = "green", hours: [Int: String] = [18: "red"], waitLikely: Int? = 40,
+                          expectedWait: Int? = 15, free: Int = 0) throws -> Station {
+    let byHour = (0..<24).map { h in hours[h].map { "\"\($0)\"" } ?? (h == 9 ? "null" : "\"\(level ?? "green")\"") }.joined(separator: ",")
+    let lvl = level.map { "\"\($0)\"" } ?? "null"
+    return try station(free: free, expectedWait: expectedWait, extra: """
+    , "wait_likely_by_min": \(waitLikely.map(String.init) ?? "null"),
+      "availability": {"level": \(lvl), "level_overall": "green", "free_share_overall": 0.87, "level_by_hour": [\(byHour)]}
+    """)
+}
+
+/// Vilnius wall-clock time on 2026-10-10.
+private func vilniusTime(_ h: Int, _ m: Int = 0) -> Date {
+    var c = DateComponents(); c.year = 2026; c.month = 10; c.day = 10; c.hour = h; c.minute = m
+    var cal = Calendar(identifier: .gregorian); cal.timeZone = TimeZone(identifier: "Europe/Vilnius")!
+    return cal.date(from: c)!
+}
+
+private let feedLevels = AvailabilityLevels(green: 0.8, yellow: 0.5,
+                                            labels: ["green": "Dažniausiai laisva", "yellow": "Kartais užimta", "red": "Dažnai užimta"])
+
+struct AvailabilityTests {
+    @Test func newFieldsDecodeAndOldFeedStillDoes() throws {
+        let json = """
+        {"meta": {"generated_utc": "2026-10-10T09:52:36Z", "data_until_utc": "2026-10-10T09:52:22Z", "history_days": 3.83,
+                  "availability_levels": {"green": 0.8, "yellow": 0.5, "labels": {"green": "Dažniausiai laisva", "red": "Dažnai užimta"}},
+                  "cdf_quantiles": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95]},
+         "stations": [{"id": "1", "name": "S", "operator": "O", "address": "A", "city": "V", "max_power_kw": 50,
+           "counts": {"total": 1, "free": 0, "busy": 1, "broken": 0, "unknown": 0, "overstaying": 0},
+           "expected_wait_min": 18, "wait_likely_by_min": 45, "wait_cdf_min": [3, 6, 9, 12, 15, 19, 24, 30, 45, 52],
+           "availability": {"level": null, "level_overall": "yellow", "free_share_overall": 0.6, "level_by_hour": [null, "red"]},
+           "reliability": {"score": 90}, "history": {}, "groups": [],
+           "connectors": [{"id": "A", "charger_id": "C", "type": "IEC_62196_T2_COMBO", "power_kw": 50, "class": "DC_50",
+             "status": "Užimta", "expected_charge_min": 45, "busy_min": 12,
+             "prediction": {"p_free_15min": 0.4, "p_free_30min": 0.6, "p_free_60min": 0.9, "expected_remaining_min": 18,
+                            "likely_by_min": 50, "remaining_cdf_min": [2, 6, 10, 15, 18, 30, 38, 45, 50, 70],
+                            "basis": "b", "basis_n": 25, "explain": "e"}}]}]}
+        """
+        let f = try Feed.decode(Data(json.utf8))
+        #expect(f.meta.availabilityLevels?.green == 0.8 && f.meta.cdfQuantiles?.last == 0.95)
+        let s = try #require(f.stations.first)
+        #expect(s.waitLikelyByMin == 45 && s.waitCdfMin?.count == 10 && s.availability?.levelOverall == "yellow")
+        #expect(s.availability?.levelByHour?[1] == "red" && s.availability?.levelByHour?[0] == .some(nil))
+        let p = try #require(s.connectors.first?.prediction)
+        #expect(p.likelyByMin == 50 && p.remainingCdfMin?.last == 70)
+
+        // the previous format (8-of-10 ranges, meta.interval) still decodes; its p80 is not shown as "9 iš 10"
+        let old = """
+        {"meta": {"generated_utc": "2026-10-10T09:02:33Z", "data_until_utc": "2026-10-10T09:02:22Z", "interval": "8 iš 10"},
+         "stations": [{"id": "1", "name": "S", "operator": "O", "address": "A", "city": "V", "max_power_kw": 50,
+           "counts": {"total": 1, "free": 0, "busy": 1, "broken": 0, "unknown": 0, "overstaying": 0},
+           "expected_wait_min": 18, "wait_range_min": [0, 45], "reliability": {"score": 90}, "history": {}, "groups": [],
+           "connectors": [{"id": "A", "charger_id": "C", "type": "IEC_62196_T2_COMBO", "power_kw": 50, "class": "DC_50",
+             "status": "Užimta", "expected_charge_min": 45, "busy_min": 12,
+             "prediction": {"p_free_15min": 0.4, "p_free_30min": 0.6, "p_free_60min": 0.9, "expected_remaining_min": 18,
+                            "remaining_range_min": [0, 45], "basis": "b", "basis_n": 25, "explain": "e"}}]}]}
+        """
+        let o = try Feed.decode(Data(old.utf8))
+        let os = try #require(o.stations.first)
+        #expect(o.meta.cdfQuantiles == nil && os.waitLikelyByMin == nil && os.waitCdfMin == nil)
+        #expect(os.connectors.first?.prediction?.likelyByMin == nil && os.connectors.first?.prediction?.remainingCdfMin == nil)
+        #expect(stationHeadline(os, lag: 0) == "Laukimas ~18 min.")
+        // the minimal test station (no availability / 9-of-10 fields) still decodes
+        let bare = try station(free: 1, expectedWait: 0)
+        #expect(bare.availability == nil && bare.waitLikelyByMin == nil)
+    }
+
+    @Test func arrivalLevelUsesTheHourThenTheCurrentLevel() throws {
+        let s = try availStation()
+        #expect(arrivalLevel(s, arrivalHour: 18) == .red)
+        #expect(arrivalLevel(s, arrivalHour: 9) == .green)        // null that hour → current level
+        #expect(arrivalLevel(try station(free: 1, expectedWait: 0), arrivalHour: 9) == nil)
+    }
+
+    @Test func availabilityTextNowOrAtTheHour() throws {
+        let s = try availStation()
+        #expect(availabilityText(s, arrival: vilniusTime(12, 20), now: vilniusTime(12, 5), levels: feedLevels) == "Dažniausiai laisva šiuo metu")
+        #expect(availabilityText(s, arrival: vilniusTime(18, 10), now: vilniusTime(12, 5), levels: feedLevels) == "Populiari: dažnai užimta 18:00")
+    }
+
+    @Test func namesComeFromTheFeed() throws {
+        let custom = AvailabilityLevels(green: 0.9, yellow: 0.6, labels: ["green": "Visada laisva"])
+        #expect(availabilityText(try availStation(), arrival: vilniusTime(12), now: vilniusTime(12), levels: custom) == "Visada laisva šiuo metu")
+    }
+
+    @Test func freeShareLine() throws {
+        #expect(freeShareText(try availStation(), historyDays: 3.79) == "Per 4 d. laisva vieta buvo 87 % laiko")
+        #expect(freeShareText(try availStation(), historyDays: nil) == nil)
+    }
+
+    @Test func longDriveUsesTheHistoryLevelInsteadOfPercent() throws {
+        // 12:05 + 6 h drive → 18:05 arrival, red that hour
+        #expect(arrivalText(try availStation(), driveMin: 360, lag: 0, now: vilniusTime(12, 5), levels: feedLevels) == "Populiari: dažnai užimta 18:00")
+    }
+}
+
+struct LikelyTests {
+    @Test func compactRowShowsTheNineOfTenTime() {
+        // likely_by_min 45, 5 min lag → "iki 40 min."
+        #expect(freesInShortLikely(remainingNow: 23, likelyBy: 45, lag: 5) == "~25 min. · iki 40 min.")
+        #expect(freesInShortLikely(remainingNow: 23, likelyBy: 26, lag: 0) == "~25 min.")   // adds nothing
+        #expect(freesInShortLikely(remainingNow: 23, likelyBy: nil, lag: 0) == "~25 min.")
+    }
+
+    @Test func connectorSentence() {
+        #expect(likelySentence(remainingNow: 23, likelyBy: 45, lag: 5) == "Greičiausiai ~25 min. · 9 iš 10 kartų per 40 min.")
+        #expect(likelySentence(remainingNow: -2, likelyBy: 4, lag: 6) == "Greičiausiai bet kurią minutę · 9 iš 10 kartų jau būtų atsilaisvinusi")
+        #expect(likelySentence(remainingNow: 23, likelyBy: nil, lag: 0) == nil)   // older feed: no 9-of-10 line
+    }
+
+    @Test func overThreeHoursIsHardToPredict() {
+        #expect(likelySentence(remainingNow: 60, likelyBy: 180, lag: 0) == "Greičiausiai ~60 min. · 9 iš 10 kartų per 3 val.")
+        #expect(likelySentence(remainingNow: 60, likelyBy: 245, lag: 5) == "Sunku nuspėti: gali užtrukti iki 4 val.")
+        // decided on the feed value: the lag doesn't bring it back under 3 h between refreshes
+        #expect(likelySentence(remainingNow: 60, likelyBy: 183, lag: 6) == "Sunku nuspėti: gali užtrukti iki 3 val.")
+        #expect(!hardToPredict(180) && hardToPredict(181) && !hardToPredict(nil))
+    }
+
+    @Test func stationWaitUsesWaitLikelyBy() throws {
+        let s = try availStation(waitLikely: 40, expectedWait: 15)
+        #expect(waitShortLikely(s, lag: 0) == "~15 min. · iki 40 min.")
+        #expect(stationHeadline(s, lag: 0) == "Laukimas ~15 min. · iki 40 min.")
+        #expect(waitShortLikely(try availStation(waitLikely: 0, expectedWait: 0, free: 1), lag: 0) == nil)
+    }
+
+    @Test func stationWaitHardToPredict() throws {
+        let s = try availStation(waitLikely: 400, expectedWait: 35)
+        #expect(waitShortLikely(s, lag: 10) == "Sunku nuspėti: gali užtrukti iki 6,5 val.")
+        #expect(stationHeadline(s, lag: 10) == "Sunku nuspėti: gali užtrukti iki 6,5 val.")
+    }
+
+    @Test func hardToPredictSuggestsTheNearestFreeStation() throws {
+        func v(_ id: String, free: Int) throws -> StationView {
+            let s = try station(free: free, expectedWait: free > 0 ? 0 : 30)
+            let copy = Station(id: id, name: id, operator: s.operator, address: s.address, city: s.city, lat: s.lat, lon: s.lon,
+                               open24_7: nil, openNow: nil, payments: nil, maxPowerKw: 150, counts: s.counts,
+                               expectedWaitMin: s.expectedWaitMin, waitLikelyByMin: nil, waitCdfMin: nil, availability: nil,
+                               reliability: s.reliability, history: s.history, groups: [], forecastByHour: nil, connectors: [])
+            return try #require(makeView(copy, lag: 0))
+        }
+        let here = Reco(v: try v("here", free: 0), km: 1, drive: 3, wait: 30)
+        let busyClose = Reco(v: try v("busy-close", free: 0), km: 1, drive: 2, wait: 20)
+        let freeFar = Reco(v: try v("free-far", free: 2), km: 6, drive: 12, wait: 0)
+        let freeNear = Reco(v: try v("free-near", free: 1), km: 3, drive: 7, wait: 0, busyAtArrival: true)
+        #expect(nearestFreeOption(than: here, among: [here, busyClose, freeFar, freeNear])?.id == "free-near")
+        #expect(nearestFreeOption(than: here, among: [here, busyClose]) == nil)
+    }
+}
+
+struct AvailabilityRecommendTests {
+    @Test func redAtArrivalCostsTenMinutes() throws {
+        let v = try #require(makeView(try availStation(), lag: 0))
+        let calm = Reco(v: v, km: 2, drive: 8, wait: 0)
+        let busy = Reco(v: v, km: 2, drive: 8, wait: 0, busyAtArrival: true)
+        #expect(calm.score == 8 && busy.score == 18)
+        #expect(busy.explanation == "8 min. kelio + ~0 min. laukimo · dažnai užimta tuo metu")
+        #expect(busyAtArrival(v.s, arrivalHour: 18) && !busyAtArrival(v.s, arrivalHour: 12))
+    }
+
+    @Test func brokenAndSilentStationsAreHiddenByDefault() {
+        #expect(!showsOnMap(pin: .broken, selected: false, showBroken: false))
+        #expect(!showsOnMap(pin: .stale, selected: false, showBroken: false))
+        #expect(showsOnMap(pin: .broken, selected: true, showBroken: false))   // selected is always shown
+        #expect(showsOnMap(pin: .stale, selected: false, showBroken: true))
+        #expect(showsOnMap(pin: .busy, selected: false, showBroken: false))
+    }
+}
+
+struct HomeFilterTests {
+    private func view(kw: Int, cls: String, tariff: String?, free: Int = 1) throws -> StationView {
+        let t = tariff.map { "\"\($0)\"" } ?? "null"
+        let s = try station(free: free, expectedWait: 0, extra: "")
+        let json = """
+        {"id": "C", "charger_id": "CH", "type": "IEC_62196_T2_COMBO", "power_kw": \(kw), "class": "\(cls)", "tariff": \(t),
+         "status": "Laisva", "expected_charge_min": 40}
+        """
+        let d = JSONDecoder(); d.dateDecodingStrategy = .iso8601
+        let c = try d.decode(Connector.self, from: Data(json.utf8))
+        let withConn = Station(id: s.id, name: s.name, operator: s.operator, address: s.address, city: s.city, lat: s.lat, lon: s.lon,
+                               open24_7: nil, openNow: nil, payments: nil, maxPowerKw: Double(kw), counts: s.counts,
+                               expectedWaitMin: 0, waitLikelyByMin: nil, waitCdfMin: nil, availability: nil, reliability: s.reliability, history: s.history,
+                               groups: [], forecastByHour: nil, connectors: [c])
+        return try #require(makeView(withConn, lag: 0))
+    }
+
+    @Test func fastMeansDC50Plus() throws {
+        #expect(matchesFilter(try view(kw: 150, cls: "DC_150", tariff: nil), .fast))
+        #expect(!matchesFilter(try view(kw: 22, cls: "AC_22", tariff: nil), .fast))
+        #expect(matchesFilter(try view(kw: 22, cls: "AC_22", tariff: nil), .all))
+    }
+
+    @Test func cheapNeedsAPriceAndSortsByIt() throws {
+        let cheap = try view(kw: 22, cls: "AC_22", tariff: "0.25 €/kWh"), dear = try view(kw: 150, cls: "DC_150", tariff: "0.49 €/kWh")
+        #expect(!matchesFilter(try view(kw: 22, cls: "AC_22", tariff: nil), .cheap))
+        let sorted = sortForFilter([Reco(v: dear, km: 1, drive: 2, wait: 0), Reco(v: cheap, km: 3, drive: 9, wait: 0)], filter: .cheap)
+        #expect(sorted.first?.v.price == 0.25)
+        #expect(sortForFilter([Reco(v: dear, km: 1, drive: 2, wait: 0), Reco(v: cheap, km: 3, drive: 9, wait: 0)], filter: .all).first?.v.price == 0.49)
+    }
+}
+
+struct PlannerTests {
+    @Test func usuallyFreeComesFirstThenWaitThenDistance() throws {
+        let here = CLLocationCoordinate2D(latitude: 54.7, longitude: 25.3)
+        func v(_ id: String, level18: String, km: Double) throws -> StationView {
+            let byHour = (0..<24).map { $0 == 18 ? "\"\(level18)\"" : "\"green\"" }.joined(separator: ",")
+            let s = try station(free: 1, expectedWait: 0, extra: """
+            , "availability": {"level": "green", "level_overall": "green", "free_share_overall": 0.9, "level_by_hour": [\(byHour)]}
+            """)
+            let moved = Station(id: id, name: id, operator: s.operator, address: s.address, city: s.city,
+                                lat: 54.7 + km / 111, lon: 25.3, open24_7: nil, openNow: nil, payments: nil, maxPowerKw: 150,
+                                counts: s.counts, expectedWaitMin: 0, waitLikelyByMin: nil, waitCdfMin: nil, availability: s.availability,
+                                reliability: s.reliability, history: s.history, groups: [], forecastByHour: nil,
+                                connectors: [connector(status: ConnectorStatus.free)])
+            return try #require(makeView(moved, lag: 0))
+        }
+        let near = try v("near-red", level18: "red", km: 1), far = try v("far-green", level18: "green", km: 6),
+            mid = try v("mid-yellow", level18: "yellow", km: 3), tooFar = try v("too-far", level18: "green", km: 40)
+        let plan = planStations([near, far, mid, tooFar], from: here, hour: 18, plugType: nil)
+        #expect(plan.map(\.id) == ["far-green", "mid-yellow", "near-red"])   // 40 km one dropped
+        #expect(planStations([near, far, mid], from: here, hour: 9, plugType: nil).first?.id == "near-red") // all green at 09 → closest
     }
 }

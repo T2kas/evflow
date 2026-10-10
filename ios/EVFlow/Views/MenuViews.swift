@@ -56,7 +56,7 @@ struct MenuScreen: View {
                 Text(title).font(.system(size: 16))
                 if dot { Circle().fill(W.red).frame(width: 7, height: 7) }
                 Spacer()
-                if let badge { Text(badge).font(.system(size: 15, weight: .semibold)).foregroundStyle(W.purple) }
+                if let badge { Text(badge).font(.system(size: 15, weight: .semibold)).foregroundStyle(W.blueText) }
             }
             .foregroundStyle(muted ? W.text3 : W.text)
             .frame(height: 55).contentShape(Rectangle())
@@ -81,7 +81,7 @@ struct ProfileScreen: View {
                     ProfilePic(size: 92, corner: 26)
                     Text("Vairuotojas").font(.system(size: 24, weight: .bold))
                     HStack(spacing: 6) {
-                        Icon("star", size: 14, color: Color(hex: 0xf5b400))
+                        Image(systemName: "star.fill").font(.system(size: 13)).foregroundStyle(Color(hex: 0xf5b400))
                         Text(g.level).font(.system(size: 14, weight: .semibold)).foregroundStyle(W.text2)
                     }
                     .padding(.horizontal, 12).frame(height: 30)
@@ -91,7 +91,7 @@ struct ProfileScreen: View {
                 .padding(.top, 8)
 
                 StatStrip(items: [
-                    .init(value: "\(g.points)", label: "taškai", color: W.purple),
+                    .init(value: "\(g.points)", label: "taškai", color: W.blueText),
                     .init(value: "\(g.reputation)", label: "reputacija"),
                     .init(value: "\(g.streak)", label: "iš eilės laiku"),
                 ])
@@ -324,13 +324,10 @@ struct PrizeCard: View {
                         Text("\(p.points)").font(.system(size: 18, weight: .bold)).foregroundStyle(can ? W.text : W.text3)
                             .padding(.horizontal, 14).frame(height: 40).background(Capsule().fill(W.field))
                         Spacer(minLength: 0)
+                        // icon only, same weight as the heart
                         ShareLink(item: p.image ?? URL(string: "https://evflow.lt")!,
                                   message: Text("\(p.title) – EVFlow prizas už \(p.points) taškų")) {
-                            HStack(spacing: 6) {
-                                GlyphView(.share, size: 18, color: .white)
-                                Text("Dalintis").font(.system(size: 14, weight: .semibold)).foregroundStyle(.white)
-                            }
-                            .padding(.horizontal, 14).frame(height: 40).background(Capsule().fill(W.blue))
+                            GlyphView(.share, size: 24).frame(width: 40, height: 40)
                         }
                     }
                 }

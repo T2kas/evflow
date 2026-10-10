@@ -20,6 +20,11 @@ func betterOption(than current: Reco, among recos: [Reco]) -> Reco? {
     return recos.filter { $0.id != current.id && $0.score <= current.score - Rewards.betterByMin }.min { $0.score < $1.score }
 }
 
+/// Station card, when the wait here is hard to predict: the nearest other recommended station with a free spot on arrival.
+func nearestFreeOption(than current: Reco, among recos: [Reco]) -> Reco? {
+    recos.filter { $0.id != current.id && $0.v.free > 0 && $0.wait == 0 }.min { ($0.drive, $0.km) < ($1.drive, $1.km) }
+}
+
 /// Driving ETAs from MKDirections, cached per station while the user stays within ~300 m (Apple throttles ETA requests).
 @MainActor
 final class ETACache {
@@ -56,7 +61,8 @@ func recommend(_ views: [StationView], from user: CLLocationCoordinate2D, plugTy
             g.addTask { @MainActor in
                 let drive = await eta.minutes(from: user, to: v)
                 let h = vilniusHour(now.addingTimeInterval(Double(drive) * 60))
-                return Reco(v: v, km: meters / 1000, drive: drive, wait: arrivalWait(v.s, driveMin: drive, lag: v.lag, arrivalHour: h))
+                return Reco(v: v, km: meters / 1000, drive: drive, wait: arrivalWait(v.s, driveMin: drive, lag: v.lag, arrivalHour: h),
+                            busyAtArrival: busyAtArrival(v.s, arrivalHour: h))
             }
         }
         for await r in g { out.append(r) }
