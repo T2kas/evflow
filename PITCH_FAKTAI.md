@@ -48,7 +48,7 @@ Metodas: modelis treniruojamas tik su sesijomis iki 2026-10-08 22:28. Tada visą
 - Stotelė žalia / geltona / raudona pagal tai, kaip dažnai tą valandą būna bent viena laisva jungtis (≥80 % / 50–80 % / <50 %), nepriklausomai nuo to, kas dedasi dabar.
 - Patikrinta su kita para: žaliose laisva vieta buvo **98 %** laiko, geltonose **72 %**, raudonose **53 %**.
 - „9 iš 10 kartų atsilaisvina per X min.“ pasitvirtino **90 %** atvejų ir lėtiesiems (AC), ir greitiesiems (DC) krovikliams (36 412 patikrinimų).
-- Visai stotelei („kada atsilaisvins bent viena vieta“) „9 iš 10“ pasitvirtino **91 %** (7 442 patikrinimai).
+- Visai stotelei („kada atsilaisvins bent viena vieta“) „9 iš 10“ pasitvirtino **94 %** (7 390 patikrinimų). To paties įkroviklio kištukai skaičiuojami kaip viena sesija: kitaip 2 kištukų stotelės atrodė dvigubai greitesnės, nei yra.
 - Planuojančiam: „Ar atsilaisvins iki 15:30?“ – kai sakėme ~87 % per 2 val., iš tikrųjų atsilaisvino 85 %.
 - AC sunkiau nuspėti (žmonės palieka auto darbe visai dienai): ten 9 iš 10 riba būna 5–9 val. Tokiais atvejais app'as sąžiningai sako „sunku nuspėti“ ir siūlo kitą stotelę.
 

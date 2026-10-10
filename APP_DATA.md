@@ -23,7 +23,8 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
     "counts": { "total", "free", "busy", "broken", "unknown", "overstaying" },
     "expected_wait_min": 0 | 23 | null,      // 0 = yra laisva jungtis; null = nežinoma. Kada atsilaisvins PIRMA iš užimtų jungčių (mediana)
     "wait_likely_by_min": 40 | null,         // „9 iš 10 kartų atsilaisvins per 40 min.“ (pirma iš užimtų jungčių); 0 = yra laisva.
-                                             // To paties įkroviklio kištukai, užimti per 5 min. vienas nuo kito, laikomi vienu automobiliu.
+                                             // To paties įkroviklio kištukai skaičiuojami kaip viena sesija (jie dalijasi galia / krauna po vieną),
+                                             // todėl stotelės laikas gali būti toks pat kaip jungties. Skirtingi įkrovikliai – nepriklausomi.
     "wait_cdf_min": [3, 6, 9, 12, 15, 19, 24, 30, 40, 52] | null,  // laukimo minutės ties meta.cdf_quantiles (10 %, 20 % … 90 %, 95 %)
     "availability": {                        // AR RASI VIETĄ: pagal istoriją, nepriklauso nuo dabartinės būsenos
       "level": "green" | "yellow" | "red" | null,   // dabartinei Lietuvos valandai; null = mažai duomenų
