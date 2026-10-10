@@ -21,7 +21,14 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
     "payments": ["Bankine kortele", "RFID tokenu", ...] | null,
     "max_power_kw": 150,
     "counts": { "total", "free", "busy", "broken", "unknown", "overstaying" },
-    "expected_wait_min": 0 | 23 | null,      // 0 = yra laisva jungtis; null = nežinoma
+    "expected_wait_min": 0 | 23 | null,      // 0 = yra laisva jungtis; null = nežinoma. Kada atsilaisvins PIRMA iš užimtų jungčių (mediana)
+    "wait_range_min": [0, 40] | null,        // [10-as, 80-as procentilis]; rodyk tik viršų: „8 iš 10 kartų per 40 min.“
+    "availability": {                        // AR RASI VIETĄ: pagal istoriją, nepriklauso nuo dabartinės būsenos
+      "level": "green" | "yellow" | "red" | null,   // dabartinei Lietuvos valandai; null = mažai duomenų
+      "level_overall": "green" | ...,               // visos paros
+      "free_share_overall": 0.87,                   // laiko dalis, kai buvo bent viena laisva jungtis
+      "level_by_hour": [24 × level]                 // atvykimo valandai: level_by_hour[arrivalHour]
+    },
     "reliability": {
       "score": 0-100,                        // 100 = niekada nebuvo „Neveikia“ / „Nežinoma“
       "broken_share": 0.004,                 // laiko dalis, kai jungtys neveikė
@@ -53,7 +60,8 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
       "overstay": false, "overstay_min": 0,
       "prediction": {                        // gali nebūti, jei per mažai istorijos
         "p_free_15min": 0.24, "p_free_30min": 0.64, "p_free_60min": 0.92,
-        "expected_remaining_min": 23,
+        "expected_remaining_min": 23,        // mediana
+        "remaining_range_min": [0, 50],      // [10-as, 80-as procentilis]; rodyk „8 iš 10 kartų per 50 min.“
         "basis": "stotelės istorija", "basis_n": 25,
         "explain": "Iš 25 panašių įkrovimų (stotelės istorija), kurie jau truko 4 min., 64 % baigėsi per 30 min."
       }
@@ -63,6 +71,9 @@ Visi laikai UTC (ISO, `Z`), galios kW, trukmės minutėmis.
 ```
 
 `class`: `AC_11` (≤11 kW), `AC_22` (<43), `DC_50` (43–60), `DC_100` (61–149), `DC_150` (150+).
+
+`meta.availability_levels`: `{"green": 0.8, "yellow": 0.5, "labels": {...}}`. Žalia = laisva vieta ≥80 % laiko tą valandą („Dažniausiai laisva“), geltona 50–80 % („Kartais užimta“), raudona <50 % („Dažnai užimta“). Ribas imk iš čia, nekoduok app'e.
+Backtest'as (`python backtest.py`): kitą parą žaliose stotelėse laisva vieta buvo 98 % laiko, geltonose 72 %, raudonose 53 %; „8 iš 10 kartų per X min.“ pasitvirtino 77 %.
 
 ## `city_stats.json` (operatorių ir miesto dashboard'ui)
 

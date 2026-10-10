@@ -44,6 +44,11 @@ Metodas: modelis treniruojamas tik su sesijomis iki 2026-10-08 22:28. Tada visą
 - „Atsilaisvins per ~N min.“ medianinė paklaida yra 45 min. Todėl UI geriau pabrėžti tikimybę (spalvą), o ne tikslias minutes.
 - Istorija kol kas vos 3 dienos, savaitgalio dar nematėme.
 
+**Spalvos „ar rasi vietą“ ir intervalas** (pridėta po mentoriaus patarimo):
+- Stotelė žalia / geltona / raudona pagal tai, kaip dažnai tą valandą būna bent viena laisva jungtis (≥80 % / 50–80 % / <50 %), nepriklausomai nuo to, kas dedasi dabar.
+- Patikrinta su kita para: žaliose laisva vieta buvo **98 %** laiko, geltonose **72 %**, raudonose **53 %**.
+- „8 iš 10 kartų atsilaisvina per X min.“ pasitvirtino **77 %** atvejų (38 750 patikrinimų).
+
 Skaidrei siūlau: grafiką ir sakinį *„Kai sakome 70 %, atsilaisvina 71 %. Patikrinta su 45 000 prognozių.“*
 
 ## 3. Verslo modelis

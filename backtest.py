@@ -20,8 +20,8 @@ import statistics
 from collections import defaultdict
 from datetime import timedelta
 
-from export_app import (LT, EndModel, load_events, load_stations, max_kw,
-                        power_class, sessions_and_current)
+from export_app import (LT, MIN_HOUR_TICKS, MIN_STATION_TICKS, EndModel, build_grid, level,
+                        load_events, load_stations, max_kw, power_class, sessions_and_current)
 
 H = 30            # horizon the app shows in colour (p_free_30min)
 STEP_MIN = 15
@@ -72,7 +72,12 @@ def main():
                 continue
             y = 1 if e is not None and e <= t + timedelta(minutes=H) else 0
             remaining = (e - t).total_seconds() / 60 if e is not None else None
-            rows.append({"p": p[f"p_free_{H}min"], "base": class_rate.get(cls, 0.5), "y": y,
+            hi = p["remaining_range_min"][1]
+            if e is not None:
+                within = (e - t).total_seconds() / 60 <= hi
+            else:
+                within = False if (t_end - t).total_seconds() / 60 > hi else None
+            rows.append({"p": p[f"p_free_{H}min"], "base": class_rate.get(cls, 0.5), "y": y, "within": within,
                          "cls": cls, "pred_rem": p["expected_remaining_min"], "rem": remaining})
         t += timedelta(minutes=STEP_MIN)
 
@@ -122,8 +127,45 @@ def main():
         print(f"  {cls:7s} n={len(b):5d}  pataikymas {acc*100:3.0f} %  Brier {brier(b, 'p'):.3f} "
               f"(vidurkis {brier(b, 'base'):.3f})")
 
+    known = [r["within"] for r in rows if r["within"] is not None]
+    if known:
+        print(f"\n„8 iš 10 kartų atsilaisvina per X min.“: iš tikrųjų per X min. atsilaisvino "
+              f"{100 * sum(known) / len(known):.0f} % (n={len(known)})")
+
+    levels_check(events, stations, cutoff, t_end, ivs)
+
     if args.plot:
         plot(calib, args.plot, model_b, base_b, len(rows))
+
+
+def levels_check(events, stations, cutoff, t_end, ivs):
+    """Station colours from history before the cutoff vs. how often a connector was free after it."""
+    train_ev = [e for e in events if e[0] <= cutoff]
+    test_ev = [e for e in events if e[0] > cutoff]
+    train_s = [(c, s, e) for c, s, e in ivs if e is not None and e <= cutoff]
+    tr = build_grid(train_ev, stations, train_s, train_ev[0][0], cutoff)
+    te = build_grid(test_ev, stations, [], test_ev[0][0], t_end)
+    full_ticks, usable_ticks, fc_train, fc_test = tr[3], tr[4], tr[-1], te[-1]
+    acc = defaultdict(lambda: [0.0, 0])          # level -> [free ticks, ticks]
+    for sid, f in fc_train.items():
+        overall = 1 - full_ticks[sid] / usable_ticks[sid] if usable_ticks[sid] >= MIN_STATION_TICKS else None
+        g = fc_test.get(sid)
+        if not g:
+            continue
+        for hr in range(24):
+            p = f["free_prob"][hr] if f["samples"][hr] >= MIN_HOUR_TICKS else None
+            lv = level(p if p is not None else overall) or "unknown"
+            n = g["samples"][hr]
+            if n and g["free_prob"][hr] is not None:
+                acc[lv][0] += g["free_prob"][hr] * n
+                acc[lv][1] += n
+    print("\nStotelių spalvos (iš istorijos iki ribos) prieš tai, kas buvo kitą parą:")
+    names = {"green": "Žalia „dažniausiai laisva“", "yellow": "Geltona „kartais užimta“",
+             "red": "Raudona „dažnai užimta“", "unknown": "Mažai duomenų"}
+    for lv in ("green", "yellow", "red", "unknown"):
+        if acc[lv][1]:
+            print(f"  {names[lv]:28s} laisva vieta buvo {100 * acc[lv][0] / acc[lv][1]:4.0f} % laiko "
+                  f"({acc[lv][1] * 5 / 60:,.0f} stotelės-valandų)")
 
 
 def plot(calib, path, model_b, base_b, n):

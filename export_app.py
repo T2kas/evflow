@@ -45,6 +45,16 @@ TICK_MIN = 5            # grid resolution for occupancy / blocking
 MIN_OWN_HISTORY = 15    # sessions needed before a station's own history is used
 GRACE_MIN = 15
 NEED_KWH = 36           # 20 -> 80 % of a 60 kWh battery
+STUCK_MIN = 1440        # "busy" for a day or operator silent for a day = stuck status, not a car
+
+# Station availability level: how often a driver arriving at that hour found a free connector.
+# Independent of the current status, so a driver can tell "free right now but usually full"
+# from "usually free". Thresholds are exported in meta so the app never hard-codes them.
+LEVEL_GREEN = 0.8       # free at least 8 times out of 10
+LEVEL_YELLOW = 0.5      # free at least half the time
+MIN_HOUR_TICKS = 24     # 5-min observations of a clock hour (~2 days) before trusting that hour
+MIN_STATION_TICKS = 288 # one day of observations before trusting the station at all
+INTERVAL = (0.1, 0.8)   # range of remaining minutes; the app shows the upper end: "8 times out of 10 within B min."
 
 
 def parse_ts(s):
@@ -90,6 +100,42 @@ def expected_min(kw):
         eff = min(kw * 0.6, 100.0)
     eff = max(eff, 2.0)
     return round(NEED_KWH / eff * 60 + GRACE_MIN)
+
+
+def level(p):
+    if p is None:
+        return None
+    return "green" if p >= LEVEL_GREEN else "yellow" if p >= LEVEL_YELLOW else "red"
+
+
+def quantile(sorted_vals, q):
+    return sorted_vals[min(len(sorted_vals) - 1, int(q * len(sorted_vals)))]
+
+
+def round5(x, up=False):
+    return int(-(-x // 5) * 5) if up else int(x // 5 * 5)
+
+
+def combine_wait(samples, qs=(INTERVAL[0], 0.5, INTERVAL[1])):
+    """Minutes until the first of several busy connectors frees up.
+
+    samples: one sorted list of possible remaining minutes per busy connector (from EndModel).
+    Treats connectors as independent: P(still all busy at t) = product of P(each still busy at t).
+    """
+    if not samples:
+        return None
+    out, t = [], 0
+    horizon = max(s[-1] for s in samples)
+    for q in qs:
+        while t <= horizon:
+            all_busy = 1.0
+            for s in samples:
+                all_busy *= 1 - bisect.bisect_right(s, t) / len(s)
+            if 1 - all_busy >= q:
+                break
+            t += 1
+        out.append(t)
+    return out
 
 
 def is_night(dt):
@@ -349,21 +395,30 @@ class EndModel:
             return own, "stotelės istorija"
         return self.by_class.get(cls, []), "visų tokios galios jungčių istorija"
 
-    def predict(self, sid, cls, elapsed, start_hour=None):
+    def remaining(self, sid, cls, elapsed, start_hour=None):
+        """Sorted remaining minutes of comparable past sessions, or None if too few."""
         pool, basis = self._pool(sid, cls, elapsed, start_hour)
-        k = bisect.bisect_right(pool, elapsed)
-        rest = pool[k:]
+        rest = pool[bisect.bisect_right(pool, elapsed):]
         if len(rest) < 5:
+            return None, basis
+        return [d - elapsed for d in rest], basis
+
+    def predict(self, sid, cls, elapsed, start_hour=None):
+        rem, basis = self.remaining(sid, cls, elapsed, start_hour)
+        if rem is None:
             return None
-        out = {"basis": basis, "basis_n": len(rest)}
+        out = {"basis": basis, "basis_n": len(rem)}
         for h in (15, 30, 60):
-            ended = bisect.bisect_right(rest, elapsed + h)
-            out[f"p_free_{h}min"] = round(ended / len(rest), 2)
-        out["expected_remaining_min"] = round(statistics.median(rest) - elapsed)
+            out[f"p_free_{h}min"] = round(bisect.bisect_right(rem, h) / len(rem), 2)
+        out["expected_remaining_min"] = round(statistics.median(rem))
+        lo, hi = round5(quantile(rem, INTERVAL[0])), round5(quantile(rem, INTERVAL[1]), up=True)
+        out["remaining_range_min"] = [lo, max(hi, lo + 5)]
         out["explain"] = (
-            f"Iš {len(rest)} panašių įkrovimų ({basis}), kurie jau truko {round(elapsed)} min., "
-            f"{round(out['p_free_30min'] * 100)} % baigėsi per 30 min."
+            f"Iš {len(rem)} panašių įkrovimų ({basis}), kurie jau truko {round(elapsed)} min., "
+            f"{round(out['p_free_30min'] * 100)} % baigėsi per 30 min., "
+            f"8 iš 10 baigėsi per {max(hi, lo + 5)} min."
         )
+        out["_samples"] = rem
         return out
 
 
@@ -429,7 +484,7 @@ def main():
                 night_ac = kw < 43 and is_night(since[c][0])
                 item["overstay"] = (not night_ac) and elapsed > item["expected_charge_min"]
                 item["overstay_min"] = max(0, round(elapsed - item["expected_charge_min"])) if item["overstay"] else 0
-                pred = model.predict(sid, cls, elapsed, since[c][0].astimezone(LT).hour)
+                pred = model.predict(sid, cls, elapsed, since[c][0].astimezone(LT).hour) if elapsed <= STUCK_MIN else None
                 if pred:
                     item["prediction"] = pred
             conn_out.append(item)
@@ -452,13 +507,35 @@ def main():
         if never_used:
             reliability = min(reliability, 60)
 
-        # waiting estimate: 0 if a free connector, else soonest expected end among busy ones
-        if statuses["Laisva"]:
-            wait = 0
+        silent = data_age is not None and data_age > STUCK_MIN
+        # waiting estimate: 0 if a free connector, else when the first busy connector frees up
+        if silent:
+            wait, wait_range = None, None
+        elif statuses["Laisva"]:
+            wait, wait_range = 0, [0, 0]
         else:
-            rem = [x["prediction"]["expected_remaining_min"] for x in conn_out
-                   if x["status"] == "Užimta" and "prediction" in x]
-            wait = max(0, min(rem)) if rem else None
+            w = combine_wait([x["prediction"]["_samples"] for x in conn_out
+                              if x["status"] == "Užimta" and "prediction" in x])
+            wait = w[1] if w else None
+            wait_range = [round5(w[0]), max(round5(w[2], up=True), round5(w[0]) + 5)] if w else None
+        for x in conn_out:
+            x.get("prediction", {}).pop("_samples", None)
+
+        # availability level per local hour (falls back to the station's overall share)
+        fc_raw = forecast.get(sid)
+        free_overall = (1 - full_ticks[sid] / usable_ticks[sid]) if usable_ticks[sid] >= MIN_STATION_TICKS else None
+        by_hour = [None] * 24
+        if fc_raw and not silent:
+            for hr in range(24):
+                p = fc_raw["free_prob"][hr] if fc_raw["samples"][hr] >= MIN_HOUR_TICKS else None
+                by_hour[hr] = level(p if p is not None else free_overall)
+        now_hr = now.astimezone(LT).hour
+        availability = {
+            "level": by_hour[now_hr],
+            "level_overall": None if silent else level(free_overall),
+            "free_share_overall": None if silent or free_overall is None else round(free_overall, 2),
+            "level_by_hour": by_hour,
+        }
 
         h = hours.get(str(sid))
         grp = defaultdict(lambda: Counter())
@@ -468,7 +545,7 @@ def main():
             g["free"] += x["status"] == "Laisva"
         groups_out = [{"type": t, "power_kw": kw, "count": g["count"], "free": g["free"]}
                       for (t, kw), g in sorted(grp.items(), key=lambda kv: -kv[0][1])]
-        fc = forecast.get(sid)
+        fc = fc_raw
         if fc:
             # confidence: how many 5-min observations back each hour (~12/h/day), capped at 1
             n = sum(fc["samples"]) / 24
@@ -491,6 +568,8 @@ def main():
                        "broken": statuses["Neveikia"], "unknown": statuses["Nežinoma"],
                        "overstaying": sum(1 for x in conn_out if x.get("overstay"))},
             "expected_wait_min": wait,
+            "wait_range_min": wait_range,
+            "availability": availability,
             "reliability": {
                 "score": reliability,
                 "broken_share": round(broken_share, 3),
@@ -516,7 +595,11 @@ def main():
 
     os.makedirs(args.out, exist_ok=True)
     meta = {"generated_utc": iso(datetime.now(timezone.utc)), "data_until_utc": iso(now),
-            "history_from_utc": iso(t0), "history_days": round(observed_days, 2)}
+            "history_from_utc": iso(t0), "history_days": round(observed_days, 2),
+            "availability_levels": {"green": LEVEL_GREEN, "yellow": LEVEL_YELLOW,
+                                    "labels": {"green": "Dažniausiai laisva", "yellow": "Kartais užimta",
+                                               "red": "Dažnai užimta", "unknown": "Mažai duomenų"}},
+            "interval": "8 iš 10"}
     with open(os.path.join(args.out, "stations.json"), "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "stations": out_stations}, f, ensure_ascii=False, separators=(",", ":"))
 

@@ -112,6 +112,19 @@ select { background: var(--panel); border: 1px solid var(--line-2); border-radiu
 .leaflet-tooltip.tt { background: var(--ink); color: var(--bg); border: 0; border-radius: 6px; padding: 6px 9px; font-size: 12px; box-shadow: none; }
 .leaflet-tooltip.tt::before { display: none; }
 
+.hourpick { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); width: 100%; }
+.hourpick[hidden] { display: none; }
+.hourpick input { flex: 1; max-width: 340px; margin: 0; }
+.hourpick output { font-size: 12.5px; color: var(--ink); min-width: 42px; }
+.lvl { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13px; }
+.lvl i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.strip { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; }
+.strip span { height: 18px; border-radius: 2px; }
+.strip span.now { outline: 2px solid var(--ink); outline-offset: 1px; }
+.strip-x { display: grid; grid-template-columns: repeat(4, 1fr); font: 10px var(--mono); color: var(--ink-3); }
+.waitbox { background: var(--sunk); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+.waitbox b { font-family: var(--mono); font-weight: 500; }
+
 /* side panel */
 .side { display: flex; flex-direction: column; max-height: 680px; }
 @media (max-width: 1080px) { .side { max-height: 560px; } }
@@ -245,9 +258,11 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
       <div class="ph" style="padding-bottom:12px">
         <h2 id="map-title">Žemėlapis</h2>
         <div class="seg" role="group" aria-label="Žemėlapio sluoksnis">
-          <button type="button" data-layer="now" aria-pressed="true">Dabar</button>
-          <button type="button" data-layer="hist" aria-pressed="false">Blokavimas per istoriją</button>
+          <button type="button" data-layer="avail" aria-pressed="true">Ar rasi vietą</button>
+          <button type="button" data-layer="now" aria-pressed="false">Dabar</button>
+          <button type="button" data-layer="hist" aria-pressed="false">Blokavimas</button>
         </div>
+        <label class="hourpick" id="hourpick">Valanda <input type="range" id="hour" min="0" max="23" step="1"><output id="hour-o" class="num"></output></label>
       </div>
       <div id="map" role="application" aria-label="Stotelių žemėlapis"></div>
       <div class="legend" id="legend"></div>
@@ -354,6 +369,8 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         <li><b>Užsistovėjimas</b>: įkrovimas truko ilgiau nei riba (lentelė „Kiek trunka įkrovimas“). Naktinės AC sesijos (pradžia 20:00–07:00) neskaičiuojamos.</li>
         <li><b>Blokavimas</b>: užsistovėjimo laikas, kai visoje stotelėje nebuvo nė vienos laisvos jungties, t. y. kažkas norėjo, bet negalėjo krauti.</li>
         <li><b>Neparduota energija</b>: blokavimo valandos × tipinė galia (AC iki 11 kW, DC 60 % nominalios, ne daugiau 100 kW) × stotelės tarifas. Tai viršutinė riba.</li>
+        <li><b>Ar rasi vietą</b>: kokią dalį laiko tą valandą stotelėje buvo bent viena laisva jungtis. Žalia ≥80 %, geltona 50–80 %, raudona &lt;50 %. Backtest'as: kitą parą žaliose stotelėse laisva vieta buvo 98 % laiko, geltonose 72 %, raudonose 53 %.</li>
+        <li><b>Kada atsilaisvins</b>: iš praeities tos pačios galios įkrovimų, kurie jau truko tiek pat. „8 iš 10 kartų per X min.“ yra 80-asis procentilis; backtest'e pasitvirtino 77 % atvejų.</li>
         <li><b>Tyli</b>: operatorius daugiau nei 24 val. neatsiuntė duomenų, todėl stotelės būsena greičiausiai pasenusi.</li>
         <li>API neskiria „krauna“ nuo „baigė, bet stovi prijungtas“, todėl užsistovėjimas yra įvertis pagal laiką. Su operatoriaus OCPP duomenimis jis būtų tikslus.</li>
       </ul>
@@ -379,7 +396,8 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
   const state = {
     scope: store.get("scope", "vil"),
     op: qs.get("op") || "",
-    layer: "now",
+    layer: "avail",
+    hour: null,
     tab: "now",
     selected: null,
     sort: { key: "blockDay", dir: -1 },
@@ -408,6 +426,13 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
   const silent = s => (s.reliability.data_age_min || 0) > STUCK_MIN;
   const stuck = (s, c) => c.status === "Užimta" && (silent(s) || (c.busy_min || 0) > STUCK_MIN);
   const overNow = s => s.connectors.filter(c => c.overstay && !stuck(s, c));
+  const LV = { green: ["--free", "Dažniausiai laisva"], yellow: ["--busy", "Kartais užimta"], red: ["--hot", "Dažnai užimta"] };
+  const lvColor = l => css((LV[l] || ["--off"])[0]);
+  const lvName = l => (LV[l] || [null, "Mažai duomenų"])[1];
+  const hourOf = () => state.hour ?? ltHour();
+  const lvAt = (s, h) => s.availability && s.availability.level_by_hour ? s.availability.level_by_hour[h] : null;
+  const dur = m => m < 90 ? `${fmt(m)} min.` : `${fmt(m / 60, m < 600 ? 1 : 0)} val.`;
+  const hh = h => String(h).padStart(2, "0") + ":00";
   const ago = m => m < 1 ? "ką tik" : m < 60 ? `prieš ${m} min.` : m < 1440 ? `prieš ${Math.round(m / 60)} val.` : `prieš ${Math.round(m / 1440)} d.`;
 
   // ---------- data
@@ -516,6 +541,7 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
     layer = L.layerGroup().addTo(map);
   }
   function stationColor(s) {
+    if (state.layer === "avail") return lvColor(lvAt(s, hourOf()));
     if (state.layer === "hist") return (s.history.blocking_hours || 0) > 0 ? css("--hot") : css("--off");
     if (silent(s)) return css("--off");
     if (overNow(s).length) return css("--hot");
@@ -534,7 +560,10 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
     layer.clearLayers();
     const maxB = Math.max(1, ...list.map(s => s.history.blocking_hours || 0));
     const ring = css("--panel");
-    const sorted = [...list].sort((a, b) => state.layer === "hist"
+    const rank = { red: 3, yellow: 2, green: 1 };
+    const sorted = [...list].sort((a, b) => state.layer === "avail"
+      ? (rank[lvAt(a, hourOf())] || 0) - (rank[lvAt(b, hourOf())] || 0)
+      : state.layer === "hist"
       ? (a.history.blocking_hours || 0) - (b.history.blocking_hours || 0)
       : (overNow(a).length ? 2 : a.counts.busy ? 1 : 0) - (overNow(b).length ? 2 : b.counts.busy ? 1 : 0));
     for (const s of sorted) {
@@ -544,7 +573,9 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         radius: stationRadius(s, maxB), color: s.id === state.selected ? css("--ink") : ring,
         weight: s.id === state.selected ? 2.5 : 1, fillColor: col, fillOpacity: muted ? 0.45 : (hist ? 0.75 : 0.9),
       });
-      const line = hist
+      const line = state.layer === "avail"
+        ? `${hh(hourOf())}: ${lvName(lvAt(s, hourOf()))} · dabar ${s.counts.free}/${s.counts.total} laisvos`
+        : hist
         ? `Blokavo ${fmt((s.history.blocking_hours || 0) / DAYS, 1)} val./d. · užsitęsia ${s.history.overstay_share != null ? fmt(s.history.overstay_share * 100) + " %" : "–"}`
         : `${s.counts.free}/${s.counts.total} laisvos${overNow(s).length ? ` · ${overNow(s).length} stovi per ilgai` : ""}${silent(s) ? " · duomenys pasenę" : ""}${s.counts.broken ? ` · ${s.counts.broken} neveikia` : ""}`;
       m.bindTooltip(`<b>${esc(s.name)}</b><br>${esc(shortOp(s.operator))} · ${line}`, { className: "tt", direction: "top", offset: [0, -4] });
@@ -561,11 +592,14 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         map.fitBounds([[q(lat, .02), q(lon, .02)], [q(lat, .98), q(lon, .98)]], { padding: [20, 20] });
       }
     }
-    const lg = state.layer === "hist"
+    const nRed = list.filter(s => lvAt(s, hourOf()) === "red").length;
+    const lg = state.layer === "avail"
+      ? [["--free", "dažniausiai laisva (≥8 iš 10 kartų)"], ["--busy", "kartais užimta"], ["--hot", "dažnai užimta (<5 iš 10)"], ["--off", "mažai duomenų"]]
+      : state.layer === "hist"
       ? [["--hot", "blokavo kitus (dydis = valandos)"], ["--off", "be blokavimo"]]
       : [["--free", "yra laisva jungtis"], ["--busy", "visos užimtos"], ["--hot", "kažkas stovi per ilgai"], ["--off", "neveikia / nėra duomenų"]];
     $("legend").innerHTML = lg.map(([c, t]) => `<span><i style="background:var(${c})"></i>${t}</span>`).join("") +
-      `<span class="dim" style="margin-left:auto">${state.layer === "hist" ? "per " + fmt(DAYS, 1) + " d." : "būsena " + ago(minsAgo(META.data_until_utc))}</span>`;
+      `<span class="dim" style="margin-left:auto">${state.layer === "avail" ? `${hh(hourOf())} · ${fmt(nRed)} raudonų stotelių` : state.layer === "hist" ? "per " + fmt(DAYS, 1) + " d." : "būsena " + ago(minsAgo(META.data_until_utc))}</span>`;
     $("map-title").textContent = (state.scope === "vil" ? "Vilnius" : "Lietuva") + (state.op ? " · " + shortOp(state.op) : "");
   }
 
@@ -635,6 +669,22 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
     $("side-list").hidden = false; $("list").hidden = false; $("detail").hidden = true;
     if (META) renderMap(scoped());
   }
+  function availSection(s, lag) {
+    const a = s.availability || {}, now = ltHour(), lv = lvAt(s, now);
+    const cells = (a.level_by_hour || Array(24).fill(null)).map((l, i) =>
+      `<span class="${i === now ? "now" : ""}" style="background:${lvColor(l)}" title="${hh(i)} – ${lvName(l)}"></span>`).join("");
+    let wait = "";
+    if (s.counts.free) wait = `Dabar laisvos <b>${s.counts.free}</b> iš ${s.counts.total}.`;
+    else if (s.wait_range_min && s.expected_wait_min != null) {
+      const m = Math.max(0, s.expected_wait_min - lag), hi = Math.max(0, s.wait_range_min[1] - lag);
+      wait = `Visos užimtos. Greičiausiai atsilaisvins per <b>~${dur(m)}</b>, 8 iš 10 kartų per <b>${dur(hi)}</b>`;
+    } else wait = "Visos užimtos, prognozei per mažai duomenų.";
+    return `<div class="sec"><h4>Ar rasi vietą</h4>
+      <span class="lvl"><i style="background:${lvColor(lv)}"></i>${hh(now)}: ${lvName(lv)}</span>
+      <div class="strip">${cells}</div><div class="strip-x"><span>00</span><span>06</span><span>12</span><span>18</span></div>
+      <span class="small dim">${a.free_share_overall != null ? `Per ${fmt(DAYS, 1)} d. laisva vieta buvo ${fmt(a.free_share_overall * 100)} % laiko.` : "Per mažai stebėjimo duomenų."} Spalva pagal tai, kaip dažnai tą valandą buvo bent viena laisva jungtis.</span>
+      <div class="waitbox">${wait}</div></div>`;
+  }
   function renderDetail(s) {
     const h = s.history || {}, r = s.reliability || {};
     const lag = minsAgo(META.data_until_utc);
@@ -645,7 +695,10 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         const busy = (c.busy_min || 0) + lag, over = c.overstay || busy > c.expected_charge_min;
         chip = stuck(s, c) ? `<span class="chip off">Užstrigo?</span>` : over ? `<span class="chip hot">+${fmt(busy - c.expected_charge_min)} min.</span>` : `<span class="chip busy">Užimta</span>`;
         x = `Užimta ${c.busy_min_is_lower_bound ? ">" : ""}${fmt(busy)} min. · norma ${fmt(c.expected_charge_min)} min.`;
-        if (c.prediction) x += ` · ${fmt(c.prediction.p_free_30min * 100)} % atsilaisvins per 30 min.`;
+        if (c.prediction && !stuck(s, c)) {
+          const rem = Math.max(0, c.prediction.expected_remaining_min - lag), hi = c.prediction.remaining_range_min ? Math.max(0, c.prediction.remaining_range_min[1] - lag) : null;
+          x += ` · greičiausiai per ~${dur(rem)}${hi != null ? `, 8 iš 10 kartų per ${dur(hi)}` : ""}`;
+        }
       } else chip = `<span class="chip off">${esc(c.status)}</span>`;
       return `<div class="conn"><span class="t">${plug(c.type)} · ${fmt(c.power_kw)} kW <span class="dim small">${esc(c.tariff || "")}</span></span>${chip}${x ? `<span class="x">${x}</span>` : ""}</div>`;
     }).join("");
@@ -660,7 +713,7 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
       <div class="dh">
         <button class="back" id="back" type="button">← Atgal į sąrašą</button>
         <h3>${esc(s.name)}</h3>
-        <span class="small muted">${esc(shortOp(s.operator))} · ${esc(s.address)}, ${esc(s.city)}</span>
+        <span class="small muted">${esc(shortOp(s.operator))} · ${esc(String(s.address || "").includes(s.city) ? s.address : [s.address, s.city].filter(Boolean).join(", "))}</span>
       </div>
       <div class="stats">
         <div><b>${h.sessions ? fmt(h.sessions_per_day, 1) : "–"}</b><span>įkrovimų per d.</span></div>
@@ -670,6 +723,7 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
         <div><b>${lost ? eur(lost) : "0 €"}</b><span>neparduota per d.</span></div>
         <div><b>${fmt(r.score)}</b><span>patikimumas /100</span></div>
       </div>
+      ${availSection(s, lag)}
       <div class="sec"><h4>Jungtys dabar</h4>${conns}</div>
       <div class="sec"><h4>Užimtumas pagal valandą</h4><svg class="spark" viewBox="0 0 300 58" preserveAspectRatio="none">${bars}</svg></div>
       <div class="sec"><span class="small dim">Operatorius paskutinį kartą atsiuntė duomenis ${r.data_age_min != null ? ago(r.data_age_min) : "–"}${r.never_used ? " · per visą stebėjimą niekas nekrovė" : ""}.</span></div>`;
@@ -786,6 +840,8 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
   function render(first) {
     document.querySelectorAll("[data-scope]").forEach(b => b.setAttribute("aria-pressed", b.dataset.scope === state.scope));
     document.querySelectorAll("[data-layer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layer === state.layer));
+    $("hourpick").hidden = state.layer !== "avail";
+    $("hour").value = hourOf(); $("hour-o").textContent = hh(hourOf()) + (state.hour == null ? " (dabar)" : "");
     const list = scoped();
     if (first) { initMap(); renderClasses(); }
     renderKpis(list);
@@ -803,6 +859,11 @@ details.how ul { margin: 0; padding: 0 16px 16px 34px; display: grid; gap: 6px; 
     state.scope = b.dataset.scope; store.set("scope", state.scope); closeDetail(); render();
   });
   document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => { state.layer = b.dataset.layer; render(); });
+  $("hour").addEventListener("input", e => {
+    state.hour = +e.target.value === ltHour() ? null : +e.target.value;
+    $("hour-o").textContent = hh(hourOf()) + (state.hour == null ? " (dabar)" : "");
+    renderMap(scoped());
+  });
   document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderList(scoped()); });
   $("op").onchange = e => { state.op = e.target.value; closeDetail(); render(); };
   $("list").onclick = e => { const it = e.target.closest(".item"); if (it) select(it.dataset.id); };
