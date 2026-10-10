@@ -8,107 +8,107 @@ Skaičiai iš duomenų 2026-10-10. Prieš įrašant patikrinkite: `python3 expor
 Aš Tautvydas…
 
 **0:02 – Tadas:**
-…o aš Tadas. Mes kuriame EVFlow.
+…o aš Tadas. Kuriame EVFlow – programėlę, kuri elektromobilių vairuotojams parodo, kada užimta įkrovimo stotelė atsilaisvins.
 
-**0:05 – Tautvydas:**
-Nuo spalio šeštosios kas porą minučių fiksuojame kiekvienos viešos įkrovimo stotelės Lietuvoje būseną.
+**0:10 – Tautvydas:**
+Nuo spalio šeštosios kas porą minučių renkame kiekvienos viešos įkrovimo stotelės Lietuvoje būseną iš atvirų Via Lietuva duomenų.
 
-**0:12 – Tautvydas:**
-Du tūkstančiai stotelių. Šeši tūkstančiai keturi šimtai jungčių. Visi dvidešimt du operatoriai. Viskas iš atvirų Via Lietuva duomenų – jau daugiau nei milijonas įrašų.
+**0:16 – Tautvydas:**
+Tai du tūkstančiai stotelių, šeši tūkstančiai keturi šimtai jungčių ir visi dvidešimt du operatoriai. Jau turime daugiau nei milijoną įrašų.
 
-**0:22 – Tadas:**
-Šiandien beveik kiekviena įkrovimo programėlė atsako į vieną klausimą: kur yra stotelė?
+**0:24 – Tadas:**
+Kokia problema? Šiandien įkrovimo programėlės parodo tik tai, ar stotelė dabar laisva, ar užimta.
 
-**0:28 – Tadas:**
-Tai paklausėme savęs: ar to užtenka?
+**0:30 – Tadas:**
+Bet kol nuvažiuoji, situacija pasikeičia. Ir nežinai, ar verta laukti, ar važiuoti kitur.
 
-**0:32 – Tadas:**
-Atsakymas aiškus – ne. Bet įdomesnis klausimas: kodėl ne?
+**0:36 – Pauzė, muzikos akcentas.**
 
-**0:38 – Pauzė, muzikos akcentas.**
-
-**0:40 – Tautvydas:**
-Žemėlapis pasako, kur. Būsena pasako, kas vyksta dabar. Bet niekas nepasako, kas bus po penkiolikos minučių, kai ten nuvažiuosi.
+**0:38 – Tautvydas:**
+O atvažiavęs dažnai randi vieną iš trijų dalykų. Automobilį, kuris jau pasikrovė, bet niekas jo nepatraukė. Pilną stotelę. Arba neveikiantį kroviklį.
 
 **0:50 – Tautvydas:**
-O nuvažiavęs dažnai randi vieną iš trijų dalykų. Automobilį, kuris jau seniai pasikrovė, bet vis dar stovi. Pilną stotelę. Arba kroviklį, kuris neveikia ar visai nebesiunčia duomenų.
+Mes tai suskaičiavome. Vilniuje beveik kas trečias įkrovimas trunka ilgiau, nei automobiliui reikia pasikrauti.
 
-**1:02 – Tautvydas:**
-Suskaičiavome: Vilniuje beveik kas trečias įkrovimas trunka ilgiau, nei automobiliui reikia. Dėl to kasdien susidaro apie trys šimtai devyniasdešimt valandų, kai visa stotelė užimta, o kitas vairuotojas laukia. Operatoriams tai iki aštuonių šimtų tūkstančių eurų per metus neparduotos energijos.
+**0:57 – Tautvydas:**
+Dėl to kasdien susidaro apie trys šimtai devyniasdešimt valandų, kai visos stotelės vietos užimtos ir kitas vairuotojas negali pasikrauti.
 
-**1:16 – Tadas:**
-Todėl EVFlow – ne dar vienas žemėlapis.
+**1:05 – Tautvydas:**
+Operatoriai dėl to per metus neparduoda elektros už iki aštuonių šimtų tūkstančių eurų. Vien Vilniuje.
 
-**1:20 – Tadas:**
-Tai naujas duomenų sluoksnis, prognozių modelis ir būdas paskatinti vairuotojus elgtis kitaip.
+**1:12 – Tadas:**
+Ką darome mes? Trys dalykai.
+
+**1:15 – Tadas:**
+Pirma. Prie kiekvienos užimtos stotelės rodome, per kiek laiko ji greičiausiai atsilaisvins. Ir rekomenduojame, kur važiuoti, kad pradėtum krauti greičiausiai: skaičiuojame kelionės laiką ir laukimą kartu.
 
 **1:28 – Tadas:**
-Vienas atviras duomenų srautas. Kiekviena stotelė, kiekvienas operatorius, atnaujinama kas porą minučių. Ir kiekvienai stotelei – prognozė, kada ji atsilaisvins.
+Prieš ilgesnę kelionę, pavyzdžiui, į Klaipėdą, programėlė pasiūlo, kiek kartų sustoti ir kuriose stotelėse.
 
-**1:36 – Tadas:**
-Skirtumą geriausiai matyti palyginus.
+**1:35 – Tadas:**
+Antra. Kai automobilis turėtų būti pasikrovęs, programėlė primena jį patraukti. Patraukei laiku – gauni taškų, kuriuos gali iškeisti į partnerių prizus ar operatorių krovimo nuolaidas. O jei kas nors užstatė vietą, apie tai gali pranešti su nuotrauka.
 
-**1:40 – Tadas:**
-Tarkim, norite pasikrauti prie VILNIUS TECH. Operatoriaus programėlė parašys: užimta. EVFlow parodys visas netoliese esančias jungtis, per kiek laiko kiekviena greičiausiai atsilaisvins, ir surikiuos jas pagal tai, kur pradėsite krauti anksčiausiai: kelionės laikas plius laukimas.
+**1:48 – Tadas:**
+Trečia. Operatoriams ir miestui – valdymo skydelis: kur stotelės užblokuotos, kurios neveikia ir kiek pinigų dėl to prarandama.
 
-**1:52 – Tadas:**
-O jei važiuojate toliau, pavyzdžiui, į Klaipėdą, programėlė pasiūlo, kiek kartų verta sustoti ir kuriose stotelėse.
+**1:56 – Tautvydas:**
+Nuo kitų programėlių skiriamės trimis dalykais. Rodome ne tik ar stotelė užimta, bet ir kada ji atsilaisvins. Vienoje programėlėje yra visi operatoriai. Ir mes ne tik informuojame, bet ir skatiname vairuotojus laiku atlaisvinti vietą.
 
-**1:58 – Tautvydas:**
-Ir mūsų skaičiai sąžiningi. Modelį mokėme su praeities duomenimis, o tikrinome su kitos dienos – beveik keturiasdešimt tūkstančių prognozių. Kai sakome, kad devyniais atvejais iš dešimties vieta atsilaisvins per nurodytą laiką, taip ir būna: devyniais iš dešimties.
+**2:08 – Tautvydas:**
+Ar prognozės tikslios? Patikrinome. Modelį apmokėme su ankstesnių dienų duomenimis ir palyginome su tuo, kas iš tikrųjų nutiko kitą dieną. Beveik keturiasdešimt tūkstančių prognozių.
 
-**2:12 – Tautvydas:**
-Sukalibruota, veikia gyvai ir sukurta vien iš atvirų duomenų.
+**2:18 – Tautvydas:**
+Kai programėlė sako, kad vieta greičiausiai atsilaisvins per penkiolika minučių, o vėliausiai – per keturiasdešimt, devyniais atvejais iš dešimties ji iš tikrųjų atsilaisvina per tas keturiasdešimt minučių.
 
-**2:18 – Tadas:**
-Vairuotojams programėlė nemokama. Moka operatoriai ir miestas.
+**2:28 – Tadas:**
+Kas moka? Vairuotojams programėlė nemokama.
 
-**2:24 – Tadas:**
-Operatoriams, pavyzdžiui, Ignitis, siūlome valdymo skydelį. Jame matyti, kur jų stotelės blokuojamos, kurios neveikia ar tyli ir kiek energijos jie praranda. Kaina priklauso nuo jungčių skaičiaus.
-
-**2:38 – Tadas:**
-Vien Vilniuje operatoriai dėl užblokuotų stotelių netenka iki dviejų tūkstančių eurų per dieną.
+**2:31 – Tadas:**
+Moka operatoriai – tokie kaip Ignitis, Eldrive ar Enefit. Jie perka valdymo skydelį, kuris parodo, kur jie praranda pardavimus ir kurias stoteles reikia taisyti. Kaina priklauso nuo jungčių skaičiaus. Mažiau užblokuotų stotelių – daugiau parduotos elektros.
 
 **2:44 – Tadas:**
-Miestas mato, kur vakarais trūksta stotelių, ir gali pasitikrinti taisykles prieš jas įvesdamas. O pačią programėlę operatorius gali turėti su savo ženklu: jų prekės ženklas, mūsų variklis.
+Miestas gauna duomenis, kur trūksta stotelių, ir gali pasitikrinti, ką pakeistų nauja taisyklė, dar prieš ją įvesdamas.
 
-**2:54 – Abu:**
-Kuriame tėkmę. Ne eiles.
+**2:51 – Tadas:**
+Operatoriai taip pat gali naudoti mūsų programėlę su savo logotipu.
+
+**2:55 – Abu:**
+Mažiau laukimo. Daugiau įkrovimų.
 
 ## 2 dalis. Demonstracija (3:00–5:00)
 
 **3:00 – Tadas:**
-Tai EVFlow gyvai. Kiekvienas taškas – tikra stotelė, atnaujinama kas porą minučių. Žalia – laisva, raudona – užimta, oranžinė – kažkas stovi per ilgai. Neveikiančias paslepiame, kad netrukdytų.
+Tai veikianti EVFlow programėlė su šios dienos duomenimis. Kiekvienas taškas yra tikra stotelė. Žalia – laisva, raudona – užimta, oranžinė – kažkas stovi ilgiau, nei reikia. Neveikiančių stotelių nerodome.
 
 **3:12 – Tadas:**
-Esu prie VILNIUS TECH. EVFlow siūlo ne artimiausią stotelę, o tą, kurioje pradėsiu krauti greičiausiai.
+Esu prie VILNIUS TECH. Programėlė rekomenduoja ne artimiausią stotelę, o tą, kurioje pradėsiu krauti greičiausiai.
 
 **3:20 – Tadas:**
-Ši stotelė dabar pilna. Bet greičiausiai atsilaisvins per kokias penkiolika minučių, o devyniais atvejais iš dešimties – per keturiasdešimt. Ir matau, kad šiuo metu čia paprastai būna užimta.
+Štai ši stotelė dabar pilna. Programėlė rodo: greičiausiai atsilaisvins po penkiolikos minučių, vėliausiai – po keturiasdešimties. Ir kad šiuo paros metu čia dažniausiai būna užimta.
 
 **3:34 – Tadas:**
-Todėl renkuosi kitą: laisva dabar ir paprastai laisva šiuo paros metu. Važiuoju su mūsų navigacija arba perduodu maršrutą į Waze ar Google Maps.
+Todėl renkuosi kitą stotelę, kuri laisva dabar. Važiuoju su programėlės navigacija arba atsidarau maršrutą Waze ar Google Maps.
 
 **3:42 – Tadas:**
-O jei planuoju ilgesnę kelionę – pasirenku kryptį ir kada išvažiuoju, o programėlė parodo, kur sustoti pasikrauti.
+Jei važiuočiau toliau, pasirinkčiau kryptį ir išvykimo laiką, o programėlė parodytų, kur sustoti pasikrauti.
 
 **3:50 – Tautvydas:**
-Atvažiavęs nuskenuoju QR kodą, ir programėlė žino, prie kurios jungties kraunuosi. Kai turėčiau būti pasikrovęs, gaunu priminimą. Patraukiu laiku – gaunu taškų. Tai tikriname su gyvais Via Lietuva duomenimis, tad apgauti nepavyks.
+Atvažiavęs paspaudžiu „Kraunu čia“. Kai turėčiau būti pasikrovęs, gaunu priminimą. Patraukiu automobilį laiku ir gaunu taškų. Ar tikrai patraukiau, tikriname pagal Via Lietuva duomenis, todėl apgauti nepavyks.
 
 **4:02 – Tautvydas:**
-Taškus galima iškeisti į partnerių prizus ar, pavyzdžiui, Ignitis krovimo nuolaidas.
+Taškus galima iškeisti į partnerių prizus ar operatorių krovimo nuolaidas.
 
 **4:08 – Tautvydas:**
-Kažkas užstatė vietą? Nufotografuoji, mūsų duomenys ir kiti vairuotojai patvirtina pažeidimą, o pranešimas keliauja operatoriui.
+Jei kas nors užstatė vietą, nufotografuoju. Pažeidimą patvirtina mūsų duomenys ir kiti vairuotojai, o pranešimas nukeliauja operatoriui.
 
 **4:16 – Tautvydas:**
-O dabar dalis, kurią parduodame. Operatorius mato, kur jo stotelės blokuojamos, kurios neveikia ar tyli ir kiek energijos jis praranda.
+O tai operatoriaus valdymo skydelis – tai, ką parduodame. Operatorius mato, kur jo stotelės užblokuotos, kurios neveikia ir kiek elektros jis neparduoda.
 
 **4:24 – Tautvydas:**
-Ir gali išbandyti taisyklę dar prieš ją įvesdamas: penkios nemokamos minutės, paskui penkiasdešimt centų už minutę – ir iškart matyti, kiek blokavimo tai panaikintų.
+Čia jis gali išbandyti taisyklę, pavyzdžiui: penkios nemokamos minutės po įkrovimo, paskui penkiasdešimt centų už minutę. Ir iškart mato, kiek valandų blokavimo tai panaikintų.
 
 **4:34 – Tadas:**
-Ta pati programėlė su operatoriaus spalvomis ir logotipu – tai mūsų white-label sprendimas. O vairuotojų prizus finansuoja partneriai.
+Tą pačią programėlę operatorius gali turėti su savo spalvomis ir logotipu. O vairuotojų prizus finansuoja partneriai.
 
 **4:42 – Muzika, EVFlow logotipas.**
 
