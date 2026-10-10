@@ -120,12 +120,29 @@ Funkcija `recommend(from userLocation, plugType: String?) -> [Recommendation]`:
 
 ## 7. „Kraunu čia“, priminimas ir taškai (be backend'o)
 
-- Jungties ekrane mygtukas **„Kraunu čia“** išsaugo `ChargingSession(connectorId, stationId, startedAt, expectedChargeMin)` per SwiftData.
-- Iškart suplanuok lokalią notifikaciją (`UNUserNotificationCenter`) po `expectedChargeMin` minučių: „Turbūt jau pasikrovei. Patrauk automobilį per 10 min. ir gausi +20 taškų.“ Leidimą notifikacijoms prašyk pirmą kartą paspaudus mygtuką.
-- Kiekvieno `refresh()` metu, jei yra aktyvi sesija ir feed'e ta jungtis jau `Laisva`, sesija baigta. `endedAt` = `connector.statusSince`.
-  - Jei `endedAt − startedAt ≤ expectedChargeMin + 10`: **+20 taškų**, reputacija +1.
-  - Jei vėluota: −1 reputacija už kiekvienas pradėtas 15 min. vėlavimo, taškų neduodama.
-- Rankinis mygtukas „Baigiau ir patraukiau“ veikia taip pat, bet laiką tikrina pagal feed'ą, kai jis atsinaujina.
+**Kada leisti „Kraunu čia“** (gryna funkcija `canStartCharging(connector, lag, userLocation) -> Result`, atskirai testuojama):
+- `Laisva` → leisti.
+- `Užimta` ir `busyNow ≤ 10` → leisti. Tai greičiausiai pats vartotojas ką tik prisijungė: feed'as vėluoja ~3–6 min.
+- `Užimta` ir `busyNow > 10` → **neleisti**. Rodyk: „Ši jungtis užimta jau {busyNow} min. Pasirink laisvą jungtį arba palauk.“ Šalia pasiūlyk tos stotelės laisvas jungtis.
+- `Neveikia` → neleisti („Jungtis neveikia“). `Nežinoma` → leisti su įspėjimu.
+- Vartotojas toliau nei 300 m nuo stotelės (`CLLocation`) → neleisti („Būk prie stotelės“). Jei vietos leidimo nėra, šį tikrinimą praleisk.
+- Kiekvieno `refresh()` metu tikrink pradėtą sesiją: jei praėjus 10 min. nuo `startedAt` jungtis vis dar `Laisva`, sesija **nepatvirtinta**. Atšauk ją be baudos ir rodyk „Nematome, kad krautum. Ar pasirinkai teisingą jungtį?“. Taškai skiriami tik patvirtintai sesijai.
+
+**Kiek laiko krausis** (asmeninis laikas vietoj vieno visiems):
+- Prieš paspaudžiant „Kraunu čia“, vieną kartą profilyje paprašyk pasirinkti automobilį (statinis sąrašas app'e: `name`, `battery_kwh`, `max_ac_kw`, `max_dc_kw`, pvz. Tesla Model 3 LR 75/11/250, VW ID.3 58/11/120, Nissan Leaf 40/6.6/50). Kiekvienai sesijai leisk nurodyti „Dabar %“ ir „Iki %“ (numatyta 20 → 80).
+- `personalChargeMin = (iki − dabar) / 100 × battery_kwh / galia × 60 + 15`, kur AC `galia = min(connector.powerKw, max_ac_kw)`, o DC `galia = min(connector.powerKw, max_dc_kw) × 0.6` (vidutinė galia krentant kreivei). Virš 80 % DC kraunasi daug lėčiau, todėl tam daliai skaičiuok `× 0.3`.
+- Automobilio nepasirinkus, naudok `expectedChargeMin` iš feed'o (konservatyvus: lėtai kraunantis auto, 36 kWh).
+- Priminimą planuok po `personalChargeMin`. Ekrane rodyk, iš ko jis apskaičiuotas („VW ID.3, 20 → 80 %, ~42 min.“).
+
+**Priminimas ir „dar kraunasi“:**
+- Priminimas: „Turbūt jau pasikrovei. Patrauk automobilį per 10 min. ir gausi +20 taškų.“ Leidimą notifikacijoms prašyk pirmą kartą paspaudus mygtuką.
+- Notifikacijoje ir ekrane yra mygtukas **„Dar kraunasi +15 min.“**. Jis pratęsia terminą be baudos, bet ne daugiau kaip 2 kartus per sesiją. Mes nežinome tikslios automobilio įkrovos, todėl vartotojui reikia leisti pataisyti mūsų įvertį.
+
+**Pabaiga ir taškai:** sesijos pabaiga yra tik tada, kai feed'e jungtis tampa `Laisva` (kištukas ištrauktas). `endedAt` = `connector.statusSince`. Vien vartotojo mygtuko neužtenka.
+- Jei `endedAt ≤ terminas + 10 min.` (terminas = `startedAt + personalChargeMin + pratęsimai`): **+20 taškų**, reputacija +1.
+- Jei vėluota: −1 reputacija už kiekvienas pradėtas 15 min. vėlavimo, taškų neduodama.
+- Mygtukas **„Baigiau ir patraukiau“** taškų iškart neduoda. Jis pažymi sesiją kaip „laukia patvirtinimo“ ir rodo „Patikrinsime per kelias min.“. Jei per 10 min. jungtis feed'e netampa `Laisva`, rodyk „Stotelė vis dar rodo, kad esi prijungtas. Ar ištraukei kabelį?“, o vėlavimas skaičiuojamas toliau.
+- Ribojimas, kurį parodyk ir „Kaip skaičiuojame“ ekrane: jei kabelis ištrauktas, bet automobilis liko stovėti vietoje, stotelė rodo `Laisva` ir mes to nematome. Tokius atvejus sprendžia kitų vartotojų pranešimai su nuotrauka.
 - Profilio ekranas rodo taškus, reputaciją (0–100, pradžioje 80) ir prizų sąrašą (statinis JSON app'e, tai demo maketas).
 - Taškų ir reputacijos taisyklės turi būti viename faile `Rewards.swift` kaip konstantos, kad būtų lengva keisti.
 
@@ -135,7 +152,9 @@ Parašyk Swift Testing testus grynoms funkcijoms:
 - `remainingNow`: kai `lag` didesnis už `expectedRemainingMin`, rodo „bet kurią minutę“;
 - `overstayNow` riba;
 - `arrivalWait` visos trys šakos;
-- taškų skaičiavimas laiku ir vėluojant;
+- taškų skaičiavimas laiku, vėluojant ir su „Dar kraunasi +15 min.“ pratęsimais;
+- `canStartCharging`: `Laisva`, `Užimta` 5 min. (leisti), `Užimta` 40 min. (neleisti), `Neveikia`, per toli;
+- `personalChargeMin` AC ir DC jungčiai su pasirinktu automobiliu ir be jo;
 - `Feed` dekodavimas iš mažo pavyzdinio JSON su trūkstamais optional laukais.
 
 ## 9. Ko nedaryti
