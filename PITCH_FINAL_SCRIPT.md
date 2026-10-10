@@ -27,12 +27,13 @@ Skaidrės: `~/Desktop/EVFlow_pitch/`
 | 8 | Kas naudoja ir kas moka | 2:08–2:27 | Tadas |
 | 9 | Nauda Vilniui | 2:27–2:45 | Tautvydas |
 | 10 | Kas toliau | 2:45–3:00 | Tadas |
-| 11 | Demo | 3:00–3:08 | Tadas |
-| 12 | Programėlė vairuotojui (video) | 3:08–4:05 | Tadas |
-| 13 | Kelionės planavimas (video) | 4:05–4:25 | Tadas |
-| 14 | Skydelis operatoriams ir miestui (video) | 4:25–4:58 | Tautvydas |
-| 15 | EVFlow. Atvažiuok, kai bus laisva. | 4:58–5:00 → klausimai | abu |
-| 16–18 | Priedai | tik jei klausia | – |
+| 11 | Demo | 3:00–3:05 | Tadas |
+| 12 | Programėlė vairuotojui (video 40 s) | 3:05–3:45 | Tadas |
+| 13 | Pranešimas apie užstatytą vietą (video 21 s) | 3:45–4:05 | Tautvydas |
+| 14 | Kelionės planavimas (video 21 s) | 4:05–4:25 | Tadas |
+| 15 | Skydelis operatoriams ir miestui (video 27 s) | 4:25–4:58 | Tautvydas |
+| 16 | EVFlow. Atvažiuok, kai bus laisva. | 4:58–5:00 → klausimai | abu |
+| 17–19 | Priedai | tik jei klausia | – |
 
 **Atmintinė, kas po ko (jei pasimesite):**
 
@@ -88,29 +89,32 @@ Kitos programėlės rodo tik „laisva arba užimta“ savo tinkle. Mes rodome l
 
 **Kaip darome.** Telefoną su programėle **paduodame komisijai**, kad pabandytų patys. Ekrane tuo metu **paleidžiame įrašą**, kad matytų visa salė ir kad demo veiktų net su lėtu internetu. Kalbame pagal įrašą.
 
-**Prieš finalą:**
-- Įdėkite 2 programėlės ekrano įrašus į 12 ir 13 skaidrę (dabar ten rėmeliai „ĮDĖKITE VIDEO“).
-- Video skaidrėse paleidžiamas paspaudus. Keynote galite nustatyti, kad prasidėtų automatiškai: Movie → Start automatically.
-- Telefone iš anksto atidarykite programėlę, be prisijungimų, prie VILNIUS TECH.
+**Video skaidrėse:**
+- Prasideda pačios, kai atsiverčia skaidrė, ir kartojasi ratu. Garsas išjungtas.
+- Skaidrę perjungiate patys, kai baigiate kalbėti.
+- Telefone iš anksto atidarykite programėlę: be prisijungimų, įkrauta, išjungti pranešimai.
 
-### 11. Demo (3:00–3:08)
+### 11. Demo (3:00–3:05)
 **Tadas:** Telefoną duodame jums – galite bandyti patys. Ekrane rodome tą patį.
 
-### 12. Programėlė vairuotojui (3:08–4:05), video
+### 12. Programėlė vairuotojui (3:05–3:45), video
 **Tadas:**
-1. Tai veikianti programėlė su šios dienos duomenimis. Žalia – laisva, raudona – užimta.
-2. Esu prie VILNIUS TECH. Artimiausia stotelė pilna, bet greičiausiai atsilaisvins po maždaug penkiolikos minučių. Grafikas rodo, kad šiuo metu čia dažniausiai užimta.
-3. Man reikia greitai. Įsijungiu filtrus ir matau laisvą stotelę netoliese.
-4. Atvažiavęs spaudžiu „Kraunu čia“. Gausiu priminimą, o patraukęs laiku – taškų.
-5. Jei kas užstatė vietą, nufotografuoju, ir pranešimas keliauja operatoriui.
+1. Tai veikianti programėlė su šios dienos duomenimis.
+2. Man reikia greitai. Spaudžiu „Greitas krovimas“, ir programėlė siūlo artimiausią tinkamą stotelę.
+3. Kortelėje matau, kiek jungčių laisva, kainą ir kad šiuo metu čia dažniausiai laisva. Jei būtų užimta, matyčiau, per kiek laiko atsilaisvins.
+4. Spaudžiu „Važiuojam“. Galiu važiuoti su EVFlow, Google Maps, Apple Maps ar Waze.
+5. Atvažiavęs spaudžiu „Krauti čia“. Programėlė rodo, kiek liko krauti, ir primins patraukti. Patraukiau laiku – plius dvidešimt taškų.
 
-### 13. Kelionės planavimas (4:05–4:25), video
-**Tadas:** Prieš ilgesnę kelionę įvedu, kur važiuoju. Programėlė pasiūlo, kur sustoti pasikrauti, ir renkasi stoteles, kurios tuo metu dažniausiai laisvos.
+### 13. Pranešimas apie užstatytą vietą (3:45–4:05), video
+**Tautvydas:** Jei kas nors užstatė vietą, spaudžiu „Pranešti“, pasirenku, kas negerai, ir nufotografuoju. Pranešimą patvirtiname duomenimis ir šalia esančiais vairuotojais, tada jis keliauja operatoriui.
 
-### 14. Skydelis operatoriams ir miestui (4:25–4:58), video
+### 14. Kelionės planavimas (4:05–4:25), video
+**Tadas:** Prieš ilgesnę kelionę, pavyzdžiui, į Klaipėdą, pasirenku, kiek kartų ir kada noriu sustoti. Programėlė parenka stotelę, kuri tuo metu dažniausiai laisva, ir sudaro maršrutą.
+
+### 15. Skydelis operatoriams ir miestui (4:25–4:58), video
 **Tautvydas:** Tai operatoriaus ir miesto vaizdas: kas šiuo metu stovi per ilgai, kas neveikia. O čia taisyklių simuliatorius. Pasirenki, pavyzdžiui, penkiolika nemokamų minučių po įkrovimo, ir iškart matai, kiek valandų blokavimo tai panaikintų ir kiek papildomų įkrovimų atsirastų.
 
-### 15. Pabaiga (4:58–5:00)
+### 16. Pabaiga (4:58–5:00)
 **Abu:** EVFlow. Atvažiuok, kai bus laisva. Ačiū – laukiame klausimų.
 *(Šią skaidrę paliekame per klausimus.)*
 
@@ -126,10 +130,10 @@ Pirma trumpas atsakymas, tada paaiškinimas. Jei nežinome: „Dar nežinome, be
 
 Komisijoje bus Cognizant (technologijos), Vilniaus savivaldybė (miestas) ir Ignitis (verslas, operatorius).
 
-**Kuo skiriatės nuo esamų programėlių?** *(16 priedas)*
+**Kuo skiriatės nuo esamų programėlių?** *(17 priedas)*
 Jos rodo tik „laisva / užimta“ savo tinkle. Mes rodome, kada stotelė atsilaisvins ir kaip dažnai ji pilna, visi 22 operatoriai yra vienoje vietoje, ir skatiname laiku atlaisvinti vietą.
 
-**Kaip žinote, kad automobilis jau nebekrauna?** *(17 priedas)*
+**Kaip žinote, kad automobilis jau nebekrauna?** *(18 priedas)*
 Viešas API to neskiria, todėl vertiname pagal laiką. Per ilgas įkrovimas yra toks, kuris trunka ilgiau, nei net lėtai kraunantis automobilis pasikrautų nuo 20 iki 80 % toje jungtyje, plius 15 min. Su operatoriaus duomenimis tai būtų tikslu. Tai mūsų piloto tikslas.
 
 **Iš kur duomenys ilgalaikėje perspektyvoje?**
@@ -163,7 +167,7 @@ Tai viršutinė riba visiems operatoriams kartu, Vilniuje. Skaičiuojame taip: b
 **Kokia nauda miestui?**
 Daugiau įkrovimų be naujų stotelių: 15 min. taisyklė atlaisvintų ~210 val. per dieną. Be to, matyti, kur vakarais trūksta stotelių, ir taisykles galima išbandyti prieš jas įvedant.
 
-**O jei kabelis ištrauktas, bet automobilis stovi?** *(18 priedas)*
+**O jei kabelis ištrauktas, bet automobilis stovi?** *(19 priedas)*
 Tada stotelė rodo „laisva“. Tokius atvejus pagauna vairuotojų pranešimai su nuotrauka.
 
 **Asmens duomenys nuotraukose?**
@@ -179,8 +183,7 @@ Visa Lietuva jau yra duomenyse. Tas pats metodas tinka bet kuriai šaliai, kur o
 
 ## Prieš finalą (checklist)
 
-- [ ] Įdėti programėlės ir kelionės planavimo ekrano įrašus į 12 ir 13 skaidres.
-- [ ] Iš naujo eksportuoti PDF (Keynote → File → Export To → PDF) ir įkelti į Google Drive iki 13:00. Patikrinti nuorodą inkognito lange.
+- [ ] Įkelti PDF į Google Drive iki 13:00. Patikrinti nuorodą inkognito lange.
 - [ ] Prezentacijos kompiuteryje turi būti įdiegti DM Sans ir Montserrat šriftai, kitaip Keynote juos pakeis.
 - [ ] Telefone atidaryta programėlė, įkrauta baterija, išjungti pranešimai.
 - [ ] 3 repeticijos su laikmačiu: pristatymas ≤ 3:00, demo ≤ 2:00.
