@@ -135,7 +135,7 @@ Daugiau įkrovimų be naujų stotelių: 15 min. taisyklė ≈ 216 val. per dien�
 Stotelė tada rodo „laisva“ – tai pagauna vairuotojų pranešimai su nuotrauka. (Priedo skaidrė 18.)
 
 **Asmens duomenys nuotraukose?**
-Pranešimas keliauja tik operatoriui, kitiems vairuotojams numerio nerodome; prieš paleidimą pridėsime automatinį numerio paslėpimą.
+Kol kas tai prototipas. Prieš paleidimą pridėsime automatinį numerių paslėpimą, o pilna nuotrauka keliaus tik operatoriui.
 
 **Plėtra?**
 Visa Lietuva jau duomenyse; tas pats metodas tinka bet kuriai šaliai, kur operatoriai teikia OCPI duomenis.
