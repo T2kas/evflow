@@ -56,10 +56,10 @@ Trečia – operatoriams ir miestui. Valdymo skydelis parodo, kur stotelės uži
 Nuo kitų programėlių skiriamės trimis dalykais. Rodome ne tik ar stotelė užimta, bet ir kada ji atsilaisvins, ir kaip dažnai ji būna užimta. Vienoje programėlėje yra visi operatoriai. Ir mes ne tik informuojame, bet ir skatiname laiku atlaisvinti vietą: taškai, nuolaidos, įvertinimas ir pranešimai.
 
 **2:10 – Tautvydas:**
-Ar prognozės tikslios? Patikrinome. Modelį apmokėme su ankstesnių dienų duomenimis ir palyginome su tuo, kas iš tikrųjų nutiko kitą dieną. Beveik keturiasdešimt tūkstančių prognozių.
+Ar galima tuo pasitikėti? Patikrinome. EVFlow algoritmą apmokėme su ankstesnių dienų duomenimis, o jo prognozes palyginome su tuo, kas realiai nutiko kitą dieną. Beveik keturiasdešimt tūkstančių prognozių.
 
-**2:20 – Tautvydas:**
-Kai programėlė sako, kad vieta greičiausiai atsilaisvins per penkiolika minučių, o vėliausiai – per keturiasdešimt, devyniais atvejais iš dešimties ji iš tikrųjų atsilaisvina per tas keturiasdešimt minučių.
+**2:18 – Tautvydas:** *(ekrane: `pitch_accuracy.png` ir `backtest.png`)*
+Kai EVFlow sakė, kad stotelė tuo metu dažniausiai laisva, ji iš tikrųjų buvo laisva devyniasdešimt aštuonis procentus laiko. Kai sakė, kad yra septyniasdešimt procentų tikimybė vietai atsilaisvinti per pusvalandį, realybėje atsilaisvino lygiai septyniasdešimt procentų. Mūsų prognozės sutampa su realybe.
 
 **2:28 – Tadas:**
 Kas moka? Vairuotojams programėlė nemokama.
@@ -82,13 +82,16 @@ Mažiau laukimo. Daugiau įkrovimų.
 Tai veikianti EVFlow programėlė su šios dienos duomenimis. Kiekvienas taškas yra tikra stotelė. Žalia – laisva, raudona – užimta, oranžinė – kažkas stovi ilgiau, nei reikia. Neveikiančių stotelių nerodome.
 
 **3:12 – Tadas:**
-Esu prie VILNIUS TECH. Man reikia greitai pasikrauti, tai įsijungiu filtrą „greitas krovimas“ ir matau tik tinkamas stoteles.
+Esu prie VILNIUS TECH ir man reikia pasikrauti kuo greičiau ir pigiau.
 
-**3:20 – Tadas:**
-Štai ši stotelė dabar pilna. Programėlė rodo: greičiausiai atsilaisvins po penkiolikos minučių, vėliausiai – po keturiasdešimties. O užimtumo grafikas rodo, kad šiuo paros metu čia dažniausiai būna užimta.
+**3:16 – Tadas:**
+Paspaudžiu artimiausią stotelę. Ji dabar pilna, bet matau, kad greičiausiai atsilaisvins po penkiolikos minučių.
+
+**3:24 – Tadas:**
+O užimtumo grafikas parodo, kada čia būna laisva: ryte dažniausiai laisva, o vakare beveik visada pilna. Tai jei čia atvažiuočiau vakare, žinočiau, kad geriau rinktis kitą stotelę.
 
 **3:34 – Tadas:**
-Netoliese yra stotelė, kuri laisva dabar, tai renkuosi ją. Važiuoju su programėlės navigacija arba atsidarau maršrutą Waze ar Google Maps.
+Bet man reikia dabar. Įsijungiu filtrus „greitas krovimas“ ir „pigiausias“ – ir iškart matau laisvą stotelę netoliese. Spaudžiu ją ir važiuoju su programėlės navigacija arba per Waze ar Google Maps.
 
 **3:42 – Tadas:**
 Jei važiuočiau toliau, pasirinkčiau kryptį ir išvykimo laiką, o programėlė parodytų, kur sustoti pasikrauti.
