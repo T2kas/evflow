@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- "Važiuojam": canOpenURL needs these to detect Google Maps / Waze -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+		<string>waze</string>
+	</array>
+	<!-- arrival geofence works only when the user grants "Always" in Settings -->
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Pranešime, kai atvyksi prie pasirinktos stotelės</string>
+</dict>
+</plist>

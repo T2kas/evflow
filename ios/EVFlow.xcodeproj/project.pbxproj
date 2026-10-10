@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF0000000000000000000F01 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = EF0000000000000000000E01 /* MapLibre */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EF0000000000000000003A01 /* EVFlowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EVFlowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0000000000000000002A01 /* EVFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EVFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0000000000000000000A01 /* EVFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EVFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EF0000000000000000000B01 /* EVFlow */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EVFlow;
+			sourceTree = "<group>";
+		};
+		EF0000000000000000002B01 /* EVFlowTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EVFlowTests;
+			sourceTree = "<group>";
+		};
+		EF0000000000000000003B01 /* EVFlowUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EVFlowUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXContainerItemProxy section */
+		EF0000000000000000002E01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0000000000000000001901 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF0000000000000000001701;
+			remoteInfo = EVFlow;
+		};
+		EF0000000000000000003E01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0000000000000000001901 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF0000000000000000001701;
+			remoteInfo = EVFlow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF0000000000000000000C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF0000000000000000000F01 /* MapLibre in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000002C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000003C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF0000000000000000001601 = {
+			isa = PBXGroup;
+			children = (
+				EF0000000000000000000B01 /* EVFlow */,
+				EF0000000000000000002B01 /* EVFlowTests */,
+				EF0000000000000000003B01 /* EVFlowUITests */,
+				EF0000000000000000001602 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF0000000000000000001602 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF0000000000000000000A01 /* EVFlow.app */,
+				EF0000000000000000002A01 /* EVFlowTests.xctest */,
+				EF0000000000000000003A01 /* EVFlowUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF0000000000000000001701 /* EVFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF0000000000000000001802 /* Build configuration list for PBXNativeTarget "EVFlow" */;
+			buildPhases = (
+				EF0000000000000000001B01 /* Sources */,
+				EF0000000000000000000C01 /* Frameworks */,
+				EF0000000000000000001A01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EF0000000000000000000B01 /* EVFlow */,
+			);
+			name = EVFlow;
+			packageProductDependencies = (
+				EF0000000000000000000E01 /* MapLibre */,
+			);
+			productName = EVFlow;
+			productReference = EF0000000000000000000A01 /* EVFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF0000000000000000002701 /* EVFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF0000000000000000002802 /* Build configuration list for PBXNativeTarget "EVFlowTests" */;
+			buildPhases = (
+				EF0000000000000000002D01 /* Sources */,
+				EF0000000000000000002C01 /* Frameworks */,
+				EF0000000000000000002D02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF0000000000000000002F01 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EF0000000000000000002B01 /* EVFlowTests */,
+			);
+			name = EVFlowTests;
+			productName = EVFlowTests;
+			productReference = EF0000000000000000002A01 /* EVFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF0000000000000000003701 /* EVFlowUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF0000000000000000003802 /* Build configuration list for PBXNativeTarget "EVFlowUITests" */;
+			buildPhases = (
+				EF0000000000000000003D01 /* Sources */,
+				EF0000000000000000003C01 /* Frameworks */,
+				EF0000000000000000003D02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF0000000000000000003F01 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EF0000000000000000003B01 /* EVFlowUITests */,
+			);
+			name = EVFlowUITests;
+			productName = EVFlowUITests;
+			productReference = EF0000000000000000003A01 /* EVFlowUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF0000000000000000001901 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					EF0000000000000000001701 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					EF0000000000000000002701 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = EF0000000000000000001701;
+					};
+					EF0000000000000000003701 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = EF0000000000000000001701;
+					};
+				};
+			};
+			buildConfigurationList = EF0000000000000000001801 /* Build configuration list for PBXProject "EVFlow" */;
+			developmentRegion = lt;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				lt,
+				Base,
+			);
+			mainGroup = EF0000000000000000001601;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF0000000000000000000D01 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EF0000000000000000001602 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF0000000000000000001701 /* EVFlow */,
+				EF0000000000000000002701 /* EVFlowTests */,
+				EF0000000000000000003701 /* EVFlowUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF0000000000000000001A01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000002D02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000003D02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF0000000000000000001B01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000002D01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF0000000000000000003D01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF0000000000000000002F01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF0000000000000000001701 /* EVFlow */;
+			targetProxy = EF0000000000000000002E01 /* PBXContainerItemProxy */;
+		};
+		EF0000000000000000003F01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF0000000000000000001701 /* EVFlow */;
+			targetProxy = EF0000000000000000003E01 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EF0000000000000000001C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EF0000000000000000001C02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF0000000000000000001D01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EVFlow-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = EVFlow;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Nuotrauka pranešimui apie užstatytą stotelę";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rodome artimiausias laisvas įkrovimo stoteles";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Nuotrauka pranešimui apie užstatytą stotelę";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EF0000000000000000001D02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EVFlow-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = EVFlow;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Nuotrauka pranešimui apie užstatytą stotelę";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rodome artimiausias laisvas įkrovimo stoteles";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Nuotrauka pranešimui apie užstatytą stotelę";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		EF0000000000000000002901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EVFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EVFlow";
+			};
+			name = Debug;
+		};
+		EF0000000000000000002902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EVFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EVFlow";
+			};
+			name = Release;
+		};
+		EF0000000000000000003901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = EVFlow;
+			};
+			name = Debug;
+		};
+		EF0000000000000000003902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PD436Y5RP7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = lt.evflow.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = EVFlow;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF0000000000000000001801 /* Build configuration list for PBXProject "EVFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF0000000000000000001C01 /* Debug */,
+				EF0000000000000000001C02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF0000000000000000001802 /* Build configuration list for PBXNativeTarget "EVFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF0000000000000000001D01 /* Debug */,
+				EF0000000000000000001D02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF0000000000000000002802 /* Build configuration list for PBXNativeTarget "EVFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF0000000000000000002901 /* Debug */,
+				EF0000000000000000002902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF0000000000000000003802 /* Build configuration list for PBXNativeTarget "EVFlowUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF0000000000000000003901 /* Debug */,
+				EF0000000000000000003902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF0000000000000000000D01 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.30.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF0000000000000000000E01 /* MapLibre */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0000000000000000000D01 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
+			productName = MapLibre;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = EF0000000000000000001901 /* Project object */;
+}
