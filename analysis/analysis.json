@@ -1,0 +1,313 @@
+{
+ "window_utc": [
+  "2026-10-06T14:04:09+00:00",
+  "2026-10-09T16:02:24+00:00"
+ ],
+ "hours": 74.0,
+ "gaps": [
+  [
+   "2026-10-06T14:05:10+00:00",
+   "2026-10-06T18:06:30+00:00"
+  ],
+  [
+   "2026-10-07T15:06:27+00:00",
+   "2026-10-07T15:20:21+00:00"
+  ],
+  [
+   "2026-10-07T16:52:28+00:00",
+   "2026-10-07T17:02:37+00:00"
+  ]
+ ],
+ "sessions_all": 14042,
+ "sessions_clean": 12785,
+ "sessions_over_24h": 41,
+ "lt": {
+  "AC": {
+   "n": 5387,
+   "p50": 150,
+   "p75": 314,
+   "p90": 600,
+   "expected_max": 284,
+   "over_n": 1198,
+   "over_share": 0.222,
+   "excess_h": 4893.7,
+   "occupied_h": 21197.9
+  },
+  "DC<=60": {
+   "n": 2538,
+   "p50": 38,
+   "p75": 60,
+   "p90": 90,
+   "expected_max": 89,
+   "over_n": 252,
+   "over_share": 0.099,
+   "excess_h": 277.8,
+   "occupied_h": 2077.0
+  },
+  "DC 61-149": {
+   "n": 802,
+   "p50": 36,
+   "p75": 54,
+   "p90": 89,
+   "expected_max": 37,
+   "over_n": 334,
+   "over_share": 0.416,
+   "excess_h": 266.8,
+   "occupied_h": 675.3
+  },
+  "DC>=150": {
+   "n": 4058,
+   "p50": 30,
+   "p75": 44,
+   "p90": 61,
+   "expected_max": 37,
+   "over_n": 1451,
+   "over_share": 0.358,
+   "excess_h": 780.4,
+   "occupied_h": 2583.6
+  }
+ },
+ "vilnius": {
+  "AC": {
+   "n": 3363,
+   "p50": 166,
+   "p75": 405,
+   "p90": 626,
+   "expected_max": 284,
+   "over_n": 798,
+   "over_share": 0.237,
+   "excess_h": 3272.0,
+   "occupied_h": 14715.2
+  },
+  "DC<=60": {
+   "n": 1270,
+   "p50": 38,
+   "p75": 60,
+   "p90": 90,
+   "expected_max": 89,
+   "over_n": 144,
+   "over_share": 0.113,
+   "excess_h": 140.0,
+   "occupied_h": 1055.5
+  },
+  "DC 61-149": {
+   "n": 229,
+   "p50": 40,
+   "p75": 62,
+   "p90": 92,
+   "expected_max": 37,
+   "over_n": 100,
+   "over_share": 0.437,
+   "excess_h": 86.9,
+   "occupied_h": 215.7
+  },
+  "DC>=150": {
+   "n": 976,
+   "p50": 30,
+   "p75": 52,
+   "p90": 76,
+   "expected_max": 37,
+   "over_n": 417,
+   "over_share": 0.427,
+   "excess_h": 353.9,
+   "occupied_h": 810.5
+  }
+ },
+ "vilnius_daytime_excess_h": {
+  "AC": 2143.5,
+  "DC<=60": 108.2,
+  "DC 61-149": 55.8,
+  "DC>=150": 211.7
+ },
+ "vilnius_top": [
+  {
+   "station": "Business Garden Parking | Uždara aikštelė",
+   "address": "Laisvės prospektas 10, Vilnius, Lithuania",
+   "operator": "Ignitis, UAB",
+   "cls": "AC",
+   "sessions": 116,
+   "over": 40,
+   "excess_h": 180.9
+  },
+  {
+   "station": "Eldrive Lithuania Rimi Mylia",
+   "address": "Smolensko gatvė 12b",
+   "operator": "Eldrive Lithuania, UAB",
+   "cls": "AC",
+   "sessions": 71,
+   "over": 27,
+   "excess_h": 131.3
+  },
+  {
+   "station": "Business Garden daugiaaukštė aikštelė",
+   "address": "Laisvės pr. 10, 04215 Vilnius, Lithuania",
+   "operator": "Ignitis, UAB",
+   "cls": "AC",
+   "sessions": 26,
+   "over": 20,
+   "excess_h": 105.6
+  },
+  {
+   "station": "Eldrive Lithuania Rimi City North",
+   "address": "Žirmūnų gatvė 64",
+   "operator": "Eldrive Lithuania, UAB",
+   "cls": "AC",
+   "sessions": 35,
+   "over": 15,
+   "excess_h": 100.7
+  },
+  {
+   "station": "SEB, Konstitucijos pr. 25 | Inbalance grid",
+   "address": "Konstitucijos pr 24",
+   "operator": "In Balance grid, UAB",
+   "cls": "AC",
+   "sessions": 32,
+   "over": 26,
+   "excess_h": 99.1
+  },
+  {
+   "station": "EV097 – CYBER CITY",
+   "address": "Švitrigailos g. 32",
+   "operator": "Stova, UAB",
+   "cls": "AC",
+   "sessions": 36,
+   "over": 24,
+   "excess_h": 91.3
+  },
+  {
+   "station": "IKI, Jovaras | Inbalance grid",
+   "address": "S. Stanevičiaus str. 23",
+   "operator": "In Balance grid, UAB",
+   "cls": "AC",
+   "sessions": 34,
+   "over": 11,
+   "excess_h": 79.8
+  },
+  {
+   "station": "BH Meraki | Inbalance grid",
+   "address": "Eitminų g. 3",
+   "operator": "In Balance grid, UAB",
+   "cls": "AC",
+   "sessions": 23,
+   "over": 16,
+   "excess_h": 71.7
+  },
+  {
+   "station": "EV123",
+   "address": "Laisvės pr. 36",
+   "operator": "Stova, UAB",
+   "cls": "AC",
+   "sessions": 24,
+   "over": 17,
+   "excess_h": 68.9
+  },
+  {
+   "station": "IKI, Pašilaičiai | Inbalance grid",
+   "address": "Gabijos str. 36",
+   "operator": "In Balance grid, UAB",
+   "cls": "AC",
+   "sessions": 34,
+   "over": 11,
+   "excess_h": 68.0
+  },
+  {
+   "station": "EV092 – VC SAVARŽELE",
+   "address": "EV092 – VC SAVARŽELE",
+   "operator": "Stova, UAB",
+   "cls": "AC",
+   "sessions": 27,
+   "over": 19,
+   "excess_h": 67.7
+  },
+  {
+   "station": "EV096 – VC ARTERY",
+   "address": "Konstitucijos pr. 18B",
+   "operator": "Stova, UAB",
+   "cls": "AC",
+   "sessions": 37,
+   "over": 17,
+   "excess_h": 64.6
+  },
+  {
+   "station": "Sostinės med centras Račių g. 1",
+   "address": "Račių Gatvė 1",
+   "operator": "Enefit, UAB",
+   "cls": "AC",
+   "sessions": 26,
+   "over": 14,
+   "excess_h": 60.1
+  },
+  {
+   "station": "Eldrive Lithuania Green Hall",
+   "address": "Upės g. 23",
+   "operator": "Eldrive Lithuania, UAB",
+   "cls": "AC",
+   "sessions": 24,
+   "over": 12,
+   "excess_h": 59.8
+  },
+  {
+   "station": "EV077",
+   "address": "Konstitucijos pr. 29",
+   "operator": "Stova, UAB",
+   "cls": "AC",
+   "sessions": 32,
+   "over": 21,
+   "excess_h": 58.2
+  }
+ ],
+ "dc_by_operator": [
+  [
+   "Eleport, UAB",
+   181,
+   0.44
+  ],
+  [
+   "Stuart Energy, UAB",
+   156,
+   0.44
+  ],
+  [
+   "In Balance grid, UAB",
+   251,
+   0.34
+  ],
+  [
+   "Elektrum Lietuva, UAB",
+   413,
+   0.32
+  ],
+  [
+   "Ignitis, UAB",
+   3638,
+   0.27
+  ],
+  [
+   "Enefit, UAB",
+   1638,
+   0.26
+  ],
+  [
+   "Eldrive Lithuania, UAB",
+   678,
+   0.26
+  ],
+  [
+   "EV Infrastruktūra, UAB",
+   251,
+   0.24
+  ],
+  [
+   "IONITY GmbH",
+   74,
+   0.14
+  ],
+  [
+   "Lidl Lietuva, UAB",
+   102,
+   0.06
+  ]
+ ],
+ "vilnius_dc_connectors": 496,
+ "vilnius_connectors": 2533
+}
