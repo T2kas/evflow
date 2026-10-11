@@ -23,6 +23,8 @@ connector_id,evse_id,station_id,station_name,operator,address,city,lat,lon,conne
 008-E-0033-F,70999,15535,Akropolis 1a. įėjimas,"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.890554,23.919003,IEC_62196_T2_COMBO,120,0.42 €/kWh,008-E-0033,Eleport UAB,,1,
 008-E-0033-G,71000,15535,Akropolis 1a. įėjimas,"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.890554,23.919003,IEC_62196_T2_COMBO,120,0.42 €/kWh,008-E-0033,Eleport UAB,,1,
 008-E-0033-H,71001,15535,Akropolis 1a. įėjimas,"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.890554,23.919003,IEC_62196_T2_COMBO,120,0.42 €/kWh,008-E-0033,Eleport UAB,,1,
+008-E-0033-H#71001,71001,15535,Akropolis 1a. įėjimas,"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.890554,23.919003,IEC_62196_T2_COMBO,120,0.42 €/kWh,008-E-0033,Eleport UAB,,1,
+008-E-0033-H#71009,71009,15535,Akropolis 1a. įėjimas,"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.890554,23.919003,IEC_62196_T2_COMBO,120,0.42 €/kWh,008-E-0033,Eleport UAB,,1,
 008-E-003A-A,67373,15534,Akropolis 2a. (Lėto krovimo),"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.891282,23.917583,IEC_62196_T2,22,0.33 €/kWh,008-E-003A,Eleport UAB,,1,
 008-E-003A-B,67374,15534,Akropolis 2a. (Lėto krovimo),"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.891282,23.917583,IEC_62196_T2,22,0.33 €/kWh,008-E-003A,Eleport UAB,,1,
 008-E-003B-A,67375,15534,Akropolis 2a. (Lėto krovimo),"Eleport, UAB ",Karaliaus Mindaugo pr. 49,Kaunas,54.891282,23.917583,IEC_62196_T2,22,0.33 €/kWh,008-E-003B,Eleport UAB,,1,
@@ -3554,9 +3556,11 @@ IGN-E-1V2Y-B,69912,3183,Marijampolės R. Stankevičiaus progimnazija,"Ignitis, U
 IGN-E-20-0-C,69224,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-20-0-C#69224,69224,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-20-0-C#70636,70636,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
+IGN-E-20-0-C#71011,71011,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-20-0-D,69225,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-20-0-D#69225,69225,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-20-0-D#70637,70637,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
+IGN-E-20-0-D#71012,71012,1868,Perspektyvos g. 24,"Ignitis, UAB","Perspektyvos g. 24, Kaunas",Kaunas,54.919173,24.040414,IEC_62196_T2_COMBO,50,0.31 €/kWh,IGN-E-20-0,Ignitis LT,,1,
 IGN-E-22-0-A,69246,2439,Viešbutis „Greta“,"Ignitis, UAB","Šlaito g. 13, Druskininkai",Druskininkai,54.024254,23.981971,IEC_62196_T2_COMBO,60,0.35 €/kWh,IGN-E-22-0,Ignitis LT,,1,
 IGN-E-22-0-B,69247,2439,Viešbutis „Greta“,"Ignitis, UAB","Šlaito g. 13, Druskininkai",Druskininkai,54.024254,23.981971,IEC_62196_T2_COMBO,60,0.35 €/kWh,IGN-E-22-0,Ignitis LT,,1,
 IGN-E-22-0-C,69248,2439,Viešbutis „Greta“,"Ignitis, UAB","Šlaito g. 13, Druskininkai",Druskininkai,54.024254,23.981971,IEC_62196_T2_COMBO,60,0.35 €/kWh,IGN-E-22-0,Ignitis LT,,1,
@@ -4976,6 +4980,7 @@ IKR-E-5CGU-A,62498,584,Naujapilis,"Įkrautas, UAB","Žeimenos g. 147, 49329 Kaun
 IKR-E-5U30-A,70674,3641,Hill Garden Residence,"Įkrautas, UAB","Užkanavės g. 46, 00170 Palanga, Lithuania",Palanga,55.958273,21.072788,IEC_62196_T2,11,0.3 € + 3 €/val. parkavimo mokestis + 0.48 €/kWh,IKR-E-5U30,Hill Garden Residence,,1,
 IKR-E-6869-A,20058,538,CITY Business Center Parking Lot,"Įkrautas, UAB","Žalgirio g. 90, Vilnius 09300, Lithuania",Vilnius,54.703683,25.27815,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-6869,Hanner,,1,Įkrovimo mokestis
 IKR-E-6880-A,20061,538,CITY Business Center Parking Lot,"Įkrautas, UAB","Žalgirio g. 90, Vilnius 09300, Lithuania",Vilnius,54.703683,25.27815,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-6880,Hanner,,1,Įkrovimo mokestis
+IKR-E-6JHU-A,71010,531,Peugeot Vilnius,"Įkrautas, UAB","Ukmergės g. 300, Vilnius 06146, Lithuania",Vilnius,54.738308,25.227683,IEC_62196_T2,22,0.3 € + 0.38 €/kWh,IKR-E-6JHU,StelAuto,,0,
 IKR-E-6QYB-A,63130,14531,Verslo Trikampis,"Įkrautas, UAB",J. Jasinskio gatvė 16F,Vilnius,54.68695,25.261234,IEC_62196_T2,22,0.3 € + 0.27 €/kWh,IKR-E-6QYB,"Uždarojo tipo informuotiesiems investuotojams skirta investicinė bendrovė UAB ""Verslo trikampis""",,1,
 IKR-E-6R5C-A,65819,14374,"Vytauto g. 1, Kuršėnai","Įkrautas, UAB","Vytauto g. 1, 81182 Kuršėnai, Lithuania",Kuršėnai,56.004896,22.933773,IEC_62196_T2,22,0.3 € + 0.61 €/kWh,IKR-E-6R5C,"Kuršėnų komunalinis ūkis, UAB",,1,
 IKR-E-6UJ6-A,70778,14375,"Žalioji g. 3, Garliava","Įkrautas, UAB","Žalioji g. 3, 53249 Garliava, Lithuania",Garliava,54.831389,23.87419,IEC_62196_T2,22,0.3 € + 0.61 €/val. parkavimo mokestis + 0.3 €/kWh,IKR-E-6UJ6,"Globali renta, UAB",,1,
