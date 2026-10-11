@@ -3339,3 +3339,4 @@ timestamp_utc,connectors,changes,heartbeats,new_connectors,duration_s,error
 2026-10-11T09:40:39Z,6339,0,0,0,5.29,
 2026-10-11T09:42:25Z,6339,30,66,0,26.22,
 2026-10-11T09:44:24Z,0,0,0,0,49.01,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: The read operation timed out
+2026-10-11T09:46:24Z,0,0,0,0,49.12,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: The read operation timed out
