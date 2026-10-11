@@ -27,7 +27,7 @@ Pristato Tadas. Skaidrės yra `~/Desktop/EVFlow_pitch/`.
 | 10 | Kas toliau | 2:45–3:00 |
 | 11 | Demo | 3:00–3:05 |
 | 12 | Programėlė vairuotojui (video 40 s) | 3:05–3:45 |
-| 13 | Pranešimas apie užstatytą vietą (video 21 s) | 3:45–4:05 |
+| 13 | Pranešimas apie užstatytą vietą (video 13 s) | 3:45–4:05 |
 | 14 | Kelionės planavimas (video 21 s) | 4:05–4:25 |
 | 15 | Skydelis: užimtumo žemėlapis | 4:25–4:40 |
 | 16 | Skydelis: taisyklių simuliatorius (video 27 s) | 4:40–4:58 |
@@ -87,8 +87,8 @@ Telefoną su programėle duodu jums, galite pabandyti patys. Ekrane rodau tą pa
 ### 12. Programėlė vairuotojui (video 40 s) (3:05–3:45)
 Tarkim, man reikia greitai pasikrauti. Spaudžiu „Greitas krovimas“, ir programėlė pasiūlo artimiausią tinkamą stotelę. Kortelėje matau, kiek jungčių laisva, kainą ir kad šiuo metu čia dažniausiai laisva. Jei būtų užimta, matyčiau, per kiek laiko atsilaisvins. Spaudžiu „Važiuojam“ ir renkuosi EVFlow, Google Maps, Apple Maps ar Waze. Atvažiavęs spaudžiu „Krauti čia“. Programėlė rodo, kiek liko krauti, ir primins patraukti. Patraukiau laiku, gaunu 20 taškų.
 
-### 13. Pranešimas apie užstatytą vietą (video 21 s) (3:45–4:05)
-Jei kas nors užstatė vietą, spaudžiu „Pranešti“, pasirenku, kas negerai, ir nufotografuoju. Pranešimą patvirtiname duomenimis ir šalia esančiais vairuotojais, tada jis nukeliauja operatoriui.
+### 13. Pranešimas apie užstatytą vietą (video 13 s) (3:45–4:05)
+Jei kas nors užstatė vietą, spaudžiu „Pranešti“, pasirenku „Užstatyta“ ir nufotografuoju. Sistema patikrina pagal duomenis: stotelė rodo laisvą vietą, nors fiziškai ji užimta. Pranešimas nukeliauja operatoriui, o aš gaunu 30 taškų.
 
 ### 14. Kelionės planavimas (video 21 s) (4:05–4:25)
 Prieš ilgesnę kelionę, pavyzdžiui į Klaipėdą, pasirenku, kiek kartų ir kada noriu sustoti. Programėlė parenka stotelę, kuri tuo metu dažniausiai laisva, ir sudaro maršrutą.
