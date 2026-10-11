@@ -29,9 +29,10 @@ Pristato Tadas. Skaidrės yra `~/Desktop/EVFlow_pitch/`.
 | 12 | Programėlė vairuotojui (video 40 s) | 3:05–3:45 |
 | 13 | Pranešimas apie užstatytą vietą (video 21 s) | 3:45–4:05 |
 | 14 | Kelionės planavimas (video 21 s) | 4:05–4:25 |
-| 15 | Skydelis operatoriams ir miestui (video 27 s) | 4:25–4:58 |
-| 16 | Pabaiga | 4:58–5:00 |
-| 17–19 | Priedai | tik jei klausia |
+| 15 | Skydelis: užimtumo žemėlapis | 4:25–4:40 |
+| 16 | Skydelis: taisyklių simuliatorius (video 27 s) | 4:40–4:58 |
+| 17 | Pabaiga | 4:58–5:00 |
+| 18–20 | Priedai | tik jei klausia |
 
 **Eiga, jei pasimestum:**
 
@@ -51,7 +52,7 @@ Turbūt pažįstama situacija. Atvažiuoji prie stotelės, o ji užimta. Nors au
 Pažiūrėjome, kiek to yra Vilniuje. Beveik kas trečias įkrovimas trunka ilgiau, nei reikia pasikrauti. Per dieną susidaro apie 380 valandų, kai visa stotelė pilna, nors automobilis joje jau pasikrovęs. Visiems operatoriams kartu tai iki 800 tūkstančių eurų neparduotos elektros per metus.
 
 ### 4. Atviri duomenys (0:45–1:02)
-Visa tai skaičiuojame iš atvirų Via Lietuva duomenų. Nuo spalio 6 dienos kas dvi minutes renkame kiekvienos Lietuvos stotelės būseną. Tai 22 operatoriai ir jau 1,2 milijono įrašų. Pavyzdžiui, čia Vilnius 16 valandą. Raudonos stotelės tuo metu dažniau užimtos nei laisvos.
+Visa tai skaičiuojame iš atvirų Via Lietuva duomenų. Nuo spalio 6 dienos kas dvi minutes renkame kiekvienos Lietuvos stotelės būseną: 2 tūkstančiai stotelių, 22 operatoriai, jau 1,2 milijono įrašų. Iš jų atkūrėme 19 tūkstančių įkrovimų ir žinome, kiek jie trunka, kada stotelės pilnos ir kas stovi per ilgai.
 
 ### 5. Sprendimas (1:02–1:25)
 Vairuotojas EVFlow programėlėje mato, kada užimta stotelė atsilaisvins ir kada ji dažniausiai laisva. Programėlė skatina laiku atlaisvinti vietą. O operatoriai ir miestas gauna valdymo skydelį, kur matyti, kuri stotelė užimta, bet nekrauna. Kitos programėlės rodo tik „laisva“ arba „užimta“ savo tinkle, o mes rodome laiką ir visus 22 operatorius vienoje vietoje.
@@ -92,12 +93,13 @@ Jei kas nors užstatė vietą, spaudžiu „Pranešti“, pasirenku, kas negerai
 ### 14. Kelionės planavimas (video 21 s) (4:05–4:25)
 Prieš ilgesnę kelionę, pavyzdžiui į Klaipėdą, pasirenku, kiek kartų ir kada noriu sustoti. Programėlė parenka stotelę, kuri tuo metu dažniausiai laisva, ir sudaro maršrutą.
 
-### 15. Skydelis operatoriams ir miestui (video 27 s) (4:25–4:58)
-O čia operatoriaus ir miesto vaizdas. Matyti, kas šiuo metu stovi per ilgai ir kas neveikia. Su simuliatoriumi galima išbandyti taisykles, pavyzdžiui, 15 nemokamų minučių po įkrovimo, o paskui mokestis. Iškart matyti, kiek valandų blokavimo tai panaikintų.
+### 15. Skydelis: užimtumo žemėlapis (4:25–4:40)
+O čia vaizdas operatoriams ir miestui. Žemėlapis rodo, kur stotelės dažnai užimtos, pavyzdžiui, Vilniuje 16 valandą. Dešinėje sąrašas, kas šiuo metu stovi per ilgai.
 
----
+### 16. Skydelis: taisyklių simuliatorius (video 27 s) (4:40–4:58)
+Su simuliatoriumi operatorius išbando taisykles, pavyzdžiui, 15 nemokamų minučių po įkrovimo, o paskui mokestis. Iškart matyti, kiek valandų blokavimo tai panaikintų.
 
-### 16. Pabaiga (4:58–5:00)
+### 17. Pabaiga (4:58–5:00)
 EVFlow. Atvažiuok, kai bus laisva. Ačiū, laukiu klausimų.
 
 *(Paskutinę skaidrę palieki per klausimus.)*
@@ -110,10 +112,10 @@ Pirma atsakai trumpai, tada paaiškini. Jei nežinai, sakyk: „Dar nežinome, b
 
 Komisijoje sėdi Cognizant (technologijos), Vilniaus savivaldybė (miestas) ir Ignitis (operatorius, verslas).
 
-**Kuo skiriatės nuo esamų programėlių?** *(17 priedas)*
+**Kuo skiriatės nuo esamų programėlių?** *(18 priedas)*
 Jos rodo tik „laisva“ arba „užimta“ ir tik savo tinkle. Mes rodome, kada stotelė atsilaisvins ir kaip dažnai ji būna pilna. Visi 22 operatoriai yra vienoje vietoje, ir mes skatiname laiku atlaisvinti vietą.
 
-**Kaip žinote, kad automobilis jau nebekrauna?** *(18 priedas)*
+**Kaip žinote, kad automobilis jau nebekrauna?** *(19 priedas)*
 Viešas API to neparodo, todėl vertiname pagal laiką. Per ilgas įkrovimas yra toks, kuris trunka ilgiau, nei net lėtai kraunantis automobilis pasikrautų nuo 20 iki 80 % toje jungtyje, plius 15 minučių. Su operatoriaus duomenimis tai būtų tikslu, todėl norime pradėti su vienu operatoriumi.
 
 **Iš kur imsite duomenis ateityje?**
@@ -138,7 +140,7 @@ Iš mūsų simuliatoriaus su Vilniaus duomenimis. Jei 6 iš 10 vairuotojų patra
 **Kokia nauda miestui?**
 Daugiau įkrovimų be naujų stotelių. Be to, miestas mato, kur vakarais trūksta stotelių, ir gali išbandyti taisykles prieš jas įvesdamas.
 
-**O jei kabelis ištrauktas, bet automobilis stovi?** *(19 priedas)*
+**O jei kabelis ištrauktas, bet automobilis stovi?** *(20 priedas)*
 Tada stotelė rodo „laisva“. Tokius atvejus pagauna vairuotojų pranešimai su nuotrauka.
 
 **O asmens duomenys nuotraukose?**
