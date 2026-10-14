@@ -1684,3 +1684,4 @@ timestamp_utc,connector_id,tariff
 2026-10-14T01:18:30Z,STR-E-ZS00-B,0.22 €/kWh + 0.23 €
 2026-10-14T01:18:30Z,STR-E-ZWU5-A,0.08 € + 0.16 €/kWh
 2026-10-14T01:18:30Z,STR-E-ZWU5-B,0.08 € + 0.16 €/kWh
+2026-10-14T01:31:06Z,IKR-E-N9TH-A,0.3 € + 0.35 €/kWh
