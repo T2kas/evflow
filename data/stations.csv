@@ -5019,7 +5019,7 @@ IKR-E-4HJI-A,67578,536,"Guest house ""Dvi Nidos""","Įkrautas, UAB","Taikos str.
 IKR-E-5003-A,20038,504,Europa Royale Druskininkai,"Įkrautas, UAB","Vilniaus Ave 7, Druskininkai 66119, Lithuania",Druskininkai,54.021702,23.976271,IEC_62196_T2,22,0.3 € + 0.45 €/kWh,IKR-E-5003,"Druskų miestas, UAB",,1,
 IKR-E-53JB-A,65975,15410,Kauno kolegija (Alytus),"Įkrautas, UAB",Studentų g. 17,Alytus,54.399761,24.067771,IEC_62196_T2,22,0.3 € + 0.3 €/kWh,IKR-E-53JB,"Kauno kolegija, VšĮ",,1,
 IKR-E-5715-A,20071,1314,"Medical SPA ""Eglės sanatorija"" Birštonas","Įkrautas, UAB","Algirdo g. 22, 59204 Birštonas, Lithuania",Birštonas,54.610331,24.031907,IEC_62196_T2,22,0.3 € + 0.51 €/kWh,IKR-E-5715,"Įkrautas, UAB",,1,Įkrovimo tarifas yra dinaminis ir keičiasi kiekvieną valandą pagal Nord Pool elektros biržoje esančią kainą.
-IKR-E-5730-A,20075,1317,Žirmūnai Business Center,"Įkrautas, UAB","Žirmūnų g. 139A, 09120 Vilnius, Lithuania",Vilnius,54.724561,25.296688,IEC_62196_T2,22,0.3 € + 0.57 €/kWh,IKR-E-5730,ŽVC UAB,,1,
+IKR-E-5730-A,20075,1317,Žirmūnai Business Center,"Įkrautas, UAB","Žirmūnų g. 139A, 09120 Vilnius, Lithuania",Vilnius,54.724561,25.296688,IEC_62196_T2,22,0.3 € + 0.58 €/kWh,IKR-E-5730,ŽVC UAB,,1,
 IKR-E-58UH-A,65397,14407,"Kauno g. 36, Jurbarkas","Įkrautas, UAB",Kauno gatvė 36,Jurbarkas,55.075524,22.766005,IEC_62196_T2,22,0.3 € + 0.3 €/kWh,IKR-E-58UH,Jurbarko rajono savivaldybės administracija,,1,
 IKR-E-5CGU-A,62498,584,Naujapilis,"Įkrautas, UAB","Žeimenos g. 147, 49329 Kaunas, Lithuania",Kaunas,54.923524,23.919218,IEC_62196_T2,22,0.3 € + 0.51 €/kWh,IKR-E-5CGU,"Nuova Capital, UAB",,1,
 IKR-E-5U30-A,70674,3641,Hill Garden Residence,"Įkrautas, UAB","Užkanavės g. 46, 00170 Palanga, Lithuania",Palanga,55.958273,21.072788,IEC_62196_T2,11,0.3 € + 3 €/val. parkavimo mokestis + 0.48 €/kWh,IKR-E-5U30,Hill Garden Residence,,1,
@@ -5031,7 +5031,7 @@ IKR-E-6QYB-A,63130,14531,Verslo Trikampis,"Įkrautas, UAB",J. Jasinskio gatvė 1
 IKR-E-6R5C-A,65819,14374,"Vytauto g. 1, Kuršėnai","Įkrautas, UAB","Vytauto g. 1, 81182 Kuršėnai, Lithuania",Kuršėnai,56.004896,22.933773,IEC_62196_T2,22,0.3 € + 0.61 €/kWh,IKR-E-6R5C,"Kuršėnų komunalinis ūkis, UAB",,1,
 IKR-E-6UJ6-A,70778,14375,"Žalioji g. 3, Garliava","Įkrautas, UAB","Žalioji g. 3, 53249 Garliava, Lithuania",Garliava,54.831389,23.87419,IEC_62196_T2,22,0.3 € + 0.61 €/val. parkavimo mokestis + 0.3 €/kWh,IKR-E-6UJ6,"Globali renta, UAB",,1,
 IKR-E-7172-A,20052,535,Verslo Centras Z3,"Įkrautas, UAB","L. Zamenhofo g. 3, Vilnius, Lithuania",Vilnius,54.738757,25.231877,IEC_62196_T2,22,0.3 € + 0.25 €/kWh,IKR-E-7172,RDB UAB,,1,
-IKR-E-7718-A,20076,1317,Žirmūnai Business Center,"Įkrautas, UAB","Žirmūnų g. 139A, 09120 Vilnius, Lithuania",Vilnius,54.724561,25.296688,IEC_62196_T2,22,0.3 € + 0.57 €/kWh,IKR-E-7718,ŽVC UAB,,1,
+IKR-E-7718-A,20076,1317,Žirmūnai Business Center,"Įkrautas, UAB","Žirmūnų g. 139A, 09120 Vilnius, Lithuania",Vilnius,54.724561,25.296688,IEC_62196_T2,22,0.3 € + 0.58 €/kWh,IKR-E-7718,ŽVC UAB,,1,
 IKR-E-7730-A,20053,535,Verslo Centras Z3,"Įkrautas, UAB","L. Zamenhofo g. 3, Vilnius, Lithuania",Vilnius,54.738757,25.231877,IEC_62196_T2,22,0.3 € + 0.25 €/kWh,IKR-E-7730,RDB UAB,,1,
 IKR-E-7768-A,20073,1315,"Šviesos g. 2A, Palanga","Įkrautas, UAB","Šviesos g. 2, 00324 Palanga, Lithuania",Palanga,56.003356,21.078336,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-7768,"Įkrautas, UAB",,1,
 IKR-E-8602-A,20048,532,Opel | Peugeot Kaunas,"Įkrautas, UAB","Savanorių pr. 404G, Kaunas 50301, Lithuania",Kaunas,54.929417,23.97631,IEC_62196_T2,22,0.3 € + 0.38 €/kWh,IKR-E-8602,StelAuto,,0,
