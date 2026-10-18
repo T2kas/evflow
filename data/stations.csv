@@ -5733,7 +5733,7 @@ STR-E-B36V-B,44905,4789,"Tauragės g. 1, Šilalė","Stuart Energy, UAB","Taurag�
 STR-E-B36V-C,44906,4789,"Tauragės g. 1, Šilalė","Stuart Energy, UAB","Tauragės g. 1, Šilalė",Šilalė,55.4876063,22.1950447,IEC_62196_T2,22,0.19 € + 0.21 €/kWh + 0.6 €/val.,STR-E-B36V,Šilalės Auobusų Parkas,,1,
 STR-E-BAZX-A,44831,3174,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34, Vilnius",Vilnius,54.6697771,25.2633532,IEC_62196_T2_COMBO,60,0.19 € + 0.26 €/kWh,STR-E-BAZX,"UAB ""LTLAB""",,1,
 STR-E-BAZX-B,44832,3174,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34, Vilnius",Vilnius,54.6697771,25.2633532,CHADEMO,60,0.19 € + 0.26 €/kWh,STR-E-BAZX,"UAB ""LTLAB""",,1,
-STR-E-BAZX-C,44833,3174,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34, Vilnius",Vilnius,54.6697771,25.2633532,IEC_62196_T2,22,0.2 € + 0.21 €/kWh + 0.6 €/val.,STR-E-BAZX,"UAB ""LTLAB""",,1,
+STR-E-BAZX-C,44833,3174,"Kauno g. 34, Vilnius","Stuart Energy, UAB","Kauno g. 34, Vilnius",Vilnius,54.6697771,25.2633532,IEC_62196_T2,22,0.2 € + 0.2 €/kWh + 0.6 €/val.,STR-E-BAZX,"UAB ""LTLAB""",,1,
 STR-E-BD5Y-A,45012,6832,"Laisvės a. 1, Švenčionys","Stuart Energy, UAB","Laisvės a. 1, Švenčionys",Švenčionys,55.1348085,26.1594464,IEC_62196_T2,22,0.25 €/kWh,STR-E-BD5Y,Švenčionių rajono savivaldybė,,1,
 STR-E-BD5Y-B,45013,6832,"Laisvės a. 1, Švenčionys","Stuart Energy, UAB","Laisvės a. 1, Švenčionys",Švenčionys,55.1348085,26.1594464,IEC_62196_T2,22,0.25 €/kWh,STR-E-BD5Y,Švenčionių rajono savivaldybė,,1,
 STR-E-BIKW-A,44790,3137,"T. Masiulio g. 21A, Kaunas","Stuart Energy, UAB","T. Masiulio g. 21A, Kaunas",Kaunas,54.8770585,24.0145818,IEC_62196_T2,22,0.23 € + 0.26 €/kWh,STR-E-BIKW,Kauno miesto savivaldybės administracija,,1,
