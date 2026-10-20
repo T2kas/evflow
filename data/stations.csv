@@ -5405,6 +5405,7 @@ NL1-P-NJ5K-C,20297,4095,Neste-charge Šilagalio žiedo EV,"Neste Lietuva, UAB",P
 NL1-P-NJ5K-D,20298,4095,Neste-charge Šilagalio žiedo EV,"Neste Lietuva, UAB",Panevėžio aplinkl. 22,Šilagalio,55.6731985,24.3353305,IEC_62196_T2_COMBO,240,,NL1-P-NJ5K,"Neste Lietuva, UAB",,,
 SET-E-0241-A,67727,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marijampole,54.475761,23.221737,IEC_62196_T2_COMBO,80,,SET-E-0241,Virsi,,,
 SET-E-0241-B,67728,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marijampole,54.475761,23.221737,IEC_62196_T2_COMBO,80,,SET-E-0241,Virsi,,,
+SET-E-HKAJ-A,71142,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marijampole,54.475761,23.221737,IEC_62196_T2_COMBO|CHADEMO,40|40,|,SET-E-HKAJ,Virsi,,,
 SET-E-I65P-A,68115,15566,DUS Marijampole,"VIRŠI Lietuva, UAB",Marijampole,Marijampole,54.475761,23.221737,IEC_62196_T2_COMBO|CHADEMO,40|40,|,SET-E-I65P,Virsi,,,
 STR-E-027B-A,44786,3135,"K. Donelaičio g. 65, Kaunas","Stuart Energy, UAB","K. Donelaičio g. 65, Kaunas",Kaunas,54.8984227,23.9156443,IEC_62196_T2,22,0.19 €/kWh + 0.23 €,STR-E-027B,Kauno miesto savivaldybės administracija,,1,
 STR-E-027B-B,44787,3135,"K. Donelaičio g. 65, Kaunas","Stuart Energy, UAB","K. Donelaičio g. 65, Kaunas",Kaunas,54.8984227,23.9156443,IEC_62196_T2,22,0.19 €/kWh + 0.23 €,STR-E-027B,Kauno miesto savivaldybės administracija,,1,
