@@ -10710,3 +10710,4 @@ timestamp_utc,connectors,changes,heartbeats,new_connectors,duration_s,error
 2026-10-21T15:42:48Z,0,0,0,0,5.07,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: Expecting value: line 1 column 1 (char 0)
 2026-10-21T15:44:49Z,0,0,0,0,4.45,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: Expecting value: line 1 column 1 (char 0)
 2026-10-21T15:46:56Z,0,0,0,0,4.82,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: Expecting value: line 1 column 1 (char 0)
+2026-10-21T15:48:51Z,0,0,0,0,4.51,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=0: Expecting value: line 1 column 1 (char 0)
