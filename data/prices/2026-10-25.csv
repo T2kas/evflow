@@ -538,3 +538,35 @@ timestamp_utc,connector_id,tariff
 2026-10-25T05:46:51Z,IKR-P-SCM5-A,0.3 € + 0.25 €/kWh
 2026-10-25T05:46:51Z,IKR-P-V9X4-A,0.3 € + 0.25 €/kWh
 2026-10-25T05:46:51Z,IKR-P-V9X4-B,0.3 € + 0.25 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-A,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-B,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-C,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-D,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-E,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-F,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-G,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-H,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-0X0P-I,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-A,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-B,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-C,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-D,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-E,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-370-F,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-CK94-A,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-CK94-B,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-CK94-C,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IGN-E-CK94-D,3 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-10-25T06:03:08Z,IKR-E-1L26-A,0.29 € + 0.08 €/kWh
+2026-10-25T06:03:08Z,IKR-E-3855-A,0.3 € + 0.21 €/kWh
+2026-10-25T06:03:08Z,IKR-E-5730-A,0.3 € + 0.24 €/kWh
+2026-10-25T06:03:08Z,IKR-E-7718-A,0.3 € + 0.24 €/kWh
+2026-10-25T06:03:08Z,IKR-E-9635-A,0.3 € + 0.21 €/kWh
+2026-10-25T06:03:08Z,IKR-E-E475-A,0.3 € + 0.23 €/kWh
+2026-10-25T06:03:08Z,IKR-E-E544-A,0.3 € + 0.23 €/kWh
+2026-10-25T06:03:08Z,IKR-E-N9TH-A,0.3 € + 0.17 €/kWh
+2026-10-25T06:03:08Z,IKR-E-OWF5-A,0.3 € + 0.24 €/kWh
+2026-10-25T06:03:08Z,IKR-E-ZJDR-A,0.29 € + 0.08 €/kWh
+2026-10-25T06:03:08Z,IKR-P-SCM5-A,0.3 € + 0.24 €/kWh
+2026-10-25T06:03:08Z,IKR-P-V9X4-A,0.3 € + 0.24 €/kWh
+2026-10-25T06:03:08Z,IKR-P-V9X4-B,0.3 € + 0.24 €/kWh
