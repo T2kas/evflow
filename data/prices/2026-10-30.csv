@@ -7661,3 +7661,7 @@ timestamp_utc,connector_id,tariff
 2026-10-30T09:19:07Z,STR-E-ZS00-B,0.23 € + 0.51 €/kWh
 2026-10-30T09:19:07Z,STR-E-ZWU5-A,0.08 € + 0.44 €/kWh
 2026-10-30T09:19:07Z,STR-E-ZWU5-B,0.08 € + 0.44 €/kWh
+2026-10-30T09:31:38Z,ELD-E-T163-C,Gargždų sporto centras LT-163; Gargždų savivaldybės aikštė LT-168; Gargždų savivaldybės aikštė LT-169; Vėžaičių konferencijų centras LT-162; Klaipėdos g. 39 LT-164; Klaipėdos g. 39 LT-165; Klaipėdos g. 39 LT-166; Klaipėdos g. 39 LT-167
+2026-10-30T09:31:38Z,IKR-E-E475-A,0.3 € + 0.57 €/kWh
+2026-10-30T09:31:38Z,IKR-E-E544-A,0.3 € + 0.57 €/kWh
+2026-10-30T09:31:38Z,IKR-E-N9TH-A,0.3 € + 0.51 €/kWh
