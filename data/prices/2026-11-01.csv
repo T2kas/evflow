@@ -17506,3 +17506,61 @@ timestamp_utc,connector_id,tariff
 2026-11-01T22:06:13Z,STR-E-ZS00-B,0.23 € + 0.41 €/kWh
 2026-11-01T22:06:13Z,STR-E-ZWU5-A,0.08 € + 0.35 €/kWh
 2026-11-01T22:06:13Z,STR-E-ZWU5-B,0.08 € + 0.35 €/kWh
+2026-11-01T22:11:30Z,IBG-E-SIWS-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-0O0M-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-0P02-C#69453,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-0P02-C#71333,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-0P02-D#69454,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-0P02-D#71334,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-21OZ-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-4IGW-A,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-4IGW-B,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-4IGW-C,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-4IGW-D,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-53RI-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-53RI-B,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-5OFW-B#69641,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-5OFW-B#71348,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-6R01-A,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-7-01-E#71324,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-8D8B-A,6 €/val. parkavimo mokestis + 0.31 €/kWh
+2026-11-01T22:11:30Z,IGN-E-A9QS-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-A9QS-B,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-CNR1-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-CNR1-B,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-DTYR-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-EULJ-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-EULJ-B,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-FIU8-A,6 €/val. parkavimo mokestis + 0.31 €/kWh
+2026-11-01T22:11:30Z,IGN-E-GJ56-A,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-GJ56-B,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-GXYI-A,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-GXYI-B,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-IODE-F#71154,
+2026-11-01T22:11:30Z,IGN-E-IODE-F#71363,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-B,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-C,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-D,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-E,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-F,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-G,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-K1DN-H,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-LE49-A,6 €/val. parkavimo mokestis + 0.35 €/kWh
+2026-11-01T22:11:30Z,IGN-E-LE49-B,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PDJW-A,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PDJW-B,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PDJW-C,0.34 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-B,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-C,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-D,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-E,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-F,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-G,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-H,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-PMCV-I,6 €/val. parkavimo mokestis + 0.39 €/kWh
+2026-11-01T22:11:30Z,IGN-E-QWG9-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-TIU9-A,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-TIU9-B,0.29 €/kWh
+2026-11-01T22:11:30Z,IGN-E-W1L2-A,0.29 €/kWh
