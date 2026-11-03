@@ -6259,3 +6259,8 @@ timestamp_utc,connector_id,tariff
 2026-11-03T08:20:07Z,STR-E-ZS00-B,0.23 € + 0.61 €/kWh
 2026-11-03T08:20:07Z,STR-E-ZWU5-A,0.08 € + 0.54 €/kWh
 2026-11-03T08:20:07Z,STR-E-ZWU5-B,0.08 € + 0.54 €/kWh
+2026-11-03T08:22:29Z,IKR-E-6QYB-A,0.3 € + 3 €/val. parkavimo mokestis + 0.27 €/kWh
+2026-11-03T08:22:29Z,IKR-E-E284-A,0.3 € + 3 €/val. parkavimo mokestis + 0.27 €/kWh
+2026-11-03T08:22:29Z,IKR-E-E381-A,0.3 € + 3 €/val. parkavimo mokestis + 0.27 €/kWh
+2026-11-03T08:22:29Z,IKR-E-E457-A,0.3 € + 3 €/val. parkavimo mokestis + 0.27 €/kWh
+2026-11-03T08:22:29Z,IKR-E-E952-A,0.3 € + 3 €/val. parkavimo mokestis + 0.27 €/kWh
