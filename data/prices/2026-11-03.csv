@@ -12433,3 +12433,4 @@ timestamp_utc,connector_id,tariff
 2026-11-03T15:02:58Z,STR-E-ZS00-B,0.23 € + 0.59 €/kWh
 2026-11-03T15:02:58Z,STR-E-ZWU5-A,0.08 € + 0.52 €/kWh
 2026-11-03T15:02:58Z,STR-E-ZWU5-B,0.08 € + 0.52 €/kWh
+2026-11-03T15:10:12Z,STR-E-BAZX-C,0.2 € + 0.28 €/kWh + 0.6 €/val.
