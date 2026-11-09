@@ -22495,3 +22495,4 @@ timestamp_utc,connectors,changes,heartbeats,new_connectors,duration_s,error
 2026-11-09T06:41:52Z,6242,77,67,0,3.97,
 2026-11-09T06:44:43Z,6242,9,1137,0,4.58,
 2026-11-09T06:48:23Z,6242,99,120,0,2.66,
+2026-11-09T06:52:38Z,0,0,0,0,5.43,RuntimeError: fetch failed after 3 attempts: https://ev.vialietuva.lt/api/locations/all?limit=500&offset=500: HTTP Error 403: Forbidden
