@@ -5475,7 +5475,7 @@ IKR-E-4360-A,20049,532,Opel | Peugeot Kaunas,"Įkrautas, UAB","Savanorių pr. 40
 IKR-E-4472-A,20059,538,CITY Business Center Parking Lot,"Įkrautas, UAB","Žalgirio g. 90, Vilnius 09300, Lithuania",Vilnius,54.703683,25.27815,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-4472,Hanner,,1,Įkrovimo mokestis
 IKR-E-4596-A,20074,1316,EV charger | Traidenio g. 6,"Įkrautas, UAB","Traidenio g. 6, 19172 Kernavė, Lithuania",Kernavė,54.887724,24.851376,IEC_62196_T2,22,0.3 € + 0.4 €/kWh,IKR-E-4596,"Antota, UAB",,1,
 IKR-E-4818-A,20042,531,Peugeot Vilnius,"Įkrautas, UAB","Ukmergės g. 300, Vilnius 06146, Lithuania",Vilnius,54.738308,25.227683,IEC_62196_T2,22,0.3 € + 0.38 €/kWh,IKR-E-4818,StelAuto,,0,
-IKR-E-483W-A,71504,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena County,55.601826,26.560436,IEC_62196_T2,22,0.29 € + 0.36 €/kWh,IKR-E-483W,Ignalinos AE,,1,
+IKR-E-483W-A,71504,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena County,55.601826,26.560436,IEC_62196_T2,22,0.29 € + 0.38 €/kWh,IKR-E-483W,Ignalinos AE,,1,
 IKR-E-4850-A,20057,538,CITY Business Center Parking Lot,"Įkrautas, UAB","Žalgirio g. 90, Vilnius 09300, Lithuania",Vilnius,54.703683,25.27815,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-4850,Hanner,,1,Įkrovimo mokestis
 IKR-E-4HJI-A,67578,536,"Guest house ""Dvi Nidos""","Įkrautas, UAB","Taikos str. 16, Nida 93127, Lithuania",Nida,55.304432,21.002383,IEC_62196_T2,22,0.3 € + 0.28 €/kWh,IKR-E-4HJI,"Erdvė investicijoms, UAB",,1,
 IKR-E-4I88-A,71270,3824,Dentavita,"Įkrautas, UAB","Taikos al. 24, 35149 Panevėžys, Lietuva",Panevėžys,55.73878,24.341301,IEC_62196_T2,22,0.3 € + 0.23 €/kWh,IKR-E-4I88,Dentavita,,1,
@@ -5578,7 +5578,7 @@ IKR-E-GFZZ-A,71024,14375,"Žalioji g. 3, Garliava","Įkrautas, UAB","Žalioji g.
 IKR-E-GJMD-A,71263,3641,Hill Garden Residence,"Įkrautas, UAB","Užkanavės g. 46, 00170 Palanga, Lithuania",Palanga,55.958273,21.072788,IEC_62196_T2,11,0.3 € + 3 €/val. parkavimo mokestis + 0.48 €/kWh,IKR-E-GJMD,Hill Garden Residence,,1,
 IKR-E-GOH9-A,71079,14453,"V. Kudirkos g. 35, Jurbarkas","Įkrautas, UAB","V. Kudirkos g. 35, 74151 Jurbarkas, Lithuania",Jurbarkas,55.08699,22.774496,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-GOH9,UAB „Jurbarko autobusų parkas“,,1,
 IKR-E-GTM3-A,62358,14405,"Palangos Juzės g. 5, Salantai","Įkrautas, UAB","Palangos Juzės g. 5, 97320 Salantai, Lithuani",Salantai,56.059277,21.574197,IEC_62196_T2,22,0.3 € + 0.54 €/kWh,IKR-E-GTM3,"Notės energija, UAB",,1,
-IKR-E-GURO-A,71505,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena County,55.601826,26.560436,IEC_62196_T2,22,0.29 € + 0.36 €/kWh,IKR-E-GURO,Ignalinos AE,,1,
+IKR-E-GURO-A,71505,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena County,55.601826,26.560436,IEC_62196_T2,22,0.29 € + 0.38 €/kWh,IKR-E-GURO,Ignalinos AE,,1,
 IKR-E-H41E-A,71498,3821,Vila Ūla,"Įkrautas, UAB","Ežero gatvę 3, 65383, Lithuania",undefined,54.201795,24.346996,IEC_62196_T2,22,0.3 € + 0.25 €/kWh,IKR-E-H41E,Vila Ūla,,1,
 IKR-E-H98V-A,71493,503,Ikrautas HQ,"Įkrautas, UAB","Ozo g. 3, Vilnius",Vilnius,54.714756,25.285099,IEC_62196_T2,0,,IKR-E-H98V,"Įkrautas, UAB",,1,
 IKR-E-HHM6-A,71091,503,Ikrautas HQ,"Įkrautas, UAB","Ozo g. 3, Vilnius",Vilnius,54.714756,25.285099,IEC_62196_T2,0,,IKR-E-HHM6,"Įkrautas, UAB",,1,
@@ -5612,7 +5612,7 @@ IKR-E-MAU9-A,70946,3825,Ignalina NPP,"Įkrautas, UAB","31217, Lithuania",Utena C
 IKR-E-MMOB-A,70938,3644,Portum Marijampolė,"Įkrautas, UAB","Gėlyno g. 6, 68100 Marijampolė, Lithuania",Marijampolės apskritis,54.58189,23.374958,IEC_62196_T2,22,0.3 € + 0.31 €/kWh,IKR-E-MMOB,Portum,,1,
 IKR-E-N2F5-A,70943,3823,Opel Vilnius,"Įkrautas, UAB","Ukmergės g. 279a, Vilnius 06138, Lithuania",Vilnius,54.73129,25.238164,IEC_62196_T2,22,0.3 € + 0.38 €/kWh,IKR-E-N2F5,StelAuto,,0,
 IKR-E-N4EF-A,70679,3823,Opel Vilnius,"Įkrautas, UAB","Ukmergės g. 279a, Vilnius 06138, Lithuania",Vilnius,54.73129,25.238164,IEC_62196_T2,22,0.3 € + 0.38 €/kWh,IKR-E-N4EF,StelAuto,,0,
-IKR-E-N9TH-A,71020,3638,Laiko Marios - 2k1,"Įkrautas, UAB",Preilos gatvė 67B,Neringa,55.371082,21.06348,IEC_62196_T2,22,0.3 € + 0.39 €/kWh,IKR-E-N9TH,Laiko Marios - Birutė,,1,
+IKR-E-N9TH-A,71020,3638,Laiko Marios - 2k1,"Įkrautas, UAB",Preilos gatvė 67B,Neringa,55.371082,21.06348,IEC_62196_T2,22,0.3 € + 0.4 €/kWh,IKR-E-N9TH,Laiko Marios - Birutė,,1,
 IKR-E-NW07-A,71491,501,HBH Palanga,"Įkrautas, UAB","Liepų gatvė, Žibininkai 97231, Lithuania",Žibininkai,55.959649,21.145219,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-NW07,HBH,,1,
 IKR-E-NW3O-A,70670,501,HBH Palanga,"Įkrautas, UAB","Liepų gatvė, Žibininkai 97231, Lithuania",Žibininkai,55.959649,21.145219,IEC_62196_T2,22,0.3 € + 0.35 €/kWh,IKR-E-NW3O,HBH,,1,
 IKR-E-O3DZ-A,70673,3641,Hill Garden Residence,"Įkrautas, UAB","Užkanavės g. 46, 00170 Palanga, Lithuania",Palanga,55.958273,21.072788,IEC_62196_T2,11,0.3 € + 3 €/val. parkavimo mokestis + 0.48 €/kWh,IKR-E-O3DZ,Hill Garden Residence,,1,
